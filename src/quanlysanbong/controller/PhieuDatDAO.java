@@ -1,0 +1,77 @@
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package quanlysanbong.controller;
+
+import DBConnection.DBConnection;
+import java.util.ArrayList;
+import quanlysanbong.model.PhieuDat;
+import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+
+/**
+ *
+ * @author tranh
+ */
+public class PhieuDatDAO {
+
+    private Connection conn;
+
+    public PhieuDatDAO() {
+        conn = new DBConnection().getDBConnection();
+    }
+
+    public ArrayList<PhieuDat> getPreOrderList() {
+        ArrayList<PhieuDat> preList = new ArrayList<>();
+
+        String sql = "SELECT * FROM PHIEUDAT";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                PhieuDat pd = new PhieuDat(rs.getString(1), rs.getString(2),
+                        rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
+
+                preList.add(pd);
+            }
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return preList;
+    }
+
+    public boolean addPreOrder(PhieuDat pd) throws ParseException {
+        String sql = "INSERT INTO PHIEUDAT(mapd, ngaydat, ghichu, makh, manv, sdt) VALUES(?, ?, ?, ?, ?, ?)";
+
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, pd.getMapd());
+            SimpleDateFormat spf = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+            long ms = spf.parse(pd.getNgayDat()).getTime();
+            Timestamp ts = new Timestamp(ms);
+            ps.setTimestamp(2, ts);
+            ps.setString(3, pd.getGhiChu());
+            ps.setString(4, pd.getMakh());
+            ps.setString(5, pd.getManv());
+            ps.setString(6, pd.getSdt());
+
+            return ps.executeUpdate() > 0;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+//    public static void main(String[] args) throws ParseException {
+//        SimpleDateFormat spf = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+//        long ms = spf.parse("16:46:30 03/03/2022").getTime();
+//        SimpleDateFormat spf2 = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+//        
+//        Timestamp ts = new Timestamp(ms);
+//        System.out.println(ts);
+//    }
+}
