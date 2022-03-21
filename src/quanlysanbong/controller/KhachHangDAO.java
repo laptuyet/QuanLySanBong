@@ -58,6 +58,21 @@ public class KhachHangDAO {
         return kh;
     }
 
+    public String getCusPhone(String cusID) {
+        String cusPhone = "";
+        String sql = "SELECT sdt FROM KHACHHANG WHERE makh=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, cusID);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            return rs.getString(1);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return cusPhone;
+    }
+
     public boolean addCus(KhachHang kh) {
         String sql = "INSERT INTO KHACHHANG(makh, ho, ten, sdt, cmnd, solan_thuesan, taikhoan, maloaikhach)"
                 + "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";

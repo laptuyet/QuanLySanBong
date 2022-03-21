@@ -4,7 +4,7 @@
  */
 package quanylsanbong.view;
 
-import Clock.Clock;
+import Clock.MyClock;
 import Utils.CheckText;
 import java.awt.Image;
 import java.util.ArrayList;
@@ -47,7 +47,7 @@ public class CustomerGUI extends javax.swing.JFrame {
         showFoodList(dvList);
         
         //set clock
-        Clock clock = new Clock(timeLabel, dateLabel);
+        MyClock clock = new MyClock(timeLabel, dateLabel);
     }
 
     /**

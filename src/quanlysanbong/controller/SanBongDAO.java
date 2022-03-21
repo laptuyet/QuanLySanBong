@@ -105,5 +105,21 @@ public class SanBongDAO {
         }
         return true;
     }
-    
+
+    public double getPricePerHour(String masan) {
+        String sql = "SELECT LS.giatien_motgio\n"
+                + "FROM LOAISAN LS, SANBONG S\n"
+                + "WHERE LS.maloaisan = S.maloaisan AND S.masan = ?";
+        try {
+            PreparedStatement ps = conn.prepareCall(sql);
+            ps.setString(1, masan);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            return rs.getDouble(1);
+        } catch(SQLException ex) {
+            ex.printStackTrace();
+        }
+        
+        return -1;
+    }
 }

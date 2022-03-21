@@ -7,7 +7,6 @@ package Utils;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,12 +31,12 @@ public class CalendarHelper {
     }
 
     public boolean isEndDateGtStartDate(String sDate, String eDate) {
-        SimpleDateFormat spf = new SimpleDateFormat("yyyy/MM/dd hh:mm:ss");
+        SimpleDateFormat spf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         long start, end;
         try {
             start = spf.parse(sDate).getTime();
             end = spf.parse(eDate).getTime();
-            return end >= start;
+            return end > start;
         } catch (ParseException ex) {
             Logger.getLogger(CalendarHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -46,7 +45,7 @@ public class CalendarHelper {
 
     public boolean isEndTimeGtStartTime(String sTime, String eTime) {
 
-        SimpleDateFormat spf = new SimpleDateFormat("hh:mm:ss");
+        SimpleDateFormat spf = new SimpleDateFormat("HH:mm:ss");
         long start, end;
         try {
             start = spf.parse(sTime).getTime();
@@ -73,4 +72,39 @@ public class CalendarHelper {
 
         return year + "/" + m + "/" + d;
     }
+
+    public boolean isTimeBetween(String start, String current, String end) {
+        SimpleDateFormat spf = new SimpleDateFormat("HH:mm:ss");
+
+        long s;
+        try {
+            s = spf.parse(start).getTime();
+            long c = spf.parse(current).getTime();
+            long e = spf.parse(end).getTime();
+            return s <= c && c <= e;
+        } catch (ParseException ex) {
+            Logger.getLogger(CalendarHelper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    public float totalTime(String start, String end) {
+
+        String[] s = start.split("\\s");
+        String[] sTime = s[1].split("\\:");
+
+        String[] e = end.split("\\s");
+        String[] eTime = e[1].split("\\:");
+
+        int sH = Integer.valueOf(sTime[0]); // lay gio
+        int sM = Integer.valueOf(sTime[1]); // lay phut
+
+        int eH = Integer.valueOf(eTime[0]); // lay gio
+        int eM = Integer.valueOf(eTime[1]); // lay phut
+
+        float total = (eH - sH) + ((float) (eM - sM) / 60);
+
+        return total;
+    }
+
 }

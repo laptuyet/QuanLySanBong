@@ -65,13 +65,15 @@ public class PhieuDatDAO {
         }
         return false;
     }
+    
+    public PhieuDat getPreOrder(String mapd, ArrayList<PhieuDat> pdList) {
+        PhieuDat pd = null;
+        for(PhieuDat item : pdList) {
+            if(item.getMapd().equals(mapd)) {
+                pd = item;
+            }
+        }
+        return pd;
+    }
 
-//    public static void main(String[] args) throws ParseException {
-//        SimpleDateFormat spf = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
-//        long ms = spf.parse("16:46:30 03/03/2022").getTime();
-//        SimpleDateFormat spf2 = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-//        
-//        Timestamp ts = new Timestamp(ms);
-//        System.out.println(ts);
-//    }
 }

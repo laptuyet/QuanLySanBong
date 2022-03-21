@@ -9,6 +9,10 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import quanlysanbong.model.TrangThaiSan;
 import java.sql.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import quanlysanbong.model.CT_PhieuDat;
+import quanlysanbong.model.CT_PhieuThue;
 
 /**
  *
@@ -25,12 +29,12 @@ public class TrangThaiSanDAO {
     public ArrayList<TrangThaiSan> getTrangThaiSanList(String sDateTime, String eEndDateTime) {
         ArrayList<TrangThaiSan> stateList = new ArrayList<>();
 
-        String sql = "SELECT SAN.*, tentt \n"
-                + "FROM (SELECT masan, tensan, tenloaisan, giatien_motgio \n"
-                + "      FROM SANBONG, LOAISAN\n"
-                + "      WHERE SANBONG.maloaisan = LOAISAN.maloaisan\n"
-                + "     ) SAN LEFT JOIN CHITIET_TRANGTHAISAN CT ON CT.masan = SAN.masan LEFT JOIN TRANGTHAISAN TT\n"
-                + "	 ON TT.matt = CT.matt AND (ngaygio_bd BETWEEN ? AND ?)";
+        String sql = "SELECT SAN.*, tentt "
+                + "FROM (SELECT masan, tensan, tenloaisan, giatien_motgio "
+                + "      FROM SANBONG, LOAISAN "
+                + "      WHERE SANBONG.maloaisan = LOAISAN.maloaisan) SAN "
+                + "      LEFT JOIN CHITIET_TRANGTHAISAN CT ON CT.masan = SAN.masan AND (ngaygio_bd BETWEEN ? AND ?) "
+                + "      LEFT JOIN TRANGTHAISAN TT ON TT.matt = CT.matt";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, sDateTime);
@@ -47,5 +51,57 @@ public class TrangThaiSanDAO {
         }
 
         return stateList;
+    }
+
+    public boolean addTrangThaiSanPreOrder(ArrayList<CT_PhieuDat> ctpdList) throws ParseException {
+        String sql = "INSERT INTO CHITIET_TRANGTHAISAN(masan, matt, ngaygio_bd, ngaygio_kt)"
+                + "VALUES(?, ?, ?, ?)";
+        SimpleDateFormat spf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            for (CT_PhieuDat ctpd : ctpdList) {
+                ps.setString(1, ctpd.getMasan());
+                ps.setString(2, "tt02"); // da dat truoc
+
+                long ms = spf.parse(ctpd.getTg_bd()).getTime();
+                ps.setTimestamp(3, new Timestamp(ms));
+                ms = spf.parse(ctpd.getTg_kt()).getTime();
+                ps.setTimestamp(4, new Timestamp(ms));
+
+                ps.addBatch();
+            }
+
+            return ps.executeBatch() != null;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean addTrangThaiSanOrder(ArrayList<CT_PhieuThue> ctptList) throws ParseException {
+        String sql = "INSERT INTO CHITIET_TRANGTHAISAN(masan, matt, ngaygio_bd, ngaygio_kt)"
+                + "VALUES(?, ?, ?, ?)";
+        SimpleDateFormat spf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            for (CT_PhieuThue ctpt : ctptList) {
+                ps.setString(1, ctpt.getMasan());
+                ps.setString(2, "tt04"); // dang thue
+
+                long ms = spf.parse(ctpt.getGioden()).getTime();
+                ps.setTimestamp(3, new Timestamp(ms));
+                ms = spf.parse(ctpt.getGio_dukientra()).getTime();
+                ps.setTimestamp(4, new Timestamp(ms));
+
+                ps.addBatch();
+            }
+
+            return ps.executeBatch() != null;
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
     }
 }

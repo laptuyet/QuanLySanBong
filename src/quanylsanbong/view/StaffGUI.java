@@ -4,7 +4,7 @@
  */
 package quanylsanbong.view;
 
-import Clock.Clock;
+import Clock.MyClock;
 import Utils.CheckText;
 import java.awt.Color;
 import java.awt.Image;
@@ -62,7 +62,7 @@ public class StaffGUI extends javax.swing.JFrame {
         showFoodList(dvList);
         
         //set clock
-        Clock clock = new Clock(timeLabel, dateLabel);
+        MyClock clock = new MyClock(timeLabel, dateLabel);
     }
 
     /**
