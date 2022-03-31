@@ -4,6 +4,7 @@
  */
 package quanylsanbong.view;
 
+import Clock.ManageRentTime;
 import Clock.MyClock;
 import Utils.AutoID;
 import Utils.CalendarHelper;
@@ -159,6 +160,7 @@ public class AdminGUI extends javax.swing.JFrame {
         
         orderAvaiStaTableModel = (DefaultTableModel) orderAvaiStaTable.getModel();
         orderListTableModel = (DefaultTableModel) orderListTable.getModel();
+        
 
     }
 
@@ -306,6 +308,7 @@ public class AdminGUI extends javax.swing.JFrame {
         jSeparator6 = new javax.swing.JSeparator();
         viewServicesBtn = new javax.swing.JButton();
         jLabel87 = new javax.swing.JLabel();
+        refreshOrderServiceTableBtn = new javax.swing.JButton();
         jLabel86 = new javax.swing.JLabel();
         preOrderIdTxt = new javax.swing.JTextField();
         checkPreOrderIdBtn = new javax.swing.JButton();
@@ -334,6 +337,12 @@ public class AdminGUI extends javax.swing.JFrame {
         jSeparator8 = new javax.swing.JSeparator();
         jScrollPane16 = new javax.swing.JScrollPane();
         orderServicesTable2 = new javax.swing.JTable();
+        viewServicesBtn2 = new javax.swing.JButton();
+        removeOrderServiceBtn2 = new javax.swing.JButton();
+        orderIdLabel2 = new javax.swing.JLabel();
+        jLabel94 = new javax.swing.JLabel();
+        refreshOrderServiceTableBtn2 = new javax.swing.JButton();
+        endStadiumBtn = new javax.swing.JButton();
         foodMngPanel = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         foodTable = new javax.swing.JTable();
@@ -382,6 +391,32 @@ public class AdminGUI extends javax.swing.JFrame {
         cancelBtn = new javax.swing.JButton();
         peopleMngPanel = new javax.swing.JPanel();
         peopleMngTabbedPane = new javax.swing.JTabbedPane();
+        customerPanel = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        khTable = new javax.swing.JTable();
+        jLabel18 = new javax.swing.JLabel();
+        cusIdTxt = new javax.swing.JTextField();
+        cusIdWrong = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        cusFnameTxt = new javax.swing.JTextField();
+        cusFnameWrong = new javax.swing.JLabel();
+        jLabel25 = new javax.swing.JLabel();
+        cusLnameTxt = new javax.swing.JTextField();
+        cusLnameWrong = new javax.swing.JLabel();
+        jLabel27 = new javax.swing.JLabel();
+        cusPhoneTxt = new javax.swing.JTextField();
+        cusPhoneWrong = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        cusCmndTxt = new javax.swing.JTextField();
+        cusCmndWrong = new javax.swing.JLabel();
+        jLabel31 = new javax.swing.JLabel();
+        cusUsernameTxt = new javax.swing.JTextField();
+        cusUsernameWrong = new javax.swing.JLabel();
+        addCusBtn = new javax.swing.JButton();
+        updateCusBtn = new javax.swing.JButton();
+        cancelCusBtn = new javax.swing.JButton();
+        jLabel19 = new javax.swing.JLabel();
+        sortCusCbBox = new javax.swing.JComboBox<>();
         staffPanel = new javax.swing.JPanel();
         cancelStaffBtn = new javax.swing.JButton();
         staffOffYesRadio = new javax.swing.JRadioButton();
@@ -411,32 +446,6 @@ public class AdminGUI extends javax.swing.JFrame {
         staffTable = new javax.swing.JTable();
         sortStaffCbBox = new javax.swing.JComboBox<>();
         jLabel17 = new javax.swing.JLabel();
-        customerPanel = new javax.swing.JPanel();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        khTable = new javax.swing.JTable();
-        jLabel18 = new javax.swing.JLabel();
-        cusIdTxt = new javax.swing.JTextField();
-        cusIdWrong = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        cusFnameTxt = new javax.swing.JTextField();
-        cusFnameWrong = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
-        cusLnameTxt = new javax.swing.JTextField();
-        cusLnameWrong = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
-        cusPhoneTxt = new javax.swing.JTextField();
-        cusPhoneWrong = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
-        cusCmndTxt = new javax.swing.JTextField();
-        cusCmndWrong = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
-        cusUsernameTxt = new javax.swing.JTextField();
-        cusUsernameWrong = new javax.swing.JLabel();
-        addCusBtn = new javax.swing.JButton();
-        updateCusBtn = new javax.swing.JButton();
-        cancelCusBtn = new javax.swing.JButton();
-        jLabel19 = new javax.swing.JLabel();
-        sortCusCbBox = new javax.swing.JComboBox<>();
         matchMngPanel = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         stadiumTab = new javax.swing.JPanel();
@@ -944,7 +953,7 @@ public class AdminGUI extends javax.swing.JFrame {
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+                        .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -969,7 +978,7 @@ public class AdminGUI extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addContainerGap(345, Short.MAX_VALUE)
+                .addContainerGap(351, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -1371,7 +1380,7 @@ public class AdminGUI extends javax.swing.JFrame {
                 .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1380,7 +1389,7 @@ public class AdminGUI extends javax.swing.JFrame {
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(47, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("PRE-ORDER LIST", new javax.swing.ImageIcon(getClass().getResource("/quanlysanbong/images/icons8-list-32.png")), jPanel10); // NOI18N
@@ -1644,10 +1653,10 @@ public class AdminGUI extends javax.swing.JFrame {
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Integer.class
+                java.lang.Object.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -1662,6 +1671,11 @@ public class AdminGUI extends javax.swing.JFrame {
         orderServicesTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 orderServicesTableMouseClicked(evt);
+            }
+        });
+        orderServicesTable.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                orderServicesTablePropertyChange(evt);
             }
         });
         jScrollPane13.setViewportView(orderServicesTable);
@@ -1684,6 +1698,14 @@ public class AdminGUI extends javax.swing.JFrame {
         jLabel87.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel87.setText("Service List");
 
+        refreshOrderServiceTableBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlysanbong/images/icons8-update-32.png"))); // NOI18N
+        refreshOrderServiceTableBtn.setText("Refresh");
+        refreshOrderServiceTableBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshOrderServiceTableBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel15Layout = new javax.swing.GroupLayout(jPanel15);
         jPanel15.setLayout(jPanel15Layout);
         jPanel15Layout.setHorizontalGroup(
@@ -1701,15 +1723,17 @@ public class AdminGUI extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel15Layout.createSequentialGroup()
+                        .addComponent(refreshOrderServiceTableBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                         .addComponent(jLabel87, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)
+                        .addGap(39, 39, 39)
                         .addComponent(viewServicesBtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(removeOrderServiceBtn)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                        .addComponent(removeOrderServiceBtn))
+                    .addComponent(jScrollPane13, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel15Layout.setVerticalGroup(
             jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1720,19 +1744,19 @@ public class AdminGUI extends javax.swing.JFrame {
                         .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel15Layout.createSequentialGroup()
                                 .addGap(10, 10, 10)
-                                .addComponent(jLabel85)
-                                .addGap(25, 25, 25))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
-                                .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(removeOrderServiceBtn, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(viewServicesBtn, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(removeOrderItemBtn, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel15Layout.createSequentialGroup()
+                                .addComponent(jLabel85))
+                            .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(removeOrderServiceBtn, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(viewServicesBtn, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(removeOrderItemBtn, javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel15Layout.createSequentialGroup()
+                                    .addGap(1, 1, 1)
+                                    .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                         .addComponent(jLabel87)
-                                        .addGap(11, 11, 11)))
-                                .addGap(18, 18, 18)))
+                                        .addComponent(refreshOrderServiceTableBtn)))))
+                        .addGap(18, 18, 18)
                         .addGroup(jPanel15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 246, Short.MAX_VALUE)
+                            .addComponent(jScrollPane13, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
                             .addComponent(jScrollPane12, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                     .addComponent(jSeparator6))
                 .addContainerGap())
@@ -1767,7 +1791,7 @@ public class AdminGUI extends javax.swing.JFrame {
                             .addComponent(jLabel79)
                             .addGroup(jPanel13Layout.createSequentialGroup()
                                 .addComponent(createOrderBtn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
                                 .addComponent(jLabel82, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1811,15 +1835,6 @@ public class AdminGUI extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addComponent(checkAvaiStaBtn1)
                 .addGap(89, 89, 89))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
-                        .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(119, 119, 119))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
-                        .addComponent(dateTimeWrong2, javax.swing.GroupLayout.PREFERRED_SIZE, 541, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(165, 165, 165))))
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1872,6 +1887,15 @@ public class AdminGUI extends javax.swing.JFrame {
                                     .addComponent(orderNoteTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(70, 70, 70)))
                         .addGap(0, 0, Short.MAX_VALUE))))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                        .addComponent(dateTimeWrong2, javax.swing.GroupLayout.PREFERRED_SIZE, 541, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(165, 165, 165))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel13Layout.createSequentialGroup()
+                        .addComponent(jPanel15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(119, 119, 119))))
         );
         jPanel13Layout.setVerticalGroup(
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2026,14 +2050,14 @@ public class AdminGUI extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Name", "Come", "Leave"
+                "Name", "Come", "Estimated time out", "Leave"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -2078,7 +2102,7 @@ public class AdminGUI extends javax.swing.JFrame {
 
         orderDateCreate2.setFont(new java.awt.Font("Unispace", 0, 14)); // NOI18N
         orderDateCreate2.setForeground(new java.awt.Color(255, 255, 255));
-        orderDateCreate2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        orderDateCreate2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         orderDateCreate2.setText("date:");
 
         jLabel93.setFont(new java.awt.Font("Unispace", 0, 14)); // NOI18N
@@ -2104,7 +2128,7 @@ public class AdminGUI extends javax.swing.JFrame {
                 java.lang.String.class, java.lang.Integer.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false
+                false, true
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -2121,66 +2145,117 @@ public class AdminGUI extends javax.swing.JFrame {
                 orderServicesTable2MouseClicked(evt);
             }
         });
+        orderServicesTable2.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                orderServicesTable2PropertyChange(evt);
+            }
+        });
         jScrollPane16.setViewportView(orderServicesTable2);
         if (orderServicesTable2.getColumnModel().getColumnCount() > 0) {
             orderServicesTable2.getColumnModel().getColumn(1).setPreferredWidth(20);
         }
+
+        viewServicesBtn2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlysanbong/images/icons8-eyes-cartoon-32.png"))); // NOI18N
+        viewServicesBtn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                viewServicesBtn2ActionPerformed(evt);
+            }
+        });
+
+        removeOrderServiceBtn2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlysanbong/images/icons8-delete-32.png"))); // NOI18N
+        removeOrderServiceBtn2.setEnabled(false);
+        removeOrderServiceBtn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                removeOrderServiceBtn2ActionPerformed(evt);
+            }
+        });
+
+        orderIdLabel2.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
+        orderIdLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        orderIdLabel2.setText(" ");
+
+        jLabel94.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
+        jLabel94.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel94.setText("ID:");
+
+        refreshOrderServiceTableBtn2.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
+        refreshOrderServiceTableBtn2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlysanbong/images/icons8-update-32.png"))); // NOI18N
+        refreshOrderServiceTableBtn2.setText("Refresh");
+        refreshOrderServiceTableBtn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                refreshOrderServiceTableBtn2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel18Layout = new javax.swing.GroupLayout(jPanel18);
         jPanel18.setLayout(jPanel18Layout);
         jPanel18Layout.setHorizontalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel18Layout.createSequentialGroup()
-                .addGap(53, 53, 53)
-                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
-                        .addComponent(jLabel92, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(orderNoteTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
-                        .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel91, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel18Layout.createSequentialGroup()
-                                .addComponent(jLabel89, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(orderStaffIdLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel90, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(orderCusIdLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(orderPhoneTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
-                .addContainerGap(241, Short.MAX_VALUE)
-                .addComponent(orderDateCreate2, javax.swing.GroupLayout.PREFERRED_SIZE, 262, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(219, 219, 219))
-            .addGroup(jPanel18Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
+                        .addComponent(jScrollPane15)
+                        .addContainerGap())
+                    .addGroup(jPanel18Layout.createSequentialGroup()
+                        .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel18Layout.createSequentialGroup()
+                                .addComponent(refreshOrderServiceTableBtn2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(viewServicesBtn2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(removeOrderServiceBtn2))
+                            .addComponent(jScrollPane16, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 107, Short.MAX_VALUE)
+                        .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                            .addComponent(currentTotalOrderLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel93))
+                        .addGap(89, 89, 89))
                     .addGroup(jPanel18Layout.createSequentialGroup()
                         .addComponent(jSeparator8)
                         .addContainerGap())
                     .addComponent(jSeparator7, javax.swing.GroupLayout.Alignment.TRAILING)))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane15)
-                .addContainerGap())
             .addGroup(jPanel18Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane16, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                    .addComponent(currentTotalOrderLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 206, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel93))
-                .addGap(89, 89, 89))
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel18Layout.createSequentialGroup()
+                        .addGap(53, 53, 53)
+                        .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
+                                .addComponent(jLabel92, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(orderNoteTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel18Layout.createSequentialGroup()
+                                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel91, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel18Layout.createSequentialGroup()
+                                        .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel94, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel89, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addGroup(jPanel18Layout.createSequentialGroup()
+                                                .addComponent(orderStaffIdLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18)
+                                                .addComponent(jLabel90, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(orderIdLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(orderCusIdLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(orderPhoneTxt2, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(jPanel18Layout.createSequentialGroup()
+                        .addGap(287, 287, 287)
+                        .addComponent(orderDateCreate2, javax.swing.GroupLayout.PREFERRED_SIZE, 272, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel18Layout.setVerticalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel18Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(orderDateCreate2)
-                .addGap(31, 31, 31)
+                .addGap(16, 16, 16)
+                .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(orderDateCreate2)
+                    .addComponent(orderIdLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel94))
+                .addGap(32, 32, 32)
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel89)
                     .addComponent(orderStaffIdLabel2)
@@ -2202,35 +2277,56 @@ public class AdminGUI extends javax.swing.JFrame {
                 .addComponent(jSeparator8, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel18Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane16, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel18Layout.createSequentialGroup()
                         .addGap(55, 55, 55)
                         .addComponent(jLabel93)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(currentTotalOrderLabel)))
-                .addContainerGap(30, Short.MAX_VALUE))
+                        .addComponent(currentTotalOrderLabel))
+                    .addGroup(jPanel18Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(viewServicesBtn2)
+                                .addComponent(removeOrderServiceBtn2))
+                            .addComponent(refreshOrderServiceTableBtn2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane16, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(61, Short.MAX_VALUE))
         );
+
+        endStadiumBtn.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
+        endStadiumBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlysanbong/images/icons8-check-32.png"))); // NOI18N
+        endStadiumBtn.setText("End");
+        endStadiumBtn.setEnabled(false);
+        endStadiumBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                endStadiumBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
         jPanel16Layout.setHorizontalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(endStadiumBtn))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         jPanel16Layout.setVerticalGroup(
             jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel16Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addContainerGap()
                 .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel18, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(46, Short.MAX_VALUE))
+                    .addGroup(jPanel16Layout.createSequentialGroup()
+                        .addComponent(jPanel17, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(44, 44, 44)
+                        .addComponent(endStadiumBtn)))
+                .addContainerGap(83, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("ORDER LIST", jPanel16);
@@ -2420,13 +2516,10 @@ public class AdminGUI extends javax.swing.JFrame {
                                             .addComponent(foodNameTxt, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)))))
                             .addGroup(foodMngPanelLayout.createSequentialGroup()
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 561, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(104, 104, 104)
                                 .addGroup(foodMngPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(foodMngPanelLayout.createSequentialGroup()
-                                        .addGap(104, 104, 104)
-                                        .addComponent(chooseImageBtn))
-                                    .addGroup(foodMngPanelLayout.createSequentialGroup()
-                                        .addGap(78, 78, 78)
-                                        .addComponent(foodImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                    .addComponent(chooseImageBtn)
+                                    .addComponent(foodImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(foodMngPanelLayout.createSequentialGroup()
                         .addGap(83, 83, 83)
                         .addComponent(addFoodBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2438,7 +2531,7 @@ public class AdminGUI extends javax.swing.JFrame {
                         .addGroup(foodMngPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(deleteFoodBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(foodCancelBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(195, Short.MAX_VALUE))
+                .addContainerGap(219, Short.MAX_VALUE))
         );
         foodMngPanelLayout.setVerticalGroup(
             foodMngPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2447,8 +2540,9 @@ public class AdminGUI extends javax.swing.JFrame {
                 .addGroup(foodMngPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 247, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(foodMngPanelLayout.createSequentialGroup()
-                        .addComponent(foodImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(46, 46, 46)
+                        .addComponent(foodImageLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(chooseImageBtn)))
                 .addGap(25, 25, 25)
                 .addGroup(foodMngPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -2697,7 +2791,7 @@ public class AdminGUI extends javax.swing.JFrame {
                     .addGroup(infoPanelLayout.createSequentialGroup()
                         .addGap(57, 57, 57)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(173, Short.MAX_VALUE))
+                .addContainerGap(224, Short.MAX_VALUE))
         );
         infoPanelLayout.setVerticalGroup(
             infoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2710,285 +2804,12 @@ public class AdminGUI extends javax.swing.JFrame {
                     .addComponent(changepwdBtn)
                     .addComponent(savebtn)
                     .addComponent(cancelBtn))
-                .addContainerGap(115, Short.MAX_VALUE))
+                .addContainerGap(255, Short.MAX_VALUE))
         );
 
         peopleMngPanel.setBackground(new java.awt.Color(255, 255, 204));
 
         peopleMngTabbedPane.setBackground(new java.awt.Color(204, 255, 255));
-
-        staffPanel.setBackground(new java.awt.Color(255, 255, 204));
-
-        cancelStaffBtn.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
-        cancelStaffBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlysanbong/images/icons8-cancel-32.png"))); // NOI18N
-        cancelStaffBtn.setText("Cancel");
-        cancelStaffBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cancelStaffBtnActionPerformed(evt);
-            }
-        });
-
-        staffOffYesRadio.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
-        staffOffYesRadio.setText("Yes");
-        staffOffYesRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                staffOffYesRadioActionPerformed(evt);
-            }
-        });
-
-        staffOffNoRadio.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
-        staffOffNoRadio.setSelected(true);
-        staffOffNoRadio.setText("No");
-        staffOffNoRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                staffOffNoRadioActionPerformed(evt);
-            }
-        });
-
-        staffAccountWrong.setForeground(new java.awt.Color(255, 0, 51));
-        staffAccountWrong.setText(" ");
-
-        jLabel24.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
-        jLabel24.setText("Account");
-
-        jLabel23.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
-        jLabel23.setText("Off");
-
-        staffCmndWrong.setForeground(new java.awt.Color(255, 0, 0));
-        staffCmndWrong.setText(" ");
-
-        staffCmndTxt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                staffCmndTxtActionPerformed(evt);
-            }
-        });
-
-        jLabel21.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
-        jLabel21.setText("ID");
-
-        staffPhoneWrong.setForeground(new java.awt.Color(255, 0, 51));
-        staffPhoneWrong.setText(" ");
-
-        staffLnameWrong.setForeground(new java.awt.Color(255, 0, 51));
-        staffLnameWrong.setText(" ");
-
-        staffFnameWrong.setForeground(new java.awt.Color(255, 0, 51));
-        staffFnameWrong.setText(" ");
-
-        staffIdWrong.setForeground(new java.awt.Color(255, 0, 51));
-        staffIdWrong.setText(" ");
-
-        jLabel16.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
-        jLabel16.setText("Phone");
-
-        jLabel15.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
-        jLabel15.setText("LName");
-
-        staffFnameTxt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                staffFnameTxtActionPerformed(evt);
-            }
-        });
-
-        jLabel14.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
-        jLabel14.setText("FName");
-
-        staffIdTxt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                staffIdTxtActionPerformed(evt);
-            }
-        });
-
-        jLabel13.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
-        jLabel13.setText("ID Work");
-
-        updateStaffBtn.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
-        updateStaffBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlysanbong/images/icons8-update-32.png"))); // NOI18N
-        updateStaffBtn.setText("Update");
-        updateStaffBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                updateStaffBtnActionPerformed(evt);
-            }
-        });
-
-        addStaffBtn.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
-        addStaffBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlysanbong/images/icons8-add-32.png"))); // NOI18N
-        addStaffBtn.setText("Add");
-        addStaffBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addStaffBtnActionPerformed(evt);
-            }
-        });
-
-        staffTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "ID Work", "First Name", "Last Name", "Phone", "ID", "Off", "Account name"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        staffTable.getTableHeader().setReorderingAllowed(false);
-        staffTable.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                staffTableMouseClicked(evt);
-            }
-        });
-        jScrollPane2.setViewportView(staffTable);
-
-        sortStaffCbBox.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
-        sortStaffCbBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Last name", "Off : No", "Off : Yes" }));
-        sortStaffCbBox.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                sortStaffCbBoxItemStateChanged(evt);
-            }
-        });
-
-        jLabel17.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
-        jLabel17.setText("Sort by:");
-
-        javax.swing.GroupLayout staffPanelLayout = new javax.swing.GroupLayout(staffPanel);
-        staffPanel.setLayout(staffPanelLayout);
-        staffPanelLayout.setHorizontalGroup(
-            staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(staffPanelLayout.createSequentialGroup()
-                .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(staffPanelLayout.createSequentialGroup()
-                        .addGap(36, 36, 36)
-                        .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)
-                        .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(staffPanelLayout.createSequentialGroup()
-                                .addGap(31, 31, 31)
-                                .addComponent(staffOffNoRadio, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(staffOffYesRadio, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(159, 159, 159)
-                                .addComponent(addStaffBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(52, 52, 52)
-                                .addComponent(updateStaffBtn)
-                                .addGap(51, 51, 51)
-                                .addComponent(cancelStaffBtn))
-                            .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(staffCmndWrong, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(staffCmndTxt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE))
-                            .addGroup(staffPanelLayout.createSequentialGroup()
-                                .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(staffPhoneWrong, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(staffPhoneTxt, javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(staffFnameWrong, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(staffFnameTxt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addComponent(staffIdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(staffIdWrong, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(80, 80, 80)
-                                .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(37, 37, 37)
-                                .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(staffLnameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(staffLnameWrong, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(staffAccountTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(staffAccountWrong, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(sortStaffCbBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(staffPanelLayout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 794, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(168, Short.MAX_VALUE))
-        );
-        staffPanelLayout.setVerticalGroup(
-            staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, staffPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(staffPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
-                        .addComponent(staffIdWrong)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(staffPanelLayout.createSequentialGroup()
-                        .addGap(24, 24, 24)
-                        .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel13)
-                            .addComponent(staffIdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel17)
-                            .addComponent(sortStaffCbBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel15)
-                    .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(staffPanelLayout.createSequentialGroup()
-                            .addGap(15, 15, 15)
-                            .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(staffFnameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel14)))
-                        .addComponent(staffLnameTxt, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(staffPanelLayout.createSequentialGroup()
-                        .addGap(68, 68, 68)
-                        .addComponent(staffPhoneWrong))
-                    .addGroup(staffPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(staffCmndTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(staffPanelLayout.createSequentialGroup()
-                                .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(staffFnameWrong)
-                                    .addComponent(staffLnameWrong))
-                                .addGap(21, 21, 21)
-                                .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel16)
-                                    .addComponent(staffPhoneTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel24)
-                                    .addComponent(staffAccountTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(staffPanelLayout.createSequentialGroup()
-                                        .addGap(54, 54, 54)
-                                        .addComponent(jLabel21))
-                                    .addGroup(staffPanelLayout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(staffAccountWrong)))))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(staffPanelLayout.createSequentialGroup()
-                        .addComponent(staffCmndWrong)
-                        .addGap(38, 38, 38)
-                        .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(staffOffNoRadio)
-                            .addComponent(jLabel23)
-                            .addComponent(staffOffYesRadio))
-                        .addGap(51, 51, 51))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, staffPanelLayout.createSequentialGroup()
-                        .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(addStaffBtn)
-                            .addComponent(updateStaffBtn)
-                            .addComponent(cancelStaffBtn))
-                        .addGap(53, 53, 53))))
-        );
-
-        peopleMngTabbedPane.addTab("STAFF  ", new javax.swing.ImageIcon(getClass().getResource("/quanlysanbong/images/icons8-waitress-32.png")), staffPanel); // NOI18N
 
         customerPanel.setBackground(new java.awt.Color(255, 255, 204));
 
@@ -3144,7 +2965,7 @@ public class AdminGUI extends javax.swing.JFrame {
                                 .addComponent(updateCusBtn)))
                         .addGap(56, 56, 56)
                         .addComponent(cancelCusBtn)))
-                .addContainerGap(109, Short.MAX_VALUE))
+                .addContainerGap(130, Short.MAX_VALUE))
         );
         customerPanelLayout.setVerticalGroup(
             customerPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3190,10 +3011,288 @@ public class AdminGUI extends javax.swing.JFrame {
                         .addComponent(updateCusBtn)
                         .addComponent(cancelCusBtn))
                     .addComponent(cusUsernameWrong))
-                .addContainerGap(77, Short.MAX_VALUE))
+                .addContainerGap(123, Short.MAX_VALUE))
         );
 
         peopleMngTabbedPane.addTab("CUSTOMER", new javax.swing.ImageIcon(getClass().getResource("/quanlysanbong/images/icons8-customer-32.png")), customerPanel); // NOI18N
+
+        staffPanel.setBackground(new java.awt.Color(255, 255, 204));
+
+        cancelStaffBtn.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
+        cancelStaffBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlysanbong/images/icons8-cancel-32.png"))); // NOI18N
+        cancelStaffBtn.setText("Cancel");
+        cancelStaffBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cancelStaffBtnActionPerformed(evt);
+            }
+        });
+
+        staffOffYesRadio.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
+        staffOffYesRadio.setText("Yes");
+        staffOffYesRadio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                staffOffYesRadioActionPerformed(evt);
+            }
+        });
+
+        staffOffNoRadio.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
+        staffOffNoRadio.setSelected(true);
+        staffOffNoRadio.setText("No");
+        staffOffNoRadio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                staffOffNoRadioActionPerformed(evt);
+            }
+        });
+
+        staffAccountWrong.setForeground(new java.awt.Color(255, 0, 51));
+        staffAccountWrong.setText(" ");
+
+        jLabel24.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
+        jLabel24.setText("Account");
+
+        jLabel23.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
+        jLabel23.setText("Off");
+
+        staffCmndWrong.setForeground(new java.awt.Color(255, 0, 0));
+        staffCmndWrong.setText(" ");
+
+        staffCmndTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                staffCmndTxtActionPerformed(evt);
+            }
+        });
+
+        jLabel21.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
+        jLabel21.setText("ID");
+
+        staffPhoneWrong.setForeground(new java.awt.Color(255, 0, 51));
+        staffPhoneWrong.setText(" ");
+
+        staffLnameWrong.setForeground(new java.awt.Color(255, 0, 51));
+        staffLnameWrong.setText(" ");
+
+        staffFnameWrong.setForeground(new java.awt.Color(255, 0, 51));
+        staffFnameWrong.setText(" ");
+
+        staffIdWrong.setForeground(new java.awt.Color(255, 0, 51));
+        staffIdWrong.setText(" ");
+
+        jLabel16.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
+        jLabel16.setText("Phone");
+
+        jLabel15.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
+        jLabel15.setText("LName");
+
+        staffFnameTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                staffFnameTxtActionPerformed(evt);
+            }
+        });
+
+        jLabel14.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
+        jLabel14.setText("FName");
+
+        staffIdTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                staffIdTxtActionPerformed(evt);
+            }
+        });
+
+        jLabel13.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
+        jLabel13.setText("ID Work");
+
+        updateStaffBtn.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
+        updateStaffBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlysanbong/images/icons8-update-32.png"))); // NOI18N
+        updateStaffBtn.setText("Update");
+        updateStaffBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateStaffBtnActionPerformed(evt);
+            }
+        });
+
+        addStaffBtn.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
+        addStaffBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlysanbong/images/icons8-add-32.png"))); // NOI18N
+        addStaffBtn.setText("Add");
+        addStaffBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addStaffBtnActionPerformed(evt);
+            }
+        });
+
+        staffTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID Work", "First Name", "Last Name", "Phone", "ID", "Off", "Account name"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        staffTable.getTableHeader().setReorderingAllowed(false);
+        staffTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                staffTableMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(staffTable);
+
+        sortStaffCbBox.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
+        sortStaffCbBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "All", "Last name", "Off : No", "Off : Yes" }));
+        sortStaffCbBox.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                sortStaffCbBoxItemStateChanged(evt);
+            }
+        });
+
+        jLabel17.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
+        jLabel17.setText("Sort by:");
+
+        javax.swing.GroupLayout staffPanelLayout = new javax.swing.GroupLayout(staffPanel);
+        staffPanel.setLayout(staffPanelLayout);
+        staffPanelLayout.setHorizontalGroup(
+            staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(staffPanelLayout.createSequentialGroup()
+                .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(staffPanelLayout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(staffPanelLayout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 794, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(staffPanelLayout.createSequentialGroup()
+                        .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(staffPanelLayout.createSequentialGroup()
+                                .addGap(116, 116, 116)
+                                .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(staffIdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(staffIdWrong, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, staffPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(staffPhoneWrong, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(staffPanelLayout.createSequentialGroup()
+                                            .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(57, 57, 57)
+                                            .addComponent(staffOffNoRadio, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(18, 18, 18)
+                                            .addComponent(staffOffYesRadio, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(staffPanelLayout.createSequentialGroup()
+                                            .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addGap(26, 26, 26)
+                                            .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                    .addComponent(staffFnameWrong, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                    .addComponent(staffFnameTxt, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                    .addComponent(staffPhoneTxt))
+                                                .addComponent(staffCmndTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(staffCmndWrong, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                        .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(staffPanelLayout.createSequentialGroup()
+                                .addGap(80, 80, 80)
+                                .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel24, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(37, 37, 37)
+                                .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(staffLnameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 154, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(staffLnameWrong, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(staffAccountTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(staffAccountWrong, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(sortStaffCbBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(staffPanelLayout.createSequentialGroup()
+                                .addGap(62, 62, 62)
+                                .addComponent(addStaffBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(40, 40, 40)
+                                .addComponent(updateStaffBtn)
+                                .addGap(51, 51, 51)
+                                .addComponent(cancelStaffBtn)))))
+                .addContainerGap(195, Short.MAX_VALUE))
+        );
+        staffPanelLayout.setVerticalGroup(
+            staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, staffPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
+                .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel13)
+                    .addComponent(staffIdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17)
+                    .addComponent(sortStaffCbBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(staffIdWrong)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(staffPanelLayout.createSequentialGroup()
+                        .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(staffFnameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel14))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(staffFnameWrong))
+                    .addGroup(staffPanelLayout.createSequentialGroup()
+                        .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel15)
+                            .addComponent(staffLnameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(11, 11, 11)
+                        .addComponent(staffLnameWrong)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(staffPanelLayout.createSequentialGroup()
+                        .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(staffPhoneTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel16))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(staffPhoneWrong))
+                    .addGroup(staffPanelLayout.createSequentialGroup()
+                        .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel24)
+                            .addComponent(staffAccountTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(staffAccountWrong)))
+                .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(staffPanelLayout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel21)
+                            .addComponent(staffCmndTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(staffCmndWrong)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(staffOffNoRadio)
+                            .addComponent(jLabel23)
+                            .addComponent(staffOffYesRadio))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(staffPanelLayout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(addStaffBtn)
+                            .addGroup(staffPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(updateStaffBtn)
+                                .addComponent(cancelStaffBtn)))
+                        .addGap(53, 149, Short.MAX_VALUE))))
+        );
+
+        peopleMngTabbedPane.addTab("STAFF  ", new javax.swing.ImageIcon(getClass().getResource("/quanlysanbong/images/icons8-waitress-32.png")), staffPanel); // NOI18N
 
         javax.swing.GroupLayout peopleMngPanelLayout = new javax.swing.GroupLayout(peopleMngPanel);
         peopleMngPanel.setLayout(peopleMngPanelLayout);
@@ -3376,7 +3475,7 @@ public class AdminGUI extends javax.swing.JFrame {
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 639, Short.MAX_VALUE)
+            .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 660, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel34)
@@ -3617,7 +3716,7 @@ public class AdminGUI extends javax.swing.JFrame {
                                     .addComponent(jLabel40))))
                         .addGap(30, 30, 30)
                         .addComponent(dateTimeWrong, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
                 .addComponent(checkDateTimeBtn)
                 .addGap(64, 64, 64))
         );
@@ -3797,7 +3896,7 @@ public class AdminGUI extends javax.swing.JFrame {
                     .addGroup(rateStadiumTabLayout.createSequentialGroup()
                         .addGap(465, 465, 465)
                         .addComponent(updateRateBtn)))
-                .addContainerGap(213, Short.MAX_VALUE))
+                .addContainerGap(234, Short.MAX_VALUE))
         );
         rateStadiumTabLayout.setVerticalGroup(
             rateStadiumTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -3850,7 +3949,7 @@ public class AdminGUI extends javax.swing.JFrame {
                 .addComponent(rateTimeWrong)
                 .addGap(26, 26, 26)
                 .addComponent(updateRateBtn)
-                .addContainerGap(116, Short.MAX_VALUE))
+                .addContainerGap(133, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Rate  ", new javax.swing.ImageIcon(getClass().getResource("/quanlysanbong/images/icons8-dividends-32.png")), rateStadiumTab); // NOI18N
@@ -3987,6 +4086,11 @@ public class AdminGUI extends javax.swing.JFrame {
         orderDateCreateLabel.setText(clock.getCurrentDateTime());
         ptList = ptDao.getOrderList();
         
+        
+        //=======Tao thread quan li thoi gian thue cho tung san
+        ManageRentTime mt = new ManageRentTime(ptList);
+        //======================================================================
+        
         // tu tao mapt 
         String autoPtID = new AutoID().getAutoPhieuThueID(ptList);
         orderIdLabel.setText(autoPtID);
@@ -4041,6 +4145,8 @@ public class AdminGUI extends javax.swing.JFrame {
         peopleMngPanel.setVisible(true);
         foodMngPanel.setVisible(false);
         billMngPanel.setVisible(false);
+        
+        showStaffList(nvList);
     }//GEN-LAST:event_peopleMngBtnActionPerformed
 
     private void foodBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_foodBtnActionPerformed
@@ -4063,6 +4169,14 @@ public class AdminGUI extends javax.swing.JFrame {
         billMngPanel.setVisible(true);
     }//GEN-LAST:event_billbtnActionPerformed
 
+    public int getStaffIndex(String manv) {
+        for(int i = 0; i < nvList.size(); i++) {
+            if(nvList.get(i).getManv().equals(manv))
+                return i;
+        }
+        return -1;
+    }
+    
     private void savebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savebtnActionPerformed
         // TODO add your handling code here:
         String fname = fnameTxt.getText();
@@ -4090,6 +4204,11 @@ public class AdminGUI extends javax.swing.JFrame {
             cmndWrong.setText("ID must has 12 numbers");
             hopLe = false;
         }
+        
+        int index = getStaffIndex(admin.getManv());
+        if(index == -1) {
+              hopLe = false;
+        }
 
         if (hopLe) {
             admin.setHo(fname);
@@ -4097,6 +4216,8 @@ public class AdminGUI extends javax.swing.JFrame {
             admin.setSdt(phone);
             admin.setCmnd(cmnd);
             admin.setTrangthainghi(quitJob);
+            nvList.set(index, admin);
+
             if (staffDao.updateStaffInfo(admin)) {
                 JOptionPane.showMessageDialog(rootPane, "Update info successful");
                 resetInfolabels();
@@ -4104,6 +4225,7 @@ public class AdminGUI extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Update info failed");
             }
+            
         }
     }//GEN-LAST:event_savebtnActionPerformed
 
@@ -5431,16 +5553,31 @@ public class AdminGUI extends javax.swing.JFrame {
             
         } else {
             orderServicesTableModel.removeRow(index);
-            
+            ctdvList.remove(index);
+            removeOrderServiceBtn.setEnabled(false);
             if(orderServicesTableModel.getRowCount() == 0 ) {
                 removeOrderServiceBtn.setEnabled(false);
             }
         }
     }//GEN-LAST:event_removeOrderServiceBtnActionPerformed
 
+    public boolean hasOrder(String preOrderID) {
+        for(PhieuThue item : ptList) {
+            if(item.getMapd() != null) 
+                if(item.getMapd().equals(preOrderID))
+                    return true;
+        }
+        return false;
+    }
+    
     private void checkPreOrderIdBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkPreOrderIdBtnActionPerformed
         // TODO add your handling code here:
         String preOrderID = preOrderIdTxt.getText();
+        
+        if(hasOrder(preOrderID)) {
+            orderIdWrong.setText("This already has ORDER!");
+            return;
+        }
         
         if(preOrderID.equals("")) {
             orderDetailTableModel.setRowCount(0);
@@ -5485,7 +5622,7 @@ public class AdminGUI extends javax.swing.JFrame {
 
     private void viewServicesBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewServicesBtnActionPerformed
         // TODO add your handling code here:
-        AddServiceOrder addService = new AddServiceOrder(this, rootPaneCheckingEnabled, dvList);
+        AddServiceOrder addService = new AddServiceOrder(this, rootPaneCheckingEnabled, dvList, 1, orderIdLabel.getText());
         addService.setVisible(true);
     }//GEN-LAST:event_viewServicesBtnActionPerformed
 
@@ -5506,19 +5643,30 @@ public class AdminGUI extends javax.swing.JFrame {
         if(index == -1) {
             
         } else {
-            String mapt = ptList.get(index).getMapt();
-
-            orderDateCreate2.setText("Date: " + ptList.get(index).getNgayThue());
-            orderStaffIdLabel2.setText(ptList.get(index).getManv());
-            orderCusIdLabel2.setText(ptList.get(index).getMakh());
-            orderPhoneTxt2.setText(ptList.get(index).getSdt());
-            orderNoteTxt2.setText(ptList.get(index).getGhiChu());
+            
+            PhieuThue item = ptList.get(index);
+            
+            String mapt = item.getMapt();
+            
+            orderIdLabel2.setText(item.getMapt());
+            orderDateCreate2.setText("Date: " + item.getNgayThue());
+            orderStaffIdLabel2.setText(item.getManv());
+            orderCusIdLabel2.setText(item.getMakh());
+            orderPhoneTxt2.setText(item.getSdt());
+            orderNoteTxt2.setText(item.getGhiChu());
 
             ctptList2 = ctptDao.getOrderDetail(mapt);
+            
+            // == thread retn time
+            
             showOrderDetail(ctptList2);
+            
+            
             
             ctdvList2 = ctdvDao.getOrderServices(mapt);
             showOrderServices(ctdvList2);
+            
+            
             
             double currentTotal = countCurrentTotal(ctptList2, ctdvList2);
             
@@ -5528,11 +5676,125 @@ public class AdminGUI extends javax.swing.JFrame {
 
     private void orderDetailTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderDetailTable2MouseClicked
         // TODO add your handling code here:
+        endStadiumBtn.setEnabled(true);
     }//GEN-LAST:event_orderDetailTable2MouseClicked
 
     private void orderServicesTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderServicesTable2MouseClicked
         // TODO add your handling code here:
+        removeOrderServiceBtn2.setEnabled(true);
     }//GEN-LAST:event_orderServicesTable2MouseClicked
+
+    private void viewServicesBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewServicesBtn2ActionPerformed
+        // TODO add your handling code here:
+        AddServiceOrder addService = new AddServiceOrder(this, rootPaneCheckingEnabled, dvList, 2, orderIdLabel2.getText());
+        addService.setVisible(true);
+        
+    }//GEN-LAST:event_viewServicesBtn2ActionPerformed
+
+    private void removeOrderServiceBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeOrderServiceBtn2ActionPerformed
+        // TODO add your handling code here:
+        int index = orderServicesTable2.getSelectedRow();
+        
+        if(index == -1) {
+            
+        } else {
+            CT_DichVu item = ctdvList2.get(index);
+            ctdvDao.deleteServiceDetail(item);
+            ctdvList2.remove(index);
+            orderServicesTableModel2.removeRow(index);
+            removeOrderServiceBtn2.setEnabled(false);
+            
+            // update current total
+            double currentTotal = countCurrentTotal(ctptList2, ctdvList2);     
+            currentTotalOrderLabel.setText(String.format("%.3f", currentTotal));
+            
+            if(orderServicesTableModel2.getRowCount() == 0 ) {
+                removeOrderServiceBtn2.setEnabled(false);
+            }
+        }
+    }//GEN-LAST:event_removeOrderServiceBtn2ActionPerformed
+
+    private void orderServicesTable2PropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_orderServicesTable2PropertyChange
+        // TODO add your handling code here:
+        int index = orderServicesTable2.getSelectedRow();
+        
+        if(index == -1) {
+            
+        } else {
+            CT_DichVu item = ctdvList2.get(index);
+            if(evt.getOldValue() == null) { // tranh truong hop de cell quantity rong~
+                orderServicesTableModel2.setValueAt((int)item.getSoluong(),index, 1);
+            }
+            item.setSoluong((int)orderServicesTableModel2.getValueAt(index, 1));
+            
+            ctdvDao.updateServiceDetail(item);
+            
+            // update current total
+            double currentTotal = countCurrentTotal(ctptList2, ctdvList2);     
+            currentTotalOrderLabel.setText(String.format("%.3f", currentTotal));
+        }
+    }//GEN-LAST:event_orderServicesTable2PropertyChange
+
+    private void refreshOrderServiceTableBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshOrderServiceTableBtn2ActionPerformed
+        // TODO add your handling code here:
+        if(ctdvList2 != null) {
+            showOrderServices(ctdvList2);
+        }
+    }//GEN-LAST:event_refreshOrderServiceTableBtn2ActionPerformed
+
+    private void refreshOrderServiceTableBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_refreshOrderServiceTableBtnActionPerformed
+        // TODO add your handling code here:
+        orderServicesTableModel.setRowCount(0);
+        for(int i = 0; i < ctdvList.size(); i++) {
+            CT_DichVu item = ctdvList.get(i);
+            String itemName = getNameOfService(item.getMadv());
+            orderServicesTableModel.addRow(new Object[]{itemName, item.getSoluong()});
+        }
+    }//GEN-LAST:event_refreshOrderServiceTableBtnActionPerformed
+
+    private void orderServicesTablePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_orderServicesTablePropertyChange
+        // TODO add your handling code here:
+        int index = orderServicesTable.getSelectedRow();
+        
+        if(index == -1) {
+            
+        } else {
+            CT_DichVu item = ctdvList.get(index);
+            if(evt.getOldValue() == null) { // tranh truong hop de cell quantity rong~
+                orderServicesTableModel.setValueAt((int)item.getSoluong(),index, 1);
+            }
+            item.setSoluong((int)orderServicesTableModel.getValueAt(index, 1));
+        }
+    }//GEN-LAST:event_orderServicesTablePropertyChange
+
+    private void endStadiumBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_endStadiumBtnActionPerformed
+        // TODO add your handling code here:
+        int index = orderDetailTable2.getSelectedRow();
+        if(index == -1) {
+            
+        } else {
+            CT_PhieuThue item = ctptList2.get(index);
+            
+            if(!item.getGiotra().equals("")){
+                JOptionPane.showMessageDialog(this, "This stadium is set LEAVE TIME");
+                return;
+            }
+            
+            int ans = JOptionPane.showConfirmDialog(this, "Do you want to set LEAVE TIME for this stadium ?",
+                    "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if(ans == JOptionPane.YES_OPTION){
+                String leaveTime = clock.getCurrentDateTime2();
+                item.setGiotra(leaveTime);
+                ctptList2.set(index, item);
+                try {
+                    ctptDao.updateLeaveTimeOfStadium(item);
+                } catch (ParseException ex) {
+                    Logger.getLogger(AdminGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                showOrderDetail(ctptList2);
+            }
+        }
+    }//GEN-LAST:event_endStadiumBtnActionPerformed
     
     
     public float getRate(String makhunggio) {
@@ -5688,6 +5950,7 @@ public class AdminGUI extends javax.swing.JFrame {
     }
 
     public void showStaffList(ArrayList<NhanVien> nvList) {
+        nvTableModel.setRowCount(0);
         for (NhanVien nv : nvList) {
             String off = nv.isTrangthainghi() ? "Yes" : "No";
             nvTableModel.addRow(new Object[]{nv.getManv(), nv.getHo(),
@@ -5832,33 +6095,65 @@ public class AdminGUI extends javax.swing.JFrame {
         avaiStaList.remove(index);
     }
     
-    public int serviceExisted(DichVu dvItem){
+    public int serviceExisted(DichVu dvItem, int flag){
         
         // tra ve vi tri cua phan tu da ton tai trong chi tiet dich vu
-        for(int i = 0; i < ctdvList.size(); i++) {
-            if(ctdvList.get(i).getMadv().equals(dvItem.getMadv())){
-                return i;
+        
+        if(flag == 1) {
+            for(int i = 0; i < ctdvList.size(); i++) {
+                if(ctdvList.get(i).getMadv().equals(dvItem.getMadv())){
+                    return i;
+                }
+            }
+        } else if(flag == 2){
+            for(int i = 0; i < ctdvList2.size(); i++) {
+                if(ctdvList2.get(i).getMadv().equals(dvItem.getMadv())){
+                    return i;
+                }
             }
         }
+        
         return -1; // khong ton tai
     }
     
-    public void addServiceOrder(DichVu dvItem, int qty){
+    public void addServiceOrder(String mapt, DichVu dvItem, int qty, int flag){
         
-        int pos = serviceExisted(dvItem);
+        int pos = serviceExisted(dvItem, flag);
         
-        if( pos > -1){
-            CT_DichVu item = ctdvList.get(pos);
-            item.setSoluong(item.getSoluong() + qty);
-            ctdvList.set(pos, item);
-            
-            orderServicesTableModel.setValueAt(item.getSoluong(), pos, 1);
-        } else {
-            ctdvList.add(new CT_DichVu(orderIdLabel.getText(), dvItem.getMadv(), qty));
-            orderServicesTableModel.addRow(new Object[]{dvItem.getTendv(), qty});
-        }
-        
-        
+        if (flag == 1) {
+            if( pos > -1){ // da ton tai
+                CT_DichVu item = ctdvList.get(pos);
+                item.setSoluong(item.getSoluong() + qty);
+                ctdvList.set(pos, item);
+
+                orderServicesTableModel.setValueAt(item.getSoluong(), pos, 1);
+            } else {
+                CT_DichVu item = new CT_DichVu(mapt, dvItem.getMadv(), qty);
+                ctdvList.add(item);
+                orderServicesTableModel.addRow(new Object[]{dvItem.getTendv(), qty});
+            }
+        } else if (flag == 2) {
+            if( pos > -1){ // da ton tai
+                CT_DichVu item = ctdvList2.get(pos);
+                item.setSoluong(item.getSoluong() + qty);
+                ctdvList2.set(pos, item);
+                ctdvDao.updateServiceDetail(ctdvList2.get(pos));
+                orderServicesTableModel2.setValueAt(item.getSoluong(), pos, 1);
+                
+                // update current total
+                double currentTotal = countCurrentTotal(ctptList2, ctdvList2);     
+                currentTotalOrderLabel.setText(String.format("%.3f", currentTotal));
+            } else {
+                CT_DichVu item = new CT_DichVu(mapt, dvItem.getMadv(), qty);
+                ctdvList2.add(item);
+                ctdvDao.addServiceDetailItem(item);
+                orderServicesTableModel2.addRow(new Object[]{dvItem.getTendv(), qty});
+                
+                // update current total
+                double currentTotal = countCurrentTotal(ctptList2, ctdvList2);     
+                currentTotalOrderLabel.setText(String.format("%.3f", currentTotal));
+            }
+        }  
     }
     
     public void resetOrder() {
@@ -5890,19 +6185,25 @@ public class AdminGUI extends javax.swing.JFrame {
     
     public void showOrderDetail(ArrayList<CT_PhieuThue> ctptList){
         orderDetailTableModel2.setRowCount(0);
+        String gioTra = "";
         for(CT_PhieuThue item : ctptList){
-            orderDetailTableModel2.addRow(new Object[]{item.getMasan(), item.getGioden(), item.getGio_dukientra()});
+            
+            if(item.getGiotra() == null || item.getGiotra().equals(""))
+                gioTra = "Chưa có";
+            else gioTra = item.getGiotra();
+            
+            orderDetailTableModel2.addRow(new Object[]{item.getMasan(), item.getGioden(), item.getGio_dukientra()
+                , gioTra});
         }
     }
     
     public String getNameOfService(String itemID) {
-        String itemName="";
         for(DichVu dv : dvList) {
             if(dv.getMadv().equals(itemID)) {
                 return dv.getTendv();
             }
         }
-        return itemName;
+        return "";
     }
     
     public void showOrderServices(ArrayList<CT_DichVu> ctdvList) {
@@ -5927,7 +6228,7 @@ public class AdminGUI extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -6011,6 +6312,7 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> endMonthCbBox;
     private javax.swing.JComboBox<String> endMonthCbBox1;
     private javax.swing.JComboBox<String> endMonthCbBox2;
+    private javax.swing.JButton endStadiumBtn;
     private com.toedter.calendar.JYearChooser endYearChooser;
     private com.toedter.calendar.JYearChooser endYearChooser1;
     private com.toedter.calendar.JYearChooser endYearChooser2;
@@ -6126,6 +6428,7 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel91;
     private javax.swing.JLabel jLabel92;
     private javax.swing.JLabel jLabel93;
+    private javax.swing.JLabel jLabel94;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -6185,6 +6488,7 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JTable orderDetailTable;
     private javax.swing.JTable orderDetailTable2;
     private javax.swing.JLabel orderIdLabel;
+    private javax.swing.JLabel orderIdLabel2;
     private javax.swing.JLabel orderIdWrong;
     private javax.swing.JTable orderListTable;
     private javax.swing.JTextField orderNoteTxt;
@@ -6229,8 +6533,11 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JTable rateTable;
     private javax.swing.JLabel rateTimeWrong;
     private javax.swing.JTextField rateTxt;
+    private javax.swing.JButton refreshOrderServiceTableBtn;
+    private javax.swing.JButton refreshOrderServiceTableBtn2;
     private javax.swing.JButton removeOrderItemBtn;
     private javax.swing.JButton removeOrderServiceBtn;
+    private javax.swing.JButton removeOrderServiceBtn2;
     private javax.swing.JButton removePreOderItemBtn;
     private javax.swing.JLabel roleLabel;
     private javax.swing.JButton savebtn;
@@ -6286,5 +6593,6 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JButton updateStaffBtn;
     private javax.swing.JLabel usernameLabel;
     private javax.swing.JButton viewServicesBtn;
+    private javax.swing.JButton viewServicesBtn2;
     // End of variables declaration//GEN-END:variables
 }

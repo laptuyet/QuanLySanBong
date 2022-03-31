@@ -46,6 +46,53 @@ public class CT_DichVuDAO {
         return true;
     }
     
+    public boolean addServiceDetailItem(CT_DichVu item) {
+        String sql =  "INSERT INTO CHITIET_DICHVU(mapt, madv, soluong) VALUES(?, ?, ?)";
+        
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, item.getMapt());
+            ps.setString(2, item.getMadv());
+            ps.setInt(3, item.getSoluong());
+            
+            return ps.executeUpdate() > 0;
+        } catch(SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+    
+    public boolean updateServiceDetail(CT_DichVu item) {
+        String sql =  "UPDATE CHITIET_DICHVU SET soluong=? WHERE mapt=? AND madv=?";
+        
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(2, item.getMapt());
+            ps.setString(3, item.getMadv());
+            ps.setInt(1, item.getSoluong());
+            
+            return ps.executeUpdate() > 0;
+        } catch(SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+    
+    public boolean deleteServiceDetail(CT_DichVu item) {
+        String sql =  "DELETE FROM CHITIET_DICHVU WHERE mapt=? AND madv=?";
+        
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, item.getMapt());
+            ps.setString(2, item.getMadv());
+            
+            return ps.executeUpdate() > 0;
+        } catch(SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
+    
     public ArrayList<CT_DichVu> getOrderServices(String mapt){
         ArrayList<CT_DichVu> ctdvList = new ArrayList<>();
         

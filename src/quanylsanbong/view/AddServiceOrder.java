@@ -4,6 +4,7 @@
  */
 package quanylsanbong.view;
 
+import java.awt.Color;
 import java.awt.Image;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
@@ -19,16 +20,19 @@ public class AddServiceOrder extends javax.swing.JDialog {
     private AdminGUI adminGUI;
     private ArrayList<DichVu> dvList;
     private DefaultTableModel foodTableModel;
-
+    private int flag; // 1: them vao ctpt luc dat phieu, 2: them vao khi xem ctpt trong order list
+    private String mapt;
     /**
      * Creates new form AddServiceOrder
      */
-    public AddServiceOrder(java.awt.Frame parent, boolean modal, ArrayList<DichVu> dvList) {
+    public AddServiceOrder(java.awt.Frame parent, boolean modal, ArrayList<DichVu> dvList, int flag, String mapt) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
         this.adminGUI = (AdminGUI) parent;
         this.dvList = dvList;
+        this.flag = flag;
+        this.mapt = mapt;
 
         foodTableModel = (DefaultTableModel) foodTable.getModel();
         showFoodList(dvList);
@@ -116,6 +120,7 @@ public class AddServiceOrder extends javax.swing.JDialog {
         jLabel1.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
         jLabel1.setText("Quantity:");
 
+        qtyWrong.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         qtyWrong.setForeground(new java.awt.Color(255, 0, 0));
         qtyWrong.setText(" ");
 
@@ -158,7 +163,7 @@ public class AddServiceOrder extends javax.swing.JDialog {
                     .addComponent(qtySpn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(qtyWrong)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addServiceOrderbtn)
                     .addComponent(cancelServerOrderBtn))
@@ -199,13 +204,17 @@ public class AddServiceOrder extends javax.swing.JDialog {
             DichVu dvItem = dvList.get(index);
             int qty = (int) qtySpn.getValue();
             if (qty == 0) {
+                qtyWrong.setForeground(Color.red);
                 qtyWrong.setText("Please choose quantity! :D");
                 hopLe = false;
             }
 
             if (hopLe) {
-                adminGUI.addServiceOrder(dvItem, qty);
-                this.dispose();
+                adminGUI.addServiceOrder(mapt, dvItem, qty, flag);
+                qtyWrong.setForeground(new Color(5, 151, 32));
+                qtySpn.setValue(0);
+                qtyWrong.setText("Add service successfully! :D");
+                //this.dispose();
             }
         }
     }//GEN-LAST:event_addServiceOrderbtnActionPerformed
@@ -218,7 +227,7 @@ public class AddServiceOrder extends javax.swing.JDialog {
     public void showFoodList(ArrayList<DichVu> dvList) {
         for (DichVu dv : dvList) {
             foodTableModel.addRow(new Object[]{dv.getMadv(), dv.getTendv(),
-                dv.getDvt(), dv.getDongia(), dv.getHinhanh()});
+                dv.getDvt(), dv.getDongia()});
         }
     }
     /**

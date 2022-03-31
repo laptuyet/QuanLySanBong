@@ -5,6 +5,7 @@
 package quanlysanbong.controller;
 
 import DBConnection.DBConnection;
+import Utils.CalendarHelper;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -18,7 +19,8 @@ import quanlysanbong.model.CT_PhieuThue;
 public class CT_PhieuThueDAO {
 
     private Connection conn;
-
+    CalendarHelper cal = new CalendarHelper();
+    
     public CT_PhieuThueDAO() {
         conn = new DBConnection().getDBConnection();
     }
@@ -35,7 +37,7 @@ public class CT_PhieuThueDAO {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 CT_PhieuThue ctpt = new CT_PhieuThue(mapt, rs.getString(2),
-                        rs.getString(3), rs.getString(4), "", 0.0, makhunggio);
+                        cal.formatDateTime(rs.getString(3)), cal.formatDateTime(rs.getString(4)), "", 0.0, makhunggio);
                 ctptList.add(ctpt);
             }
         } catch (SQLException ex) {
@@ -84,7 +86,6 @@ public class CT_PhieuThueDAO {
 
     public ArrayList<CT_PhieuThue> getOrderDetail(String mapt) {
         ArrayList<CT_PhieuThue> ctptList = new ArrayList<>();
-
         String sql = "SELECT CT.* \n"
                 + "FROM CHITIET_PHIEUTHUE CT \n"
                 + "WHERE CT.mapt=?";
@@ -94,7 +95,8 @@ public class CT_PhieuThueDAO {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 CT_PhieuThue ctpt = new CT_PhieuThue(rs.getString(1), rs.getString(2),
-                        rs.getString(3), rs.getString(4), rs.getString(5), rs.getDouble(6), rs.getString(7));
+                       cal.formatDateTime(rs.getString(3)), cal.formatDateTime(rs.getString(4)),
+                        cal.formatDateTime(rs.getString(5)), rs.getDouble(6), rs.getString(7));
                 ctptList.add(ctpt);
             }
         } catch (SQLException ex) {
@@ -102,6 +104,25 @@ public class CT_PhieuThueDAO {
         }
 
         return ctptList;
+    }
+    
+    public boolean updateLeaveTimeOfStadium(CT_PhieuThue item) throws ParseException {
+        String sql = "UPDATE CHITIET_PHIEUTHUE SET giotra=? WHERE mapt=? AND masan=?";
+        SimpleDateFormat spf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            
+            long ms = spf.parse(item.getGiotra()).getTime();
+            ps.setTimestamp(1, new Timestamp(ms));
+            ps.setString(2, item.getMapt());
+            ps.setString(3, item.getMasan());
+            
+            return ps.executeUpdate() > 0;
+            
+        } catch(SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
     }
 //
 //    public static void main(String[] args) {

@@ -31,16 +31,16 @@ public class MyClock extends Thread {
     }
 
     public MyClock(JLabel timeLabel, JLabel dateLabel) {
-        start();
+        this.start();
         this.timeLabel = timeLabel;
         this.dateLabel = dateLabel;
     }
 
     @Override
     public void run() {
-
+        Calendar cal;
         while (true) {
-            Calendar cal = Calendar.getInstance();
+            cal = Calendar.getInstance();
 
             date = cal.getTime();
             time = spfTime.format(date);
@@ -62,9 +62,16 @@ public class MyClock extends Thread {
         Date date = cal.getTime();
         String dateTime = spf.format(date);
         return dateTime;
-
     }
-    
+
+    public String getCurrentDateTime2() {
+        SimpleDateFormat spf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        Calendar cal = Calendar.getInstance();
+        Date date = cal.getTime();
+        String dateTime = spf.format(date);
+        return dateTime;
+    }
+
     public String getCurrentDate() {
         SimpleDateFormat spf = new SimpleDateFormat("yyyy/MM/dd");
         Calendar cal = Calendar.getInstance();
@@ -73,7 +80,7 @@ public class MyClock extends Thread {
         return date;
 
     }
-    
+
     public String getCurrentTime() {
         SimpleDateFormat spf = new SimpleDateFormat("HH:mm:ss");
         Calendar cal = Calendar.getInstance();

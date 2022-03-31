@@ -7,6 +7,7 @@ package Utils;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -106,5 +107,52 @@ public class CalendarHelper {
 
         return total;
     }
-
+    
+    public String formatDateTime(String dateTime) {
+        
+        if(dateTime == null) return "";
+        if(dateTime.equals("")) return "";
+        
+        String ans = "";
+        SimpleDateFormat spf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat spf2 = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        try {
+            long ms = spf.parse(dateTime).getTime();
+            
+            ans = spf2.format(ms);
+            
+        } catch (ParseException ex) {
+            Logger.getLogger(CalendarHelper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ans;
+    }
+    
+    public String formatDateTime(long ms) {
+        SimpleDateFormat spf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        
+        Date date = new Date(ms);
+        
+        return spf.format(date);
+    }
+    
+    public long getMiliSecondTime(String dateTime){
+        SimpleDateFormat spf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        
+        long ms = 0;
+        try {
+            ms = spf.parse(dateTime).getTime();
+        } catch (ParseException ex) {
+            Logger.getLogger(CalendarHelper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return ms;
+    }
+    
+    public static void main(String[] args) {
+        
+        CalendarHelper c = new CalendarHelper();
+        long ms = c.getMiliSecondTime("2022/03/30 20:30:00");
+        System.out.println(ms);
+        System.out.println(c.formatDateTime(ms));
+    }
 }
