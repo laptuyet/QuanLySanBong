@@ -31,8 +31,9 @@ public class ManageRentTime extends Thread {
     }
 
     public ManageRentTime(ArrayList<PhieuThue> ptList) {
-        start();
         this.ptList = ptList;
+        start();
+        
     }
 
     @Override
@@ -48,8 +49,8 @@ public class ManageRentTime extends Thread {
             date = cal.getTime();
             currTime = date.getTime();
 
-            for (PhieuThue pt : ptList) {
-
+            for (int j = 0; j < ptList.size(); j++) {
+                PhieuThue pt = ptList.get(j);
                 // Lay ra ctpt cua tung phieu
                 ctptList = ctptDao.getOrderDetail(pt.getMapt());
 
@@ -65,12 +66,13 @@ public class ManageRentTime extends Thread {
                     }
                 }
                 // END xu ly tung san trong ctpt
+                ctptList.clear();
 
             }
             // END xu ly tung phieu thue
 
             try {
-                Thread.sleep(10000); // 30s check 1 lan
+                Thread.sleep(30000); // 30s check 1 lan
             } catch (InterruptedException ex) {
                 Logger.getLogger(MyClock.class.getName()).log(Level.SEVERE, null, ex);
             }

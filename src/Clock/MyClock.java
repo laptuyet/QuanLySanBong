@@ -84,9 +84,9 @@ public class MyClock extends Thread {
     public String getCurrentTime() {
         SimpleDateFormat spf = new SimpleDateFormat("HH:mm:ss");
         Calendar cal = Calendar.getInstance();
-        Date date = cal.getTime();
-        String time = spf.format(date);
-        return time;
+        Date d = cal.getTime();
+        String t = spf.format(d);
+        return t;
     }
 
     public String getCurrentYMD_HM(String option) {

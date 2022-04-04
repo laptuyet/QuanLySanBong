@@ -25,19 +25,33 @@ public class CT_PhieuThueDAO {
         conn = new DBConnection().getDBConnection();
     }
 
-    public ArrayList<CT_PhieuThue> getOrderDetailWithPreOrder(String mapd, String mapt, String makhunggio) {
+    public ArrayList<CT_PhieuThue> getOrderDetailWithPreOrder(String mapd, String mapt){
         ArrayList<CT_PhieuThue> ctptList = new ArrayList<>();
+        HeSoDAO hsDao = new HeSoDAO();
+        String makhunggio = "";
 
-        String sql = "SELECT CT.* \n"
-                + "FROM CHITIET_PHIEUDAT CT \n"
+        String sql = "SELECT CT.*, LS.giatien_motgio \n"
+                + "FROM CHITIET_PHIEUDAT CT INNER JOIN SANBONG S ON CT.masan = S.masan \n"
+                + "INNER JOIN LOAISAN LS ON S.maloaisan = LS.maloaisan \n"
                 + "WHERE CT.mapd = ?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, mapd);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
+                
+                
+                makhunggio = hsDao.getMaKhungGio(rs.getString(3));
+                
+                // tinh thanhtien
+                String sDateTime = rs.getString(3), eDateTime = rs.getString(4);
+                float totalTime = cal.totalTime(sDateTime, eDateTime);
+                
+                //
+                
                 CT_PhieuThue ctpt = new CT_PhieuThue(mapt, rs.getString(2),
-                        cal.formatDateTime(rs.getString(3)), cal.formatDateTime(rs.getString(4)), "", 0.0, makhunggio);
+                        cal.formatDateTime(sDateTime), cal.formatDateTime(eDateTime),
+                        "", rs.getDouble(6) * totalTime, makhunggio);
                 ctptList.add(ctpt);
             }
         } catch (SQLException ex) {
@@ -69,7 +83,7 @@ public class CT_PhieuThueDAO {
 
                 ps.setTime(5, null);
 
-                ps.setDouble(6, 0.0);
+                ps.setDouble(6, ctpt.getThanhtien());
                 ps.setString(7, ctpt.getMakhunggio());
 
                 ps.addBatch();

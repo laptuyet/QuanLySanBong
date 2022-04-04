@@ -26,7 +26,7 @@ public class TrangThaiSanDAO {
         conn = new DBConnection().getDBConnection();
     }
 
-    public ArrayList<TrangThaiSan> getTrangThaiSanList(String sDateTime, String eEndDateTime) {
+    public ArrayList<TrangThaiSan> getTrangThaiSanList(String sDateTime, String eDateTime) {
         ArrayList<TrangThaiSan> stateList = new ArrayList<>();
 
         String sql = "SELECT SAN.*, tentt "
@@ -38,7 +38,7 @@ public class TrangThaiSanDAO {
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, sDateTime);
-            ps.setString(2, eEndDateTime);
+            ps.setString(2, eDateTime);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 String state = rs.getString(5) == null ? "Trống" : rs.getString(5);

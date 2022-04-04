@@ -7,6 +7,7 @@ package quanylsanbong.view;
 import java.awt.Color;
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 import quanlysanbong.model.DichVu;
@@ -31,11 +32,16 @@ public class AddServiceOrder extends javax.swing.JDialog {
         this.setLocationRelativeTo(null);
         this.adminGUI = (AdminGUI) parent;
         this.dvList = dvList;
+
+        // loc ra cac item chua het hang de hien thi
+        this.dvList = (ArrayList<DichVu>) dvList.stream()
+                .filter(item -> !item.isHethang()).collect(Collectors.toList());
+        
         this.flag = flag;
         this.mapt = mapt;
 
         foodTableModel = (DefaultTableModel) foodTable.getModel();
-        showFoodList(dvList);
+        showFoodList(this.dvList);
     }
 
     /**

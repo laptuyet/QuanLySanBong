@@ -5,6 +5,7 @@
 package quanlysanbong.controller;
 
 import DBConnection.DBConnection;
+import Utils.CalendarHelper;
 import java.util.ArrayList;
 import quanlysanbong.model.PhieuDat;
 import java.sql.*;
@@ -25,13 +26,14 @@ public class PhieuDatDAO {
 
     public ArrayList<PhieuDat> getPreOrderList() {
         ArrayList<PhieuDat> preList = new ArrayList<>();
+        CalendarHelper cal = new CalendarHelper();
 
         String sql = "SELECT * FROM PHIEUDAT";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                PhieuDat pd = new PhieuDat(rs.getString(1), rs.getString(2),
+                PhieuDat pd = new PhieuDat(rs.getString(1), cal.formatDateTime(rs.getString(2)),
                         rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6));
 
                 preList.add(pd);
@@ -50,7 +52,7 @@ public class PhieuDatDAO {
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, pd.getMapd());
-            SimpleDateFormat spf = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+            SimpleDateFormat spf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             long ms = spf.parse(pd.getNgayDat()).getTime();
             Timestamp ts = new Timestamp(ms);
             ps.setTimestamp(2, ts);

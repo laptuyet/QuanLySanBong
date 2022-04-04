@@ -7,6 +7,7 @@ package quanylsanbong.view;
 import Clock.MyClock;
 import Utils.CalendarHelper;
 import Utils.FoodHelper;
+import javax.swing.JOptionPane;
 import quanlysanbong.model.CT_PhieuDat;
 import quanlysanbong.model.TrangThaiSan;
 
@@ -23,12 +24,13 @@ public class AddToDetailPreOrder extends javax.swing.JDialog {
     private String mapd;
     private int index;
     private MyClock clock;
+    private String date, sTime, eTime;
 
     /**
      * Creates new form AddToDetailPreOrder
      */
     public AddToDetailPreOrder(java.awt.Frame parent, boolean modal,
-            TrangThaiSan preOrderItem, String sDateTime, String eDateTime, String mapd, int index) {
+            TrangThaiSan preOrderItem, String date, String sTime, String eTime, String mapd, int index) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
@@ -40,14 +42,27 @@ public class AddToDetailPreOrder extends javax.swing.JDialog {
         staName.setText(preOrderItem.getTenSan());
         staPrice.setText(String.valueOf(preOrderItem.getPricePerHour()));
 
-        startYearChooser1.setYear(Integer.valueOf(clock.getCurrentYMD_HM("year")));
-        startMonthCbBox1.setSelectedIndex(Integer.valueOf(clock.getCurrentYMD_HM("month")) - 1);
-        startDayCbBox1.setSelectedIndex(Integer.valueOf(clock.getCurrentYMD_HM("day")) - 1);
+        preOrderDateLabel.setText(date);
 
         this.adminGUI = (AdminGUI) parent;
         this.preOrderItem = preOrderItem;
         this.mapd = mapd;
         this.index = index;
+        this.date = date;
+        this.sTime = sTime;
+        this.eTime = eTime;
+
+        String[] s = sTime.split("\\:");
+        String sH = s[0], sM = s[1];
+
+        String[] e = eTime.split("\\:");
+        String eH = e[0], eM = e[1];
+
+        sHourSpn.setValue(Integer.valueOf(sH));
+        sMinuteSpn.setValue(Integer.valueOf(sM));
+        eHourSpn.setValue(Integer.valueOf(eH));
+        eMinuteSpn.setValue(Integer.valueOf(eM));
+
     }
 
     /**
@@ -79,10 +94,8 @@ public class AddToDetailPreOrder extends javax.swing.JDialog {
         jLabel12 = new javax.swing.JLabel();
         staPrice = new javax.swing.JLabel();
         preOrderTimeWrong = new javax.swing.JLabel();
-        startYearChooser1 = new com.toedter.calendar.JYearChooser();
-        startMonthCbBox1 = new javax.swing.JComboBox<>();
-        startDayCbBox1 = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
+        preOrderDateLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 204));
@@ -117,6 +130,7 @@ public class AddToDetailPreOrder extends javax.swing.JDialog {
         jLabel4.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
         jLabel4.setText("Deposit:");
 
+        staName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         staName.setText("stadium name");
 
         staDeposit.setText("0");
@@ -147,32 +161,18 @@ public class AddToDetailPreOrder extends javax.swing.JDialog {
         jLabel12.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
         jLabel12.setText("Price/h:");
 
+        staPrice.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         staPrice.setText("price/h");
 
         preOrderTimeWrong.setForeground(new java.awt.Color(255, 0, 51));
         preOrderTimeWrong.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         preOrderTimeWrong.setText(" ");
 
-        startYearChooser1.setEnabled(false);
-        startYearChooser1.addInputMethodListener(new java.awt.event.InputMethodListener() {
-            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
-            }
-            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
-                startYearChooser1InputMethodTextChanged(evt);
-            }
-        });
-
-        startMonthCbBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
-        startMonthCbBox1.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                startMonthCbBox1ItemStateChanged(evt);
-            }
-        });
-
-        startDayCbBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-
         jLabel5.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
         jLabel5.setText("Date:");
+
+        preOrderDateLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        preOrderDateLabel.setText(" ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -182,60 +182,56 @@ public class AddToDetailPreOrder extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(37, 37, 37)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel12)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(6, 6, 6)
-                                .addComponent(preOrderTimeWrong, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(staPrice, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(staName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel1)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel12)
-                                    .addComponent(jLabel4))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGap(42, 42, 42)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addComponent(staDepositWrong, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(staDeposit, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(addDetailPreOrderBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(80, 80, 80)
-                                                .addComponent(cancelPreOrderBtn))
-                                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addComponent(staPrice, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(staName, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGap(42, 42, 42)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(sHourSpn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(24, 24, 24)
-                                                .addComponent(sMinuteSpn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(eHourSpn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(eMinuteSpn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(sHourSpn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(24, 24, 24)
+                                        .addComponent(sMinuteSpn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(eHourSpn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(eMinuteSpn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(addDetailPreOrderBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(50, 50, 50)
+                                .addComponent(cancelPreOrderBtn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(staDepositWrong, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(preOrderDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                    .addGap(33, 33, 33)
+                                    .addComponent(staDeposit, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(59, 59, 59)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(53, 53, 53)
-                        .addComponent(startYearChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(startMonthCbBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(startDayCbBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(39, Short.MAX_VALUE))
+                        .addGap(43, 43, 43)
+                        .addComponent(preOrderTimeWrong, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(35, 35, 35))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -268,24 +264,21 @@ public class AddToDetailPreOrder extends javax.swing.JDialog {
                             .addComponent(eMinuteSpn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(preOrderTimeWrong)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(startMonthCbBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(startYearChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(startDayCbBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
-                .addComponent(jLabel4)
-                .addGap(13, 13, 13)
-                .addComponent(staDeposit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(staDepositWrong)
-                .addGap(31, 31, 31)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addDetailPreOrderBtn)
-                    .addComponent(cancelPreOrderBtn))
-                .addGap(27, 27, 27))
+                    .addComponent(jLabel5)
+                    .addComponent(preOrderDateLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(staDeposit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(38, 38, 38)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(staDepositWrong)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(addDetailPreOrderBtn)
+                        .addComponent(cancelPreOrderBtn)))
+                .addGap(74, 74, 74))
         );
 
         pack();
@@ -303,12 +296,12 @@ public class AddToDetailPreOrder extends javax.swing.JDialog {
 
         int eHour = (int) eHourSpn.getValue();
         int eMinute = (int) eMinuteSpn.getValue();
+        
+        String sTime = cal.formatHourAndMinute(sHour, sMinute);
+        String eTime = cal.formatHourAndMinute(eHour, eMinute);
 
-        String date = cal.formatDate(startYearChooser1.getValue(),
-                startMonthCbBox1.getSelectedIndex() + 1, startDayCbBox1.getSelectedIndex() + 1);
-
-        String sDate = date + " " + cal.formatHourAndMinute(sHour, sMinute);
-        String eDate = date + " " + cal.formatHourAndMinute(eHour, eMinute);
+        String sDate = this.date + " " + sTime;
+        String eDate = this.date + " " + eTime;
 
         boolean hopLe = true;
 
@@ -323,6 +316,16 @@ public class AddToDetailPreOrder extends javax.swing.JDialog {
             staDepositWrong.setText("Deposit must be numbers");
             hopLe = false;
         }
+        
+        if( !(cal.isEndTimeGtStartTime(this.sTime, sTime) && cal.isEndTimeGtStartTime(eTime, this.eTime)) ) {
+            
+            String msg = "Pre-order time must be between "
+                    + this.sTime + " and " + this.eTime + "\n\n"
+                    + this.sTime + " <= " + "Come: " + sTime + " --> "
+                    + "Leave: " + eTime + " <= " + this.eTime;
+            JOptionPane.showMessageDialog(this, msg);
+            hopLe = false;
+        }
 
         if (hopLe) {
             CT_PhieuDat ctpdItem = new CT_PhieuDat(mapd, preOrderItem.getMaSan(), sDate, eDate, deposit);
@@ -331,14 +334,6 @@ public class AddToDetailPreOrder extends javax.swing.JDialog {
 
         }
     }//GEN-LAST:event_addDetailPreOrderBtnActionPerformed
-
-    private void startYearChooser1InputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_startYearChooser1InputMethodTextChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_startYearChooser1InputMethodTextChanged
-
-    private void startMonthCbBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_startMonthCbBox1ItemStateChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_startMonthCbBox1ItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -397,6 +392,7 @@ public class AddToDetailPreOrder extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel preOrderDateLabel;
     private javax.swing.JLabel preOrderTimeWrong;
     private javax.swing.JSpinner sHourSpn;
     private javax.swing.JSpinner sMinuteSpn;
@@ -404,8 +400,5 @@ public class AddToDetailPreOrder extends javax.swing.JDialog {
     private javax.swing.JLabel staDepositWrong;
     private javax.swing.JLabel staName;
     private javax.swing.JLabel staPrice;
-    private javax.swing.JComboBox<String> startDayCbBox1;
-    private javax.swing.JComboBox<String> startMonthCbBox1;
-    private com.toedter.calendar.JYearChooser startYearChooser1;
     // End of variables declaration//GEN-END:variables
 }

@@ -6,6 +6,7 @@ package quanylsanbong.view;
 
 import Clock.MyClock;
 import Utils.CalendarHelper;
+import javax.swing.JOptionPane;
 import quanlysanbong.model.CT_PhieuThue;
 import quanlysanbong.model.TrangThaiSan;
 
@@ -22,11 +23,13 @@ public class AddToDetailOrder extends javax.swing.JDialog {
     private TrangThaiSan orderItem;
     private String makhunggio;
     private int index;
+    private String sTime, eTime;
 
     /**
      * Creates new form AddToDetailOrder
      */
-    public AddToDetailOrder(java.awt.Frame parent, boolean modal, TrangThaiSan orderItem, String mapt, String makhunggio, int index) {
+    public AddToDetailOrder(java.awt.Frame parent, boolean modal, TrangThaiSan orderItem,
+            String sTime, String eTime, String mapt, String makhunggio, int index) {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
@@ -35,6 +38,8 @@ public class AddToDetailOrder extends javax.swing.JDialog {
         this.orderItem = orderItem;
         this.makhunggio = makhunggio;
         this.index = index;
+        this.sTime = sTime;
+        this.eTime = eTime;
 
         cal = new CalendarHelper();
         clock = new MyClock();
@@ -42,11 +47,16 @@ public class AddToDetailOrder extends javax.swing.JDialog {
         staName.setText(orderItem.getTenSan());
         staPrice.setText(String.valueOf(orderItem.getPricePerHour()));
 
-        sHourSpn.setValue(Integer.valueOf(clock.getCurrentYMD_HM("hour")));
-        sMinuteSpn.setValue(Integer.valueOf(clock.getCurrentYMD_HM("minute")));
+        String[] s = sTime.split("\\:");
+        String sH = s[0], sM = s[1];
 
-        eHourSpn.setValue(Integer.valueOf(clock.getCurrentYMD_HM("hour")));
-        eMinuteSpn.setValue(Integer.valueOf(clock.getCurrentYMD_HM("minute")));
+        String[] e = eTime.split("\\:");
+        String eH = e[0], eM = e[1];
+
+        sHourSpn.setValue(Integer.valueOf(sH));
+        sMinuteSpn.setValue(Integer.valueOf(sM));
+        eHourSpn.setValue(Integer.valueOf(eH));
+        eMinuteSpn.setValue(Integer.valueOf(eM));
 
         orderDateLabel.setText(clock.getCurrentDate());
     }
@@ -85,11 +95,13 @@ public class AddToDetailOrder extends javax.swing.JDialog {
         jLabel3.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
         jLabel3.setText("Name:");
 
+        staName.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         staName.setText("stadium name");
 
         jLabel12.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
         jLabel12.setText("Price/h:");
 
+        staPrice.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         staPrice.setText("price/h");
 
         orderTimeWrong.setForeground(new java.awt.Color(255, 0, 51));
@@ -125,6 +137,7 @@ public class AddToDetailOrder extends javax.swing.JDialog {
         jLabel5.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
         jLabel5.setText("Date:");
 
+        orderDateLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         orderDateLabel.setText("jLabel4");
 
         addDetailOrderBtn.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
@@ -150,64 +163,65 @@ public class AddToDetailOrder extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(114, 114, 114)
-                .addComponent(addDetailOrderBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(80, 80, 80)
-                .addComponent(cancelOrderBtn)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(43, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(9, 9, 9)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel12)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(staName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(staPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(95, 95, 95)
+                        .addComponent(addDetailOrderBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(80, 80, 80)
+                        .addComponent(cancelOrderBtn))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(orderTimeWrong, javax.swing.GroupLayout.PREFERRED_SIZE, 480, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addGap(42, 42, 42)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGap(58, 58, 58)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(sHourSpn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(24, 24, 24)
-                                .addComponent(sMinuteSpn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(9, 9, 9)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel12)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(staName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(staPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(eHourSpn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel1))
+                                .addGap(42, 42, 42)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(sHourSpn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(24, 24, 24)
+                                        .addComponent(sMinuteSpn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(eHourSpn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(eMinuteSpn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(eMinuteSpn, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(28, 28, 28)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(orderDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(26, 26, 26))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(28, 28, 28)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(orderDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(orderTimeWrong, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(76, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(staName))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(staPrice)
                     .addComponent(jLabel12))
                 .addGap(18, 18, 18)
@@ -234,11 +248,11 @@ public class AddToDetailOrder extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(orderDateLabel))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 109, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addDetailOrderBtn)
                     .addComponent(cancelOrderBtn))
-                .addGap(41, 41, 41))
+                .addGap(53, 53, 53))
         );
 
         pack();
@@ -253,9 +267,12 @@ public class AddToDetailOrder extends javax.swing.JDialog {
         int eMinute = (int) eMinuteSpn.getValue();
 
         String date = clock.getCurrentDate();
+        
+        String sTime = cal.formatHourAndMinute(sHour, sMinute);
+        String eTime = cal.formatHourAndMinute(eHour, eMinute);
 
-        String sDate = date + " " + cal.formatHourAndMinute(sHour, sMinute);
-        String eDate = date + " " + cal.formatHourAndMinute(eHour, eMinute);
+        String sDate = date + " " + sTime;
+        String eDate = date + " " + eTime;
 
         boolean hopLe = true;
 
@@ -263,9 +280,23 @@ public class AddToDetailOrder extends javax.swing.JDialog {
             orderTimeWrong.setText("Leave time must be larger than come time");
             hopLe = false;
         }
+        
+        if( !(cal.isEndTimeGtStartTime(this.sTime, sTime) && cal.isEndTimeGtStartTime(eTime, this.eTime)) ) {
+            
+            String msg = "Order time must be between "
+                    + this.sTime + " and " + this.eTime + "\n\n"
+                    + this.sTime + " <= " + "Come: " + sTime + " --> "
+                    + "Leave: " + eTime + " <= " + this.eTime;
+            JOptionPane.showMessageDialog(this, msg);
+            hopLe = false;
+        }
 
         if (hopLe) {
-            CT_PhieuThue ctptItem = new CT_PhieuThue(this.mapt, orderItem.getMaSan(), sDate, eDate, "", 0.0, this.makhunggio);
+            
+            float totalTime = cal.totalTime(sDate, eDate);
+            
+            CT_PhieuThue ctptItem = new CT_PhieuThue(this.mapt, orderItem.getMaSan(),
+                    sDate, eDate, "", totalTime * orderItem.getPricePerHour(), this.makhunggio);
             adminGUI.addDetailOrder(ctptItem, index);
             this.dispose();
         }

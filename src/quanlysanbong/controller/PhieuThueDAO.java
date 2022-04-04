@@ -5,6 +5,7 @@
 package quanlysanbong.controller;
 
 import DBConnection.DBConnection;
+import Utils.CalendarHelper;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -25,13 +26,14 @@ public class PhieuThueDAO {
 
     public ArrayList<PhieuThue> getOrderList() {
         ArrayList<PhieuThue> orderList = new ArrayList<>();
-
+        CalendarHelper cal = new CalendarHelper();
+        
         String sql = "SELECT * FROM PHIEUTHUE";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                PhieuThue pt = new PhieuThue(rs.getString(1), rs.getString(2),
+                PhieuThue pt = new PhieuThue(rs.getString(1), cal.formatDateTime(rs.getString(2)),
                         rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7));
 
                 orderList.add(pt);
@@ -50,7 +52,7 @@ public class PhieuThueDAO {
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, pt.getMapt());
-            SimpleDateFormat spf = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+            SimpleDateFormat spf = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
             long ms = spf.parse(pt.getNgayThue()).getTime();
             Timestamp ts = new Timestamp(ms);
             ps.setTimestamp(2, ts);

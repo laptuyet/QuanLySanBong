@@ -9,6 +9,7 @@ package quanlysanbong.model;
  * @author tranh
  */
 public class CT_PhieuThue {
+
     private String mapt;
     private String masan;
     private String gioden;
@@ -86,6 +87,19 @@ public class CT_PhieuThue {
     public void setThanhtien(double thanhtien) {
         this.thanhtien = thanhtien;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("CT_PhieuThue{mapt=").append(mapt);
+        sb.append(", masan=").append(masan);
+        sb.append(", gioden=").append(gioden);
+        sb.append(", gio_dukientra=").append(gio_dukientra);
+        sb.append(", giotra=").append(giotra);
+        sb.append(", thanhtien=").append(thanhtien);
+        sb.append(", makhunggio=").append(makhunggio);
+        sb.append('}');
+        return sb.toString();
+    }
+
 }

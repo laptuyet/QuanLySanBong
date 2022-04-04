@@ -5,6 +5,7 @@
 package quanlysanbong.controller;
 
 import DBConnection.DBConnection;
+import Utils.CalendarHelper;
 import java.sql.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -43,7 +44,7 @@ public class HeSoDAO {
         String sql = "UPDATE HESO_THEOGIO SET tu=?, den=?, heso=? WHERE makhunggio=?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
-            SimpleDateFormat spf = new SimpleDateFormat("hh:MM:ss");
+            SimpleDateFormat spf = new SimpleDateFormat("HH:mm:ss"); //old: hh:MM:ss
             long begin = spf.parse(rate.getTg_bd()).getTime();
             long end = spf.parse(rate.getTg_kt()).getTime();
             Time t1 = new Time(begin);
@@ -76,4 +77,28 @@ public class HeSoDAO {
         }
         return null;
     }
+
+    public String getMaKhungGio(String ngayGioBatDau) {
+
+        String[] dateTimeArr = ngayGioBatDau.split("\\s");
+        String gioBatDau = dateTimeArr[1];
+
+        String sql = "SELECT makhunggio FROM HESO_THEOGIO WHERE ? BETWEEN tu AND den";
+
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, gioBatDau);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            return rs.getString(1);
+
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return "";
+    }
+
+//    public static void main(String[] args) {
+//        System.out.println(new HeSoDAO().getMaKhungGio("2022/03/30 18:00:00"));
+//    }
 }

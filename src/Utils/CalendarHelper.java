@@ -15,6 +15,14 @@ import java.util.logging.Logger;
  *
  * @author tranh
  */
+
+/**
+ ********** NOTE
+ *  Đa phần class này sử dụng tính năng của java.util.Date cũ nên kết quả khi
+ *  chuyển đổi thời gian có thể sẽ không khớp so với convert trên SQL.
+ * 
+ */
+
 public class CalendarHelper {
 
     private Calendar cal = Calendar.getInstance();
@@ -76,25 +84,25 @@ public class CalendarHelper {
 
     public boolean isTimeBetween(String start, String current, String end) {
         SimpleDateFormat spf = new SimpleDateFormat("HH:mm:ss");
-
-        long s;
+        long s, c, e;
         try {
             s = spf.parse(start).getTime();
-            long c = spf.parse(current).getTime();
-            long e = spf.parse(end).getTime();
-            return s <= c && c <= e;
+            c = spf.parse(current).getTime();
+            e = spf.parse(end).getTime();
+
+            return (s <= c && c <= e);
         } catch (ParseException ex) {
             Logger.getLogger(CalendarHelper.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
 
-    public float totalTime(String start, String end) {
+    public float totalTime(String startDateTime, String endDateTime) {
 
-        String[] s = start.split("\\s");
+        String[] s = startDateTime.split("\\s");
         String[] sTime = s[1].split("\\:");
 
-        String[] e = end.split("\\s");
+        String[] e = endDateTime.split("\\s");
         String[] eTime = e[1].split("\\:");
 
         int sH = Integer.valueOf(sTime[0]); // lay gio
@@ -115,6 +123,25 @@ public class CalendarHelper {
         
         String ans = "";
         SimpleDateFormat spf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat spf2 = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+        try {
+            long ms = spf.parse(dateTime).getTime();
+            
+            ans = spf2.format(ms);
+            
+        } catch (ParseException ex) {
+            Logger.getLogger(CalendarHelper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ans;
+    }
+    
+    public String formatDateTime2(String dateTime) {
+        
+        if(dateTime == null) return "";
+        if(dateTime.equals("")) return "";
+        
+        String ans = "";
+        SimpleDateFormat spf = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
         SimpleDateFormat spf2 = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
         try {
             long ms = spf.parse(dateTime).getTime();
@@ -148,11 +175,11 @@ public class CalendarHelper {
         return ms;
     }
     
-    public static void main(String[] args) {
-        
-        CalendarHelper c = new CalendarHelper();
-        long ms = c.getMiliSecondTime("2022/03/30 20:30:00");
-        System.out.println(ms);
-        System.out.println(c.formatDateTime(ms));
-    }
+//    public static void main(String[] args) {
+//        
+//        CalendarHelper c = new CalendarHelper();
+//        long ms = c.getMiliSecondTime("20:00:00");
+//        System.out.println(ms);
+//        System.out.println(c.formatDateTime(ms));
+//    }
 }

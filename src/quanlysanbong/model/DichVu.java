@@ -15,16 +15,18 @@ public class DichVu {
     private String dvt;
     private double dongia;
     private String hinhanh;
+    private boolean hethang;
 
     public DichVu() {
     }
 
-    public DichVu(String madv, String tendv, String dvt, double dongia, String hinhanh) {
+    public DichVu(String madv, String tendv, String dvt, double dongia, String hinhanh, boolean hethang) {
         this.madv = madv;
         this.tendv = tendv;
         this.dvt = dvt;
         this.dongia = dongia;
         this.hinhanh = hinhanh;
+        this.hethang = hethang;
     }
 
     public double getDongia() {
@@ -65,6 +67,14 @@ public class DichVu {
 
     public void setHinhanh(String hinhanh) {
         this.hinhanh = hinhanh;
+    }
+
+    public boolean isHethang() {
+        return hethang;
+    }
+
+    public void setHethang(boolean hethang) {
+        this.hethang = hethang;
     }
 
 }
