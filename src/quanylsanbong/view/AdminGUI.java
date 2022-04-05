@@ -44,6 +44,7 @@ public class AdminGUI extends javax.swing.JFrame {
     private PhieuThueDAO ptDao = new PhieuThueDAO();
     private CT_PhieuThueDAO ctptDao = new CT_PhieuThueDAO();
     private CT_DichVuDAO ctdvDao = new CT_DichVuDAO();
+    private BillDAO billDao = new BillDAO();
     //============================================================
 
     private NhanVien admin;
@@ -92,6 +93,12 @@ public class AdminGUI extends javax.swing.JFrame {
     private DefaultTableModel orderListTableModel;
     private ArrayList<CT_PhieuThue> ctptList2;
     private ArrayList<CT_DichVu> ctdvList2;
+    
+    
+    private DefaultTableModel billListTableModel;
+    private DefaultTableModel billStaDetailTableModel;
+    private DefaultTableModel billServiceDetailTableModel;
+    private ArrayList<Bill> billList;
     
     
     private CalendarHelper cal;
@@ -163,7 +170,17 @@ public class AdminGUI extends javax.swing.JFrame {
         orderAvaiStaTableModel = (DefaultTableModel) orderAvaiStaTable.getModel();
         orderListTableModel = (DefaultTableModel) orderListTable.getModel();
         
-
+        
+        // get bill list
+        billList = billDao.getBillList();
+        billListTableModel = (DefaultTableModel) billListTable.getModel();
+        showBillList(billList);
+        
+        billStaDetailTableModel = (DefaultTableModel) billStaDetailTable.getModel();
+        billServiceDetailTableModel = (DefaultTableModel) billServiceDetailTable.getModel();
+        
+        // auto make bill with expired order
+        
     }
 
     /**
@@ -175,6 +192,9 @@ public class AdminGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        offInfoBtnGrp = new javax.swing.ButtonGroup();
+        offStaffGrp = new javax.swing.ButtonGroup();
+        outOfStockBtnGrp = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -364,6 +384,41 @@ public class AdminGUI extends javax.swing.JFrame {
         outOfStockYes = new javax.swing.JRadioButton();
         outOfStockNo = new javax.swing.JRadioButton();
         billMngPanel = new javax.swing.JPanel();
+        jTabbedPane3 = new javax.swing.JTabbedPane();
+        jPanel19 = new javax.swing.JPanel();
+        jPanel20 = new javax.swing.JPanel();
+        jScrollPane17 = new javax.swing.JScrollPane();
+        billListTable = new javax.swing.JTable();
+        jLabel97 = new javax.swing.JLabel();
+        jPanel21 = new javax.swing.JPanel();
+        jLabel98 = new javax.swing.JLabel();
+        billIDLabel = new javax.swing.JLabel();
+        jLabel100 = new javax.swing.JLabel();
+        billOrderIDLabel = new javax.swing.JLabel();
+        jLabel102 = new javax.swing.JLabel();
+        billDateCreateLabel = new javax.swing.JLabel();
+        jLabel104 = new javax.swing.JLabel();
+        jLabel105 = new javax.swing.JLabel();
+        billStaffIDLabel = new javax.swing.JLabel();
+        jLabel107 = new javax.swing.JLabel();
+        billCusIDLabel = new javax.swing.JLabel();
+        jSeparator9 = new javax.swing.JSeparator();
+        jLabel109 = new javax.swing.JLabel();
+        jScrollPane18 = new javax.swing.JScrollPane();
+        billStaDetailTable = new javax.swing.JTable();
+        jLabel110 = new javax.swing.JLabel();
+        jScrollPane19 = new javax.swing.JScrollPane();
+        billServiceDetailTable = new javax.swing.JTable();
+        jLabel111 = new javax.swing.JLabel();
+        billTempTotalLabel = new javax.swing.JLabel();
+        jLabel113 = new javax.swing.JLabel();
+        jLabel99 = new javax.swing.JLabel();
+        memDiscountLabel = new javax.swing.JLabel();
+        jSeparator10 = new javax.swing.JSeparator();
+        billTotalLabel = new javax.swing.JLabel();
+        jLabel103 = new javax.swing.JLabel();
+        jLabel101 = new javax.swing.JLabel();
+        billMemshipLabel = new javax.swing.JLabel();
         infoPanel = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -708,6 +763,8 @@ public class AdminGUI extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         bookingPanel.setBackground(new java.awt.Color(255, 255, 204));
+
+        jTabbedPane2.setBackground(new java.awt.Color(255, 255, 255));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 204));
 
@@ -2441,22 +2498,14 @@ public class AdminGUI extends javax.swing.JFrame {
         jLabel95.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
         jLabel95.setText("Out of stock:");
 
+        outOfStockBtnGrp.add(outOfStockYes);
         outOfStockYes.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
         outOfStockYes.setText("Yes");
-        outOfStockYes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                outOfStockYesActionPerformed(evt);
-            }
-        });
 
+        outOfStockBtnGrp.add(outOfStockNo);
         outOfStockNo.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
         outOfStockNo.setSelected(true);
         outOfStockNo.setText("No");
-        outOfStockNo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                outOfStockNoActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout foodMngPanelLayout = new javax.swing.GroupLayout(foodMngPanel);
         foodMngPanel.setLayout(foodMngPanelLayout);
@@ -2564,17 +2613,368 @@ public class AdminGUI extends javax.swing.JFrame {
                 .addContainerGap(209, Short.MAX_VALUE))
         );
 
-        billMngPanel.setBackground(new java.awt.Color(0, 255, 204));
+        billMngPanel.setBackground(new java.awt.Color(255, 255, 204));
+
+        jTabbedPane3.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel19.setBackground(new java.awt.Color(255, 255, 204));
+
+        jPanel20.setBackground(new java.awt.Color(255, 204, 153));
+
+        billListTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID", "Date"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        billListTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                billListTableMouseClicked(evt);
+            }
+        });
+        jScrollPane17.setViewportView(billListTable);
+
+        jLabel97.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
+        jLabel97.setText("Bill List");
+
+        javax.swing.GroupLayout jPanel20Layout = new javax.swing.GroupLayout(jPanel20);
+        jPanel20.setLayout(jPanel20Layout);
+        jPanel20Layout.setHorizontalGroup(
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel20Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane17, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel20Layout.createSequentialGroup()
+                .addContainerGap(119, Short.MAX_VALUE)
+                .addComponent(jLabel97)
+                .addGap(114, 114, 114))
+        );
+        jPanel20Layout.setVerticalGroup(
+            jPanel20Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel20Layout.createSequentialGroup()
+                .addGap(15, 15, 15)
+                .addComponent(jLabel97)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane17, javax.swing.GroupLayout.DEFAULT_SIZE, 205, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel21.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel21.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel98.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
+        jLabel98.setText("Bill ID:");
+
+        billIDLabel.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
+        billIDLabel.setText(" ");
+
+        jLabel100.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
+        jLabel100.setText("Order ID:");
+
+        billOrderIDLabel.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
+        billOrderIDLabel.setText(" ");
+
+        jLabel102.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
+        jLabel102.setText("Date:");
+
+        billDateCreateLabel.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
+        billDateCreateLabel.setText(" ");
+
+        jLabel104.setFont(new java.awt.Font("Unispace", 3, 24)); // NOI18N
+        jLabel104.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel104.setText("THANK YOU!");
+
+        jLabel105.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
+        jLabel105.setText("Staff's ID:");
+
+        billStaffIDLabel.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
+        billStaffIDLabel.setText(" ");
+
+        jLabel107.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
+        jLabel107.setText("Cus's ID:");
+
+        billCusIDLabel.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
+        billCusIDLabel.setText(" ");
+
+        jLabel109.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
+        jLabel109.setText("Stadium detail:");
+
+        billStaDetailTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Stadium", "From", "To", "Total time", "Rate", "Total"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Double.class, java.lang.Float.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        billStaDetailTable.setEnabled(false);
+        billStaDetailTable.getTableHeader().setReorderingAllowed(false);
+        jScrollPane18.setViewportView(billStaDetailTable);
+        if (billStaDetailTable.getColumnModel().getColumnCount() > 0) {
+            billStaDetailTable.getColumnModel().getColumn(3).setPreferredWidth(30);
+            billStaDetailTable.getColumnModel().getColumn(4).setPreferredWidth(10);
+        }
+
+        jLabel110.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
+        jLabel110.setText("Service detail:");
+
+        billServiceDetailTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Service name", "Price", "Quantity", "Total"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Double.class, java.lang.Integer.class, java.lang.Double.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        billServiceDetailTable.setEnabled(false);
+        billServiceDetailTable.getTableHeader().setReorderingAllowed(false);
+        jScrollPane19.setViewportView(billServiceDetailTable);
+
+        jLabel111.setFont(new java.awt.Font("Unispace", 0, 14)); // NOI18N
+        jLabel111.setText("Temp:");
+
+        billTempTotalLabel.setFont(new java.awt.Font("Unispace", 0, 14)); // NOI18N
+        billTempTotalLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        billTempTotalLabel.setText(" ");
+
+        jLabel113.setFont(new java.awt.Font("Unispace", 0, 14)); // NOI18N
+        jLabel113.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel113.setText("See you again.");
+
+        jLabel99.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
+        jLabel99.setText("Member Discount:");
+
+        memDiscountLabel.setFont(new java.awt.Font("Unispace", 0, 14)); // NOI18N
+        memDiscountLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        memDiscountLabel.setText(" ");
+
+        billTotalLabel.setFont(new java.awt.Font("Unispace", 0, 14)); // NOI18N
+        billTotalLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        billTotalLabel.setText(" ");
+
+        jLabel103.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
+        jLabel103.setText("Total:");
+
+        jLabel101.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
+        jLabel101.setText("Membership:");
+
+        billMemshipLabel.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
+        billMemshipLabel.setText(" ");
+
+        javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
+        jPanel21.setLayout(jPanel21Layout);
+        jPanel21Layout.setHorizontalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel21Layout.createSequentialGroup()
+                .addGap(87, 87, 87)
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel21Layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel102)
+                            .addComponent(jLabel98))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(billIDLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(billDateCreateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(55, 55, 55)
+                        .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel100)
+                            .addComponent(jLabel105)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel21Layout.createSequentialGroup()
+                        .addComponent(jLabel107)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(billCusIDLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel101)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel21Layout.createSequentialGroup()
+                        .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(billStaffIDLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+                            .addComponent(billMemshipLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(130, 130, 130))
+                    .addGroup(jPanel21Layout.createSequentialGroup()
+                        .addComponent(billOrderIDLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel21Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel21Layout.createSequentialGroup()
+                        .addComponent(jLabel113, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(247, 247, 247))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel21Layout.createSequentialGroup()
+                        .addComponent(jLabel104, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(283, 283, 283))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel21Layout.createSequentialGroup()
+                        .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel21Layout.createSequentialGroup()
+                                .addComponent(jLabel103)
+                                .addGap(18, 18, 18)
+                                .addComponent(billTotalLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jSeparator10, javax.swing.GroupLayout.PREFERRED_SIZE, 293, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel21Layout.createSequentialGroup()
+                                    .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel99)
+                                        .addComponent(jLabel111))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(billTempTotalLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(memDiscountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(38, 38, 38))))
+            .addGroup(jPanel21Layout.createSequentialGroup()
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator9)
+                    .addGroup(jPanel21Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jScrollPane19))
+                    .addGroup(jPanel21Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane18))
+                    .addGroup(jPanel21Layout.createSequentialGroup()
+                        .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel21Layout.createSequentialGroup()
+                                .addGap(26, 26, 26)
+                                .addComponent(jLabel109))
+                            .addGroup(jPanel21Layout.createSequentialGroup()
+                                .addGap(25, 25, 25)
+                                .addComponent(jLabel110)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel21Layout.setVerticalGroup(
+            jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel21Layout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addComponent(jLabel104)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel98)
+                    .addComponent(billIDLabel)
+                    .addComponent(billOrderIDLabel)
+                    .addComponent(jLabel100))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel102)
+                    .addComponent(billDateCreateLabel)
+                    .addComponent(jLabel105)
+                    .addComponent(billStaffIDLabel))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel107)
+                    .addComponent(billCusIDLabel)
+                    .addComponent(jLabel101)
+                    .addComponent(billMemshipLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator9, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel109)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane18, javax.swing.GroupLayout.PREFERRED_SIZE, 174, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel110)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane19, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel111)
+                    .addComponent(billTempTotalLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel99)
+                    .addComponent(memDiscountLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator10, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(billTotalLabel)
+                    .addComponent(jLabel103))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addComponent(jLabel113)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jPanel19Layout = new javax.swing.GroupLayout(jPanel19);
+        jPanel19.setLayout(jPanel19Layout);
+        jPanel19Layout.setHorizontalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel19Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+        jPanel19Layout.setVerticalGroup(
+            jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel19Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(jPanel19Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel21, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jTabbedPane3.addTab("BILL LIST", jPanel19);
 
         javax.swing.GroupLayout billMngPanelLayout = new javax.swing.GroupLayout(billMngPanel);
         billMngPanel.setLayout(billMngPanelLayout);
         billMngPanelLayout.setHorizontalGroup(
             billMngPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1091, Short.MAX_VALUE)
+            .addComponent(jTabbedPane3)
         );
         billMngPanelLayout.setVerticalGroup(
             billMngPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 704, Short.MAX_VALUE)
+            .addComponent(jTabbedPane3)
         );
 
         infoPanel.setBackground(new java.awt.Color(255, 255, 204));
@@ -2617,23 +3017,16 @@ public class AdminGUI extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
         jLabel3.setText("Off");
 
+        offInfoBtnGrp.add(quitYesRadio);
         quitYesRadio.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
         quitYesRadio.setText("Yes");
         quitYesRadio.setEnabled(false);
-        quitYesRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                quitYesRadioActionPerformed(evt);
-            }
-        });
 
+        offInfoBtnGrp.add(quitNoRadio);
         quitNoRadio.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
+        quitNoRadio.setSelected(true);
         quitNoRadio.setText("No");
         quitNoRadio.setEnabled(false);
-        quitNoRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                quitNoRadioActionPerformed(evt);
-            }
-        });
 
         fnameWrong.setForeground(new java.awt.Color(255, 0, 51));
         fnameWrong.setText(" ");
@@ -2797,7 +3190,7 @@ public class AdminGUI extends javax.swing.JFrame {
 
         peopleMngPanel.setBackground(new java.awt.Color(255, 255, 204));
 
-        peopleMngTabbedPane.setBackground(new java.awt.Color(204, 255, 255));
+        peopleMngTabbedPane.setBackground(new java.awt.Color(255, 255, 255));
 
         customerPanel.setBackground(new java.awt.Color(255, 255, 204));
 
@@ -3018,22 +3411,14 @@ public class AdminGUI extends javax.swing.JFrame {
             }
         });
 
+        offStaffGrp.add(staffOffYesRadio);
         staffOffYesRadio.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
         staffOffYesRadio.setText("Yes");
-        staffOffYesRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                staffOffYesRadioActionPerformed(evt);
-            }
-        });
 
+        offStaffGrp.add(staffOffNoRadio);
         staffOffNoRadio.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
         staffOffNoRadio.setSelected(true);
         staffOffNoRadio.setText("No");
-        staffOffNoRadio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                staffOffNoRadioActionPerformed(evt);
-            }
-        });
 
         staffAccountWrong.setForeground(new java.awt.Color(255, 0, 51));
         staffAccountWrong.setText(" ");
@@ -3269,7 +3654,7 @@ public class AdminGUI extends javax.swing.JFrame {
 
         matchMngPanel.setBackground(new java.awt.Color(255, 255, 204));
 
-        jTabbedPane1.setBackground(new java.awt.Color(204, 255, 255));
+        jTabbedPane1.setBackground(new java.awt.Color(255, 255, 255));
 
         stadiumTab.setBackground(new java.awt.Color(255, 255, 204));
         stadiumTab.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
@@ -4190,11 +4575,12 @@ public class AdminGUI extends javax.swing.JFrame {
     
     private void savebtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_savebtnActionPerformed
         // TODO add your handling code here:
-        String fname = fnameTxt.getText();
-        String lname = lnameTxt.getText();
-        String phone = phoneTxt.getText();
-        String cmnd = cmndTxt.getText();
-        boolean quitJob = quitNoRadio.isSelected() ? false : true;
+        String fname = fnameTxt.getText().trim();
+        String lname = lnameTxt.getText().trim();
+        String phone = phoneTxt.getText().trim();
+        String cmnd = cmndTxt.getText().trim();
+        boolean quitJob = quitYesRadio.isSelected();
+        
 
         boolean hopLe = true;
         CheckText ct = new CheckText();
@@ -4202,15 +4588,24 @@ public class AdminGUI extends javax.swing.JFrame {
         if (fname.equals("")) {
             fnameWrong.setText("First name empty");
             hopLe = false;
-        }
-        if (fname.equals("")) {
-            fnameWrong.setText("Last name empty");
+        } else if(fname.length() > 50){
+            fnameWrong.setText("First name must have maximum 50 characters");
             hopLe = false;
         }
+        
+        if (lname.equals("")) {
+            lnameWrong.setText("Last name empty");
+            hopLe = false;
+        } else if (lname.length() > 20 ) {
+            lnameWrong.setText("Last name must have maximum 20 characters");
+            hopLe = false;
+        }
+        
         if (!ct.isPhoneNumber(phone)) {
             phoneWrong.setText("Phone must has maxinum 11 numbers");
             hopLe = false;
         }
+        
         if (!ct.isCmnd(cmnd)) {
             cmndWrong.setText("ID must has 12 numbers");
             hopLe = false;
@@ -4282,22 +4677,35 @@ public class AdminGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         boolean hopLe = true;
         FoodHelper fh = new FoodHelper();
+        
+        String id =  foodIdTxt.getText().trim();
+        String name = foodNameTxt.getText().trim();
+        String unit = foodUnitTxt.getText().trim();
 
-        if (foodIdTxt.getText().equals("")) {
+        if (id.equals("")) {
             foodIdWrong.setText("ID is empty!");
             hopLe = false;
-        } else if (dvDao.checkFoodId(foodIdTxt.getText())) {
+        } else if (dvDao.checkFoodId(id)) {
             foodIdWrong.setText("ID is existed");
             hopLe = false;
-        }
-
-        if (foodNameTxt.getText().equals("")) {
-            foodNameWrong.setText("Name is empty!");
+        } else if(id.length() > 10){
+            foodIdWrong.setText("ID is maxuimum 10 characters!");
             hopLe = false;
         }
 
-        if (foodUnitTxt.getText().equals("")) {
+        if (name.equals("")) {
+            foodNameWrong.setText("Name is empty!");
+            hopLe = false;
+        } else if (name.length() > 50) {
+            foodNameWrong.setText("Name is maximum 50 characters!");
+            hopLe = false;
+        }
+
+        if (unit.equals("")) {
             foodUnitWrong.setText("Unit is empty!");
+            hopLe = false;
+        } else if (unit.length() > 20) {
+            foodUnitWrong.setText("Unit is maximum 20 characters!");
             hopLe = false;
         }
 
@@ -4310,8 +4718,7 @@ public class AdminGUI extends javax.swing.JFrame {
         }
 
         if (hopLe) {
-            DichVu dv = new DichVu(foodIdTxt.getText(), foodNameTxt.getText(),
-                    foodUnitTxt.getText(), fh.formatMoney(foodPriceTxt.getText()), imgUrl, outOfStockYes.isSelected());
+            DichVu dv = new DichVu(id, name, unit, fh.formatMoney(foodPriceTxt.getText()), imgUrl, outOfStockYes.isSelected());
             if (dvDao.addDichVu(dv)) {
                 dvList.add(dv);
                 String hetHang = outOfStockYes.isSelected() ? "Yes" : "No";
@@ -4353,13 +4760,22 @@ public class AdminGUI extends javax.swing.JFrame {
         if (index == -1) {
             updateFoodBtn.setEnabled(false);
         } else {
-            if (foodNameTxt.getText().equals("")) {
+            String name = foodNameTxt.getText().trim();
+            String unit = foodUnitTxt.getText().trim();
+
+            if (name.equals("")) {
                 foodNameWrong.setText("Name is empty!");
+                hopLe = false;
+            } else if (name.length() > 50) {
+                foodNameWrong.setText("Name is maximum 50 characters!");
                 hopLe = false;
             }
 
-            if (foodUnitTxt.getText().equals("")) {
+            if (unit.equals("")) {
                 foodUnitWrong.setText("Unit is empty!");
+                hopLe = false;
+            } else if (unit.length() > 20) {
+                foodUnitWrong.setText("Unit is maximum 20 characters!");
                 hopLe = false;
             }
 
@@ -4373,8 +4789,8 @@ public class AdminGUI extends javax.swing.JFrame {
 
             if (hopLe) {
 
-                DichVu dv = new DichVu(foodIdTxt.getText(), foodNameTxt.getText(),
-                        foodUnitTxt.getText(), fh.formatMoney(foodPriceTxt.getText()), imgUrl, outOfStockYes.isSelected());
+                DichVu dv = new DichVu(foodIdTxt.getText(), name, unit,
+                        fh.formatMoney(foodPriceTxt.getText()), imgUrl, outOfStockYes.isSelected());
 
                 if (dvDao.updateDichVu(dv)) {
                     dvList.set(index, dv);
@@ -4388,6 +4804,7 @@ public class AdminGUI extends javax.swing.JFrame {
                     foodUnitTxt.setEnabled(true);
                     foodPriceTxt.setEnabled(true);
                     updateFoodBtn.setEnabled(false);
+                    addFoodBtn.setEnabled(true);
                 } else {
                     JOptionPane.showMessageDialog(rootPane, "Update food failed");
                 }
@@ -4403,6 +4820,7 @@ public class AdminGUI extends javax.swing.JFrame {
         if (index == -1) {
             updateFoodBtn.setEnabled(false);
         } else {
+            addFoodBtn.setEnabled(false);
             updateFoodBtn.setEnabled(true);
 
             foodIdTxt.setEnabled(false);
@@ -4437,8 +4855,10 @@ public class AdminGUI extends javax.swing.JFrame {
     private void foodCancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_foodCancelBtnActionPerformed
         // TODO add your handling code here:
         resetFoodTexts();
+        resetFoodWrongLabels();
         foodIdTxt.setEnabled(true);
         updateFoodBtn.setEnabled(false);
+        addFoodBtn.setEnabled(true);
     }//GEN-LAST:event_foodCancelBtnActionPerformed
 
     private void cancelStaffBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelStaffBtnActionPerformed
@@ -4481,25 +4901,15 @@ public class AdminGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_staffTableMouseClicked
 
-    private void staffOffNoRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffOffNoRadioActionPerformed
-        // TODO add your handling code here:
-        staffOffYesRadio.setSelected(false);
-    }//GEN-LAST:event_staffOffNoRadioActionPerformed
-
-    private void staffOffYesRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_staffOffYesRadioActionPerformed
-        // TODO add your handling code here:
-        staffOffNoRadio.setSelected(false);
-    }//GEN-LAST:event_staffOffYesRadioActionPerformed
-
     private void addStaffBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStaffBtnActionPerformed
         // TODO add your handling code here:
-        String id = staffIdTxt.getText();
-        String fname = staffFnameTxt.getText();
-        String lname = staffLnameTxt.getText();
-        String phone = staffPhoneTxt.getText();
-        String cmnd = staffCmndTxt.getText();
+        String id = staffIdTxt.getText().trim();
+        String fname = staffFnameTxt.getText().trim();
+        String lname = staffLnameTxt.getText().trim();
+        String phone = staffPhoneTxt.getText().trim();
+        String cmnd = staffCmndTxt.getText().trim();
 
-        String account = staffAccountTxt.getText();
+        String account = staffAccountTxt.getText().trim();
 
         boolean hopLe = true;
         CheckText ct = new CheckText();
@@ -4507,18 +4917,27 @@ public class AdminGUI extends javax.swing.JFrame {
         if (id.equals("")) {
             staffIdWrong.setText("ID is empty!");
             hopLe = false;
+        } else if (id.length() > 10) {
+            staffIdWrong.setText("ID is maximum 10 characters!");
+            hopLe = false;
         } else if (staffDao.checkStaffWorkId(id)) {
             staffIdWrong.setText("ID is existed!");
             hopLe = false;
-        }
+        } 
 
         if (fname.equals("")) {
             staffFnameWrong.setText("First name is empty!");
+            hopLe = false;
+        } else if(fname.length() > 50) {
+            staffFnameWrong.setText("First name is maximum 50 characters!");
             hopLe = false;
         }
 
         if (lname.equals("")) {
             staffLnameWrong.setText("Last name is empty!");
+            hopLe = false;
+        } else if (lname.length() > 20 ) {
+            staffLnameWrong.setText("Last name is maximum 20 characters!");
             hopLe = false;
         }
 
@@ -4534,8 +4953,19 @@ public class AdminGUI extends javax.swing.JFrame {
         if (account.equals("")) {
             staffAccountWrong.setText("Username is empty!");
             hopLe = false;
+        } else if (account.length() > 30){
+            staffAccountWrong.setText("Username is maximum 30 characters!");
+            hopLe = false; 
         } else if (accDao.checkUsername(account)) {
             staffAccountWrong.setText("Username is already existed!");
+            hopLe = false;
+        }
+        
+        if(cmnd.equals("")) {
+            staffCmndWrong.setText("Personal ID is empty!");
+            hopLe = false;
+        } else if (!ct.isCmnd(cmnd)) {
+            staffCmndWrong.setText("Personal ID is invalid, must have maximum 12 numbers!");
             hopLe = false;
         }
 
@@ -4561,13 +4991,13 @@ public class AdminGUI extends javax.swing.JFrame {
 
     private void updateStaffBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateStaffBtnActionPerformed
         // TODO add your handling code here:
-        String id = staffIdTxt.getText();
-        String fname = staffFnameTxt.getText();
-        String lname = staffLnameTxt.getText();
-        String phone = staffPhoneTxt.getText();
-        String cmnd = staffCmndTxt.getText();
+        String id = staffIdTxt.getText().trim();
+        String fname = staffFnameTxt.getText().trim();
+        String lname = staffLnameTxt.getText().trim();
+        String phone = staffPhoneTxt.getText().trim();
+        String cmnd = staffCmndTxt.getText().trim();
 
-        String account = staffAccountTxt.getText();
+        String account = staffAccountTxt.getText().trim();
 
         int index = staffTable.getSelectedRow();
         boolean hopLe = true;
@@ -4576,10 +5006,16 @@ public class AdminGUI extends javax.swing.JFrame {
         if (fname.equals("")) {
             staffFnameWrong.setText("First name is empty!");
             hopLe = false;
+        } else if(fname.length() > 50) {
+            staffFnameWrong.setText("First name is maximum 50 characters!");
+            hopLe = false;
         }
 
         if (lname.equals("")) {
             staffLnameWrong.setText("Last name is empty!");
+            hopLe = false;
+        } else if (lname.length() > 20 ) {
+            staffLnameWrong.setText("Last name is maximum 20 characters!");
             hopLe = false;
         }
 
@@ -4591,6 +5027,15 @@ public class AdminGUI extends javax.swing.JFrame {
             staffPhoneWrong.setText("Phone is invalid, must me number");
             hopLe = false;
         }
+        
+        if(cmnd.equals("")) {
+            staffCmndWrong.setText("Personal ID is empty!");
+            hopLe = false;
+        } else if (!ct.isCmnd(cmnd)) {
+            staffCmndWrong.setText("Personal ID is invalid, must have maximum 12 numbers!");
+            hopLe = false;
+        }
+
 
         if (hopLe) {
             boolean off = staffOffYesRadio.isSelected();
@@ -4650,6 +5095,7 @@ public class AdminGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         cusIdTxt.setEnabled(false);
         cusUsernameTxt.setEnabled(false);
+        addCusBtn.setEnabled(false);
 
         int index = khTable.getSelectedRow();
 
@@ -4674,6 +5120,7 @@ public class AdminGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         cusIdTxt.setEnabled(true);
         cusUsernameTxt.setEnabled(true);
+        addCusBtn.setEnabled(true);
 
         resetCusTexts();
         resetCusLabels();
@@ -4684,18 +5131,21 @@ public class AdminGUI extends javax.swing.JFrame {
 
         resetCusLabels();
 
-        String id = cusIdTxt.getText();
-        String fname = cusFnameTxt.getText();
-        String lname = cusLnameTxt.getText();
-        String phone = cusPhoneTxt.getText();
-        String cmnd = cusCmndTxt.getText();
-        String username = cusUsernameTxt.getText();
+        String id = cusIdTxt.getText().trim();
+        String fname = cusFnameTxt.getText().trim();
+        String lname = cusLnameTxt.getText().trim();
+        String phone = cusPhoneTxt.getText().trim();
+        String cmnd = cusCmndTxt.getText().trim();
+        String username = cusUsernameTxt.getText().trim();
 
         boolean hopLe = true;
         CheckText ct = new CheckText();
 
         if (id.equals("")) {
             cusIdWrong.setText("ID is empty!");
+            hopLe = false;
+        } else if (id.length() > 10 ) {
+            cusIdWrong.setText("ID is maximum 10 characters!");
             hopLe = false;
         } else if (khDao.checkCusId(id)) {
             cusIdWrong.setText("ID is existed!");
@@ -4705,10 +5155,16 @@ public class AdminGUI extends javax.swing.JFrame {
         if (fname.equals("")) {
             cusFnameWrong.setText("First name is empty!");
             hopLe = false;
-        }
+        } else if (fname.length() > 50) {
+            cusFnameWrong.setText("First name is maximum 50 characters!");
+            hopLe = false;
+        } 
 
         if (lname.equals("")) {
             cusLnameWrong.setText("Last name is empty!");
+            hopLe = false;
+        } else if (lname.length() > 20) {
+            cusLnameWrong.setText("Last name is maximum 20 characters!");
             hopLe = false;
         }
 
@@ -4787,12 +5243,12 @@ public class AdminGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         resetCusLabels();
 
-        String id = cusIdTxt.getText();
-        String fname = cusFnameTxt.getText();
-        String lname = cusLnameTxt.getText();
-        String phone = cusPhoneTxt.getText();
-        String cmnd = cusCmndTxt.getText();
-        String username = cusUsernameTxt.getText();
+        String id = cusIdTxt.getText().trim();
+        String fname = cusFnameTxt.getText().trim();
+        String lname = cusLnameTxt.getText().trim();
+        String phone = cusPhoneTxt.getText().trim();
+        String cmnd = cusCmndTxt.getText().trim();
+        String username = cusUsernameTxt.getText().trim();
 
         int index = khTable.getSelectedRow();
 
@@ -4802,10 +5258,16 @@ public class AdminGUI extends javax.swing.JFrame {
         if (fname.equals("")) {
             cusFnameWrong.setText("First name is empty!");
             hopLe = false;
-        }
+        } else if (fname.length() > 50) {
+            cusFnameWrong.setText("First name is maximum 50 characters!");
+            hopLe = false;
+        } 
 
         if (lname.equals("")) {
             cusLnameWrong.setText("Last name is empty!");
+            hopLe = false;
+        } else if (lname.length() > 20) {
+            cusLnameWrong.setText("Last name is maximum 20 characters!");
             hopLe = false;
         }
 
@@ -4839,6 +5301,7 @@ public class AdminGUI extends javax.swing.JFrame {
                 resetCusLabels();
                 cusIdTxt.setEnabled(true);
                 cusUsernameTxt.setEnabled(true);
+                addCusBtn.setEnabled(true);
                 showCusList(khList);
 
                 JOptionPane.showMessageDialog(rootPane, "Update customer info successfully!");
@@ -4848,20 +5311,10 @@ public class AdminGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_updateCusBtnActionPerformed
 
-    private void quitYesRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitYesRadioActionPerformed
-        // TODO add your handling code here:
-        quitNoRadio.setSelected(false);
-    }//GEN-LAST:event_quitYesRadioActionPerformed
-
-    private void quitNoRadioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quitNoRadioActionPerformed
-        // TODO add your handling code here:
-        quitYesRadio.setSelected(false);
-    }//GEN-LAST:event_quitNoRadioActionPerformed
-
     private void addStaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStaBtnActionPerformed
         // TODO add your handling code here:
-        String staId = staIdTxt.getText();
-        String staName = staNameTxt.getText();
+        String staId = staIdTxt.getText().trim();
+        String staName = staNameTxt.getText().trim();
         String type = (String) staTypeCbBox.getSelectedItem();
 
         String[] temp = type.split("\\s+");
@@ -4873,6 +5326,9 @@ public class AdminGUI extends javax.swing.JFrame {
         if (staId.equals("")) {
             staIdWrong.setText("ID is empty!");
             hopLe = false;
+        } else if (staId.length() > 20) {
+            staIdWrong.setText("ID is maximum 20 characters!");
+            hopLe = false;
         } else if (staDao.checkStaId(staId)) {
             staIdWrong.setText("ID is existed!");
             hopLe = false;
@@ -4880,6 +5336,9 @@ public class AdminGUI extends javax.swing.JFrame {
 
         if (staName.equals("")) {
             staNameWrong.setText("Name is empty!");
+            hopLe = false;
+        } else if (staName.length() > 50) {
+            staNameWrong.setText("Name is maximum 50 characters!");
             hopLe = false;
         }
 
@@ -4899,6 +5358,7 @@ public class AdminGUI extends javax.swing.JFrame {
 
     private void staTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_staTableMouseClicked
         // TODO add your handling code here:
+        addStaBtn.setEnabled(false);
         updateStaBtn.setEnabled(true);
         deleteStaBtn.setEnabled(true);
         maintainYes.setEnabled(true);
@@ -4931,7 +5391,8 @@ public class AdminGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         resetStaTexts();
         resetStaLabels();
-
+        
+        addStaBtn.setEnabled(true);
         staIdTxt.setEnabled(true);
         updateStaBtn.setEnabled(false);
         deleteStaBtn.setEnabled(false);
@@ -4944,8 +5405,8 @@ public class AdminGUI extends javax.swing.JFrame {
 
         int index = staTable.getSelectedRow();
 
-        String staId = staIdTxt.getText();
-        String staName = staNameTxt.getText();
+        String staId = staIdTxt.getText().trim();
+        String staName = staNameTxt.getText().trim();
         String type = (String) staTypeCbBox.getSelectedItem();
         String[] temp = type.split("\\s+");
 
@@ -4953,8 +5414,11 @@ public class AdminGUI extends javax.swing.JFrame {
 
         boolean hopLe = true;
 
-        if (staNameTxt.getText().equals("")) {
+        if (staName.equals("")) {
             staNameWrong.setText("Name is empty!");
+            hopLe = false;
+        } else if (staName.length() > 50) {
+            staNameWrong.setText("Name is maximum 50 characters!");
             hopLe = false;
         }
 
@@ -4967,6 +5431,7 @@ public class AdminGUI extends javax.swing.JFrame {
                 staTableModel.setRowCount(0);
                 showStaList(staList);
                 staIdTxt.setEnabled(true);
+                addStaBtn.setEnabled(true);
                 updateStaBtn.setEnabled(false);
                 deleteStaBtn.setEnabled(false);
                 maintainYes.setEnabled(false);
@@ -5805,27 +6270,64 @@ public class AdminGUI extends javax.swing.JFrame {
                 // kiem tra lai phieu dat nay da qua han hay chua
                 checkExpiredOrder(ctptList2);
                 showOrderServices(ctdvList2);
-            }
+                
+                //kiem tra lai xem toan bo chi tiet phieu thue da het thoi gian thue
+                //hay chua, neu roi thi auto tao bill
+                if(isAllOrderDetailExpired(ctptList2)) {
+                    
+                    String mahd = new AutoID().getAutoHoaDonID(billList);
+                    
+                    Bill bill = autoCreateBill(mahd, orderIdLabel2.getText(), orderStaffIdLabel2.getText(),
+                            orderCusIdLabel2.getText());
+                    if(billDao.addBill(bill)) {
+                        JOptionPane.showMessageDialog(this, "New bill: " + mahd + "\nhas been created for this order!");
+                        billList.add(bill);
+                        showBillList(billList);
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Create bill for this order FAILED!");
+                    }
+                    
+                }
+            }         
         }
     }//GEN-LAST:event_endStadiumBtnActionPerformed
 
-    private void outOfStockYesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_outOfStockYesActionPerformed
-        // TODO add your handling code here:
-        if(outOfStockNo.isSelected()) {
-            outOfStockNo.setSelected(false);
-            outOfStockYes.setSelected(true);
+    public boolean isAllOrderDetailExpired(ArrayList<CT_PhieuThue> ctptList) {
+        for(CT_PhieuThue item : ctptList) {
+            if(item.getGiotra().equals("")) return false;
+        }
+        return true;
+    }
+    
+    public double getTotalBillWithoutMemDiscount(ArrayList<CT_PhieuThue> ctptList, ArrayList<CT_DichVu> ctdvList) {
+        double totalBill = 0;
+        float heso;
+        
+        for(CT_PhieuThue item : ctptList) {
+            
+            heso = getRate(item.getMakhunggio());
+            totalBill += ( item.getThanhtien() * heso );
         }
         
-    }//GEN-LAST:event_outOfStockYesActionPerformed
-
-    private void outOfStockNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_outOfStockNoActionPerformed
-        // TODO add your handling code here:
-        if(outOfStockYes.isSelected()) {
-            outOfStockYes.setSelected(false);
-            outOfStockNo.setSelected(true);
-        }
-    }//GEN-LAST:event_outOfStockNoActionPerformed
-
+        for(CT_DichVu item : ctdvList)
+           totalBill += ( getServicePrice(item.getMadv()) * item.getSoluong());
+        
+        return  totalBill;
+    }
+    
+    public Bill autoCreateBill(String mahd, String mapt, String manv, String makh) {
+        ArrayList<CT_PhieuThue> ctptList = ctptDao.getOrderDetail(mapt);
+        ArrayList<CT_DichVu> ctdvList = ctdvDao.getOrderServices(mapt);
+        
+        double totalBill = getTotalBillWithoutMemDiscount(ctptList, ctdvList);
+        
+        float memberDiscount = khDao.getMemRateDiscount(makh);
+        totalBill = totalBill * (1.0 - memberDiscount);
+        
+        Bill bill = new Bill(mahd, clock.getCurrentDateTime2(), totalBill, mapt, manv, makh);
+        return bill;
+    }
+    
     private void startMinute1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_startMinute1StateChanged
         // TODO add your handling code here:
         int val = (int)startMinute1.getValue();
@@ -5967,6 +6469,36 @@ public class AdminGUI extends javax.swing.JFrame {
         else if(val == -1)
             rateEMinute.setValue(59);
     }//GEN-LAST:event_rateEMinuteStateChanged
+
+    private void billListTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_billListTableMouseClicked
+        // TODO add your handling code here:
+        int index = billListTable.getSelectedRow();
+        if(index == -1) {
+            
+        } else {
+            Bill bill = billList.get(index);
+            billIDLabel.setText(bill.getMahd());
+            billDateCreateLabel.setText(bill.getNgaylap());
+            billOrderIDLabel.setText(bill.getMapt());
+            billStaffIDLabel.setText(bill.getManv());
+            billCusIDLabel.setText(bill.getMakh());
+            billMemshipLabel.setText(khDao.getMembership(bill.getMakh()).toUpperCase());
+            
+            ArrayList<CT_PhieuThue> ctptList = ctptDao.getOrderDetailWithBillId(bill.getMahd(), bill.getMapt());
+            ArrayList<CT_DichVu> ctdvList = ctdvDao.getOrderServices(bill.getMapt());
+            
+            showBillStadiumDetail(ctptList);
+            showBillServiceDetail(ctdvList);
+            
+            double tempTotal = getTotalBillWithoutMemDiscount(ctptList, ctdvList);
+            float discount = khDao.getMemRateDiscount(bill.getMakh());
+            double total = tempTotal * (1.0 - discount);
+            
+            billTempTotalLabel.setText(String.format("%.3f", tempTotal));
+            memDiscountLabel.setText(String.valueOf(discount * 100) + "%");
+            billTotalLabel.setText(String.format("%.3f", total));
+        }
+    }//GEN-LAST:event_billListTableMouseClicked
     
     
     public float getRate(String makhunggio) {
@@ -6433,6 +6965,7 @@ public class AdminGUI extends javax.swing.JFrame {
             if(ctpt.getGiotra().equals("")) {
                 viewServicesBtn2.setEnabled(true);
                 orderServicesTable2.setEnabled(true);
+                break;
             } else {
                 viewServicesBtn2.setEnabled(false);
                 orderServicesTable2.setEnabled(false);
@@ -6449,14 +6982,57 @@ public class AdminGUI extends javax.swing.JFrame {
     }
 
     public boolean isExpiredOrder(String mapt) {
+        boolean expired = true;
         ArrayList<CT_PhieuThue> ctptList = ctptDao.getOrderDetail(mapt);
         for(int i = 0; i < ctptList.size(); i++) {
             CT_PhieuThue ctpt = ctptList.get(i);
-            if(ctpt.getGiotra().equals("")) return true; 
+            if(ctpt.getGiotra().equals("")) expired = false; 
         }
-        return false;
+        return expired;
     }
     
+    
+    public void showBillList(ArrayList<Bill> billList) {
+        billListTableModel.setRowCount(0);
+        for(Bill item : billList) {
+            billListTableModel.addRow(new Object[]{item.getMahd(), item.getNgaylap()});
+        }
+    }
+    
+    public String getNameOfStadium(String masan) {
+        for(SanBong item : staList) {
+            if(item.getMaSan().equals(masan))
+                return item.getTenSan();
+        }
+        return "";
+    }
+    
+    public void showBillStadiumDetail(ArrayList<CT_PhieuThue> ctptList) {
+        String staName;
+        float totalTime, heso;
+        
+        billStaDetailTableModel.setRowCount(0);
+        for(CT_PhieuThue item : ctptList) {
+            staName = getNameOfStadium(item.getMasan());
+            totalTime = cal.totalTime(item.getGioden(), item.getGio_dukientra());
+            heso = getRate(item.getMakhunggio());
+            
+            billStaDetailTableModel.addRow(new Object[]{staName, item.getGioden(),
+                item.getGio_dukientra(), totalTime, heso, item.getThanhtien() * heso});
+        }
+    }
+    
+    public void showBillServiceDetail(ArrayList<CT_DichVu> ctdvList) {
+        billServiceDetailTableModel.setRowCount(0);
+        String serviceName;
+        double price;
+        for(CT_DichVu item : ctdvList) {
+            serviceName = getNameOfService(item.getMadv());
+            price = getServicePrice(item.getMadv());
+            billServiceDetailTableModel.addRow(new Object[]{serviceName, price,
+                item.getSoluong(), item.getSoluong() * price});
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -6503,7 +7079,18 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JButton addStaBtn;
     private javax.swing.JButton addStaffBtn;
     private javax.swing.JTable avaiStaTable;
+    private javax.swing.JLabel billCusIDLabel;
+    private javax.swing.JLabel billDateCreateLabel;
+    private javax.swing.JLabel billIDLabel;
+    private javax.swing.JTable billListTable;
+    private javax.swing.JLabel billMemshipLabel;
     private javax.swing.JPanel billMngPanel;
+    private javax.swing.JLabel billOrderIDLabel;
+    private javax.swing.JTable billServiceDetailTable;
+    private javax.swing.JTable billStaDetailTable;
+    private javax.swing.JLabel billStaffIDLabel;
+    private javax.swing.JLabel billTempTotalLabel;
+    private javax.swing.JLabel billTotalLabel;
     private javax.swing.JButton billbtn;
     private javax.swing.JButton bookingBtn;
     private javax.swing.JPanel bookingPanel;
@@ -6567,7 +7154,18 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JPanel infoPanel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel100;
+    private javax.swing.JLabel jLabel101;
+    private javax.swing.JLabel jLabel102;
+    private javax.swing.JLabel jLabel103;
+    private javax.swing.JLabel jLabel104;
+    private javax.swing.JLabel jLabel105;
+    private javax.swing.JLabel jLabel107;
+    private javax.swing.JLabel jLabel109;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel110;
+    private javax.swing.JLabel jLabel111;
+    private javax.swing.JLabel jLabel113;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -6661,6 +7259,9 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel94;
     private javax.swing.JLabel jLabel95;
     private javax.swing.JLabel jLabel96;
+    private javax.swing.JLabel jLabel97;
+    private javax.swing.JLabel jLabel98;
+    private javax.swing.JLabel jLabel99;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -6671,7 +7272,10 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel17;
     private javax.swing.JPanel jPanel18;
+    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel20;
+    private javax.swing.JPanel jPanel21;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
@@ -6687,6 +7291,9 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane14;
     private javax.swing.JScrollPane jScrollPane15;
     private javax.swing.JScrollPane jScrollPane16;
+    private javax.swing.JScrollPane jScrollPane17;
+    private javax.swing.JScrollPane jScrollPane18;
+    private javax.swing.JScrollPane jScrollPane19;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -6696,6 +7303,7 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator10;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
@@ -6703,8 +7311,10 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JSeparator jSeparator8;
+    private javax.swing.JSeparator jSeparator9;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTabbedPane jTabbedPane2;
+    private javax.swing.JTabbedPane jTabbedPane3;
     private javax.swing.JTable khTable;
     private javax.swing.JTextField lnameTxt;
     private javax.swing.JLabel lnameWrong;
@@ -6714,6 +7324,9 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JRadioButton maintainYes;
     private javax.swing.JButton matchMngBtn;
     private javax.swing.JPanel matchMngPanel;
+    private javax.swing.JLabel memDiscountLabel;
+    private javax.swing.ButtonGroup offInfoBtnGrp;
+    private javax.swing.ButtonGroup offStaffGrp;
     private javax.swing.JTable orderAvaiStaTable;
     private javax.swing.JComboBox<String> orderCusIDCbBox;
     private javax.swing.JLabel orderCusIdLabel2;
@@ -6734,6 +7347,7 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JLabel orderStaffIdLabel;
     private javax.swing.JLabel orderStaffIdLabel2;
     private javax.swing.JLabel orderWrong;
+    private javax.swing.ButtonGroup outOfStockBtnGrp;
     private javax.swing.JRadioButton outOfStockNo;
     private javax.swing.JRadioButton outOfStockYes;
     private javax.swing.JButton peopleMngBtn;

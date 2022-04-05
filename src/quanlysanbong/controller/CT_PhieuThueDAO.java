@@ -43,7 +43,7 @@ public class CT_PhieuThueDAO {
                 
                 makhunggio = hsDao.getMaKhungGio(rs.getString(3));
                 
-                // tinh thanhtien
+                // tinh thanhtien, chua nhan (X) he so khung gio
                 String sDateTime = rs.getString(3), eDateTime = rs.getString(4);
                 float totalTime = cal.totalTime(sDateTime, eDateTime);
                 
@@ -137,6 +137,35 @@ public class CT_PhieuThueDAO {
             ex.printStackTrace();
         }
         return false;
+    }
+    
+    public ArrayList<CT_PhieuThue> getOrderDetailWithBillId(String mahd, String mapt){
+        ArrayList<CT_PhieuThue> ctptList = new ArrayList<>();
+        HeSoDAO hsDao = new HeSoDAO();
+        String makhunggio = "";
+
+        String sql = "SELECT CTPT.*\n" +
+                    "FROM HOADON HD INNER JOIN CHITIET_PHIEUTHUE CTPT ON HD.mapt = CTPT.mapt\n" +
+                    "	AND mahd=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, mahd);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) { 
+                String sDateTime = rs.getString(3),
+                        esDateTime = rs.getString(4),
+                        eDateTime = rs.getString(5);
+                
+                CT_PhieuThue ctpt = new CT_PhieuThue(mapt, rs.getString(2),
+                        cal.formatDateTime(sDateTime), cal.formatDateTime(esDateTime),
+                        cal.formatDateTime(eDateTime), rs.getDouble(6), rs.getString(7));
+                ctptList.add(ctpt);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return ctptList;
     }
 //
 //    public static void main(String[] args) {

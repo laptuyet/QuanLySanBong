@@ -125,4 +125,36 @@ public class KhachHangDAO {
         }
         return true;
     }
+    
+    public float getMemRateDiscount(String makh) {
+        String sql = "SELECT tile_giamgia\n" +
+                    "FROM KHACHHANG KH INNER JOIN LOAIKHACH LK ON KH.maloaikhach = LK.maloaikhach\n" +
+                    "	AND KH.makh=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, makh);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            return rs.getFloat(1);
+            
+        } catch(SQLException ex) {
+            ex.printStackTrace();
+        }
+        return -1;
+    }
+    
+    public String getMembership(String makh) {
+        String sql = "SELECT maloaikhach FROM KHACHHANG WHERE makh=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, makh);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            return rs.getString(1);
+            
+        } catch(SQLException ex) {
+            ex.printStackTrace();
+        }
+        return "";
+    }
 }
