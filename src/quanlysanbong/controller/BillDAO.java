@@ -65,9 +65,22 @@ public class BillDAO {
         }
         return false;
     }
+    
+    public boolean isOrderHasBill(String mapt) {
+        String sql = "SELECT * FROM HOADON WHERE mapt=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, mapt);
+            ResultSet rs = ps.executeQuery();
+            return rs.next();
+        } catch(SQLException ex) {
+            ex.printStackTrace();
+        }
+        return false;
+    }
 
 //    public static void main(String[] args) {
-//        ArrayList<Bill> billList = new BillDAO().getBillList();
-//        System.out.println(billList.get(0));
+//        boolean billList = new BillDAO().isOrderHasBill("pt02");
+//        System.out.println(billList);
 //    }
 }

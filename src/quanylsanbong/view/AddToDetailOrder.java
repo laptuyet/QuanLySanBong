@@ -281,7 +281,7 @@ public class AddToDetailOrder extends javax.swing.JDialog {
             hopLe = false;
         }
         
-        if( !(cal.isEndTimeGtStartTime(this.sTime, sTime) && cal.isEndTimeGtStartTime(eTime, this.eTime)) ) {
+        if( !(cal.isEndTimeGtStartTime2(this.sTime, sTime) && cal.isEndTimeGtStartTime2(eTime, this.eTime)) ) {
             
             String msg = "Order time must be between "
                     + this.sTime + " and " + this.eTime + "\n\n"

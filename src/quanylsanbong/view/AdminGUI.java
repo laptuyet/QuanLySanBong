@@ -4,7 +4,7 @@
  */
 package quanylsanbong.view;
 
-import Clock.ManageRentTime;
+import Clock.ManageRentTimeAndBill;
 import Clock.MyClock;
 import Utils.AutoID;
 import Utils.CalendarHelper;
@@ -103,10 +103,13 @@ public class AdminGUI extends javax.swing.JFrame {
     
     private CalendarHelper cal;
     private MyClock clock;
+    private String glbMsg;
 
     /**
      * Creates new form AdminGUI
      */
+    public AdminGUI() {}
+    
     public AdminGUI(String username, String role) {
 
         initComponents();
@@ -121,6 +124,7 @@ public class AdminGUI extends javax.swing.JFrame {
         peopleMngPanel.setVisible(false);
         foodMngPanel.setVisible(false);
         billMngPanel.setVisible(false);
+       
 
         //set clock
         clock = new MyClock(timeLabel, dateLabel);
@@ -181,6 +185,11 @@ public class AdminGUI extends javax.swing.JFrame {
         
         // auto make bill with expired order
         
+        ptList = ptDao.getOrderList(); // pt duoc dua len day de ho tro tao bill auto
+        
+        //========= Tao thread quan li thoi gian thue cho tung san =============
+        ManageRentTimeAndBill mt = new ManageRentTimeAndBill(ptList, billList, dvList, rateList);
+        //======================================================================
     }
 
     /**
@@ -419,6 +428,8 @@ public class AdminGUI extends javax.swing.JFrame {
         jLabel103 = new javax.swing.JLabel();
         jLabel101 = new javax.swing.JLabel();
         billMemshipLabel = new javax.swing.JLabel();
+        jLabel106 = new javax.swing.JLabel();
+        billDepositLabel = new javax.swing.JLabel();
         infoPanel = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -2809,6 +2820,13 @@ public class AdminGUI extends javax.swing.JFrame {
         billMemshipLabel.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
         billMemshipLabel.setText(" ");
 
+        jLabel106.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
+        jLabel106.setText("Deposit:");
+
+        billDepositLabel.setFont(new java.awt.Font("Unispace", 0, 14)); // NOI18N
+        billDepositLabel.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        billDepositLabel.setText(" ");
+
         javax.swing.GroupLayout jPanel21Layout = new javax.swing.GroupLayout(jPanel21);
         jPanel21.setLayout(jPanel21Layout);
         jPanel21Layout.setHorizontalGroup(
@@ -2822,10 +2840,13 @@ public class AdminGUI extends javax.swing.JFrame {
                             .addComponent(jLabel102)
                             .addComponent(jLabel98))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(billIDLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(billDateCreateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(55, 55, 55)
+                        .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel21Layout.createSequentialGroup()
+                                .addComponent(billIDLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(91, 91, 91))
+                            .addGroup(jPanel21Layout.createSequentialGroup()
+                                .addComponent(billDateCreateLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(81, 81, 81)))
                         .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel100)
                             .addComponent(jLabel105)))
@@ -2837,16 +2858,12 @@ public class AdminGUI extends javax.swing.JFrame {
                         .addComponent(jLabel101)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel21Layout.createSequentialGroup()
-                        .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(billStaffIDLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
-                            .addComponent(billMemshipLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(130, 130, 130))
-                    .addGroup(jPanel21Layout.createSequentialGroup()
-                        .addComponent(billOrderIDLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                    .addComponent(billStaffIDLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+                    .addComponent(billMemshipLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(billOrderIDLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(130, 130, 130))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel21Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(256, Short.MAX_VALUE)
                 .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel21Layout.createSequentialGroup()
                         .addComponent(jLabel113, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -2865,11 +2882,13 @@ public class AdminGUI extends javax.swing.JFrame {
                                 .addGroup(jPanel21Layout.createSequentialGroup()
                                     .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                         .addComponent(jLabel99)
-                                        .addComponent(jLabel111))
+                                        .addComponent(jLabel111)
+                                        .addComponent(jLabel106))
                                     .addGap(18, 18, 18)
                                     .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(billTempTotalLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(memDiscountLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addComponent(memDiscountLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                                        .addComponent(billDepositLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                         .addGap(38, 38, 38))))
             .addGroup(jPanel21Layout.createSequentialGroup()
                 .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -2930,6 +2949,10 @@ public class AdminGUI extends javax.swing.JFrame {
                     .addComponent(billTempTotalLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel106, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(billDepositLabel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel99)
                     .addComponent(memDiscountLabel))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -2938,7 +2961,7 @@ public class AdminGUI extends javax.swing.JFrame {
                 .addGroup(jPanel21Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(billTotalLabel)
                     .addComponent(jLabel103))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addGap(28, 28, 28)
                 .addComponent(jLabel113)
                 .addContainerGap())
         );
@@ -4478,17 +4501,12 @@ public class AdminGUI extends javax.swing.JFrame {
         preOrderPhoneWrong.setText(" ");
         preOrderWrong.setText(" ");
         //======================================================================
-        
+
         // ORDER NOW ===========================================================
         
         orderStaffIdLabel.setText(admin.getManv());
         orderDateCreateLabel.setText(clock.getCurrentDateTime2());
-        ptList = ptDao.getOrderList();
-        
-        
-        //========= Tao thread quan li thoi gian thue cho tung san =============
-        ManageRentTime mt = new ManageRentTime(ptList);
-        //======================================================================
+        // phiethue da tung dat o day
         
         // tu tao mapt 
         String autoPtID = new AutoID().getAutoPhieuThueID(ptList);
@@ -4563,6 +4581,8 @@ public class AdminGUI extends javax.swing.JFrame {
         peopleMngPanel.setVisible(false);
         foodMngPanel.setVisible(false);
         billMngPanel.setVisible(true);
+        
+        showBillList(billList);
     }//GEN-LAST:event_billbtnActionPerformed
 
     public int getStaffIndex(String manv) {
@@ -5954,8 +5974,7 @@ public class AdminGUI extends javax.swing.JFrame {
         if(hopLe) {
             PhieuThue pt = new PhieuThue(id, date, note, cusId, staffId, mapd, phone);
 
-            try {
-                
+            try {  
                 if(ptDao.addOrder(pt) && ctptDao.addOrderDetailList(ctptList)
                         && stateDao.addTrangThaiSanOrder(ctptList) 
                         && ctdvDao.addServiceDetailOrder(ctdvList)) {
@@ -6022,9 +6041,18 @@ public class AdminGUI extends javax.swing.JFrame {
 
     public boolean hasOrder(String mapd) {
         for(PhieuThue item : ptList) 
-            if(item.getMapd() != null)
-                return item.getMapd().equals(mapd);
+            if(item.getMapd() != null) // neu phieuthue do co mapd
+                if(item.getMapd().equals(mapd)) // kiem tra mapd do co khop khong ?
+                    return true;
         return false;
+    }
+    
+    public String hasPreOrder(String mapt) {
+        for(PhieuThue item : ptList)
+            if(item.getMapt().equals(mapt)) // kiem tra phieu thue nao khop
+                if(item.getMapd() != null) // kiem tra phieu thue do co phieu dat khong ?
+                    return item.getMapd();
+        return null;
     }
     
     private void checkPreOrderIdBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkPreOrderIdBtnActionPerformed
@@ -6293,9 +6321,8 @@ public class AdminGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_endStadiumBtnActionPerformed
 
     public boolean isAllOrderDetailExpired(ArrayList<CT_PhieuThue> ctptList) {
-        for(CT_PhieuThue item : ctptList) {
+        for(CT_PhieuThue item : ctptList)
             if(item.getGiotra().equals("")) return false;
-        }
         return true;
     }
     
@@ -6474,7 +6501,7 @@ public class AdminGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         int index = billListTable.getSelectedRow();
         if(index == -1) {
-            
+      
         } else {
             Bill bill = billList.get(index);
             billIDLabel.setText(bill.getMahd());
@@ -6491,10 +6518,16 @@ public class AdminGUI extends javax.swing.JFrame {
             showBillServiceDetail(ctdvList);
             
             double tempTotal = getTotalBillWithoutMemDiscount(ctptList, ctdvList);
+            double deposit = 0.0;
+            if(hasPreOrder(bill.getMapt()) != null) {
+                deposit = ctpdDao.getTotalDeposit(hasPreOrder(bill.getMapt()));
+            }
+            
             float discount = khDao.getMemRateDiscount(bill.getMakh());
-            double total = tempTotal * (1.0 - discount);
+            double total = (tempTotal - deposit) * (1.0 - discount);
             
             billTempTotalLabel.setText(String.format("%.3f", tempTotal));
+            billDepositLabel.setText("- " + String.format("%.3f", deposit));
             memDiscountLabel.setText(String.valueOf(discount * 100) + "%");
             billTotalLabel.setText(String.format("%.3f", total));
         }
@@ -7081,6 +7114,7 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JTable avaiStaTable;
     private javax.swing.JLabel billCusIDLabel;
     private javax.swing.JLabel billDateCreateLabel;
+    private javax.swing.JLabel billDepositLabel;
     private javax.swing.JLabel billIDLabel;
     private javax.swing.JTable billListTable;
     private javax.swing.JLabel billMemshipLabel;
@@ -7160,6 +7194,7 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel103;
     private javax.swing.JLabel jLabel104;
     private javax.swing.JLabel jLabel105;
+    private javax.swing.JLabel jLabel106;
     private javax.swing.JLabel jLabel107;
     private javax.swing.JLabel jLabel109;
     private javax.swing.JLabel jLabel11;

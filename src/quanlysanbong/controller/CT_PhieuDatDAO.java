@@ -72,4 +72,21 @@ public class CT_PhieuDatDAO {
 
         return ctpdList;
     }
+    
+    public double getTotalDeposit(String mapd) {
+        String sql = "SELECT tiendatcoc FROM CHITIET_PHIEUDAT WHERE mapd=?";
+        double total = 0;
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, mapd);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()) {
+                total += rs.getDouble(1);
+            }
+            
+        } catch(SQLException ex) {
+            ex.printStackTrace();
+        }
+        return total;
+    }
 }

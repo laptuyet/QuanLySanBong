@@ -67,6 +67,22 @@ public class CalendarHelper {
 
         return false;
     }
+    
+    public boolean isEndTimeGtStartTime2(String sTime, String eTime) {
+        // cai nay co so sanh bang
+        SimpleDateFormat spf = new SimpleDateFormat("HH:mm:ss");
+        long start, end;
+        try {
+            start = spf.parse(sTime).getTime();
+            end = spf.parse(eTime).getTime();
+            return end >= start;
+
+        } catch (ParseException ex) {
+            Logger.getLogger(CalendarHelper.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return false;
+    }
 
     public String formatHourAndMinute(int hour, int minute) {
         String h = hour <= 9 ? "0" + String.valueOf(hour) : String.valueOf(hour);
