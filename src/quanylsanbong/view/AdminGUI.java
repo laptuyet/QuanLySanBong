@@ -10,6 +10,8 @@ import Utils.AutoID;
 import Utils.CalendarHelper;
 import Utils.CheckText;
 import Utils.FoodHelper;
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Image;
 import java.io.File;
 import java.text.ParseException;
@@ -22,12 +24,19 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 import quanlysanbong.controller.*;
 import quanlysanbong.model.*;
 
+
 /**
  *
- * @author tranh
+ * @author Tran Hoang Phi N19DCCN136
  */
 public class AdminGUI extends javax.swing.JFrame {
     
@@ -93,7 +102,7 @@ public class AdminGUI extends javax.swing.JFrame {
     private DefaultTableModel orderListTableModel;
     private ArrayList<CT_PhieuThue> ctptList2;
     private ArrayList<CT_DichVu> ctdvList2;
-    
+    private boolean checkOrderFlag = true;
     
     private DefaultTableModel billListTableModel;
     private DefaultTableModel billStaDetailTableModel;
@@ -430,6 +439,8 @@ public class AdminGUI extends javax.swing.JFrame {
         billMemshipLabel = new javax.swing.JLabel();
         jLabel106 = new javax.swing.JLabel();
         billDepositLabel = new javax.swing.JLabel();
+        jPanel22 = new javax.swing.JPanel();
+        barChartPanel = new javax.swing.JPanel();
         infoPanel = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -2621,7 +2632,7 @@ public class AdminGUI extends javax.swing.JFrame {
                     .addComponent(updateFoodBtn)
                     .addComponent(addFoodBtn)
                     .addComponent(foodCancelBtn))
-                .addContainerGap(209, Short.MAX_VALUE))
+                .addContainerGap(239, Short.MAX_VALUE))
         );
 
         billMngPanel.setBackground(new java.awt.Color(255, 255, 204));
@@ -2987,7 +2998,30 @@ public class AdminGUI extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane3.addTab("BILL LIST", jPanel19);
+        jTabbedPane3.addTab("BILL LIST", new javax.swing.ImageIcon(getClass().getResource("/quanlysanbong/images/icons8-bill-32.png")), jPanel19); // NOI18N
+
+        jPanel22.setBackground(new java.awt.Color(255, 255, 204));
+
+        barChartPanel.setLayout(new java.awt.BorderLayout());
+
+        javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
+        jPanel22.setLayout(jPanel22Layout);
+        jPanel22Layout.setHorizontalGroup(
+            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel22Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(barChartPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1081, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel22Layout.setVerticalGroup(
+            jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel22Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(barChartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(253, Short.MAX_VALUE))
+        );
+
+        jTabbedPane3.addTab("STATISTICS", new javax.swing.ImageIcon(getClass().getResource("/quanlysanbong/images/icons8-list-32.png")), jPanel22); // NOI18N
 
         javax.swing.GroupLayout billMngPanelLayout = new javax.swing.GroupLayout(billMngPanel);
         billMngPanel.setLayout(billMngPanelLayout);
@@ -3156,6 +3190,11 @@ public class AdminGUI extends javax.swing.JFrame {
         changepwdBtn.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
         changepwdBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlysanbong/images/change-pwd-icon.png"))); // NOI18N
         changepwdBtn.setText("Change password");
+        changepwdBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                changepwdBtnActionPerformed(evt);
+            }
+        });
 
         savebtn.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
         savebtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlysanbong/images/icons8-save-32.png"))); // NOI18N
@@ -3208,7 +3247,7 @@ public class AdminGUI extends javax.swing.JFrame {
                     .addComponent(changepwdBtn)
                     .addComponent(savebtn)
                     .addComponent(cancelBtn))
-                .addContainerGap(203, Short.MAX_VALUE))
+                .addContainerGap(242, Short.MAX_VALUE))
         );
 
         peopleMngPanel.setBackground(new java.awt.Color(255, 255, 204));
@@ -3418,7 +3457,7 @@ public class AdminGUI extends javax.swing.JFrame {
                     .addComponent(addCusBtn)
                     .addComponent(updateCusBtn)
                     .addComponent(cancelCusBtn))
-                .addContainerGap(132, Short.MAX_VALUE))
+                .addContainerGap(162, Short.MAX_VALUE))
         );
 
         peopleMngTabbedPane.addTab("CUSTOMER", new javax.swing.ImageIcon(getClass().getResource("/quanlysanbong/images/icons8-customer-32.png")), customerPanel); // NOI18N
@@ -3659,7 +3698,7 @@ public class AdminGUI extends javax.swing.JFrame {
                     .addComponent(addStaffBtn)
                     .addComponent(updateStaffBtn)
                     .addComponent(cancelStaffBtn))
-                .addContainerGap(153, Short.MAX_VALUE))
+                .addContainerGap(183, Short.MAX_VALUE))
         );
 
         peopleMngTabbedPane.addTab("STAFF  ", new javax.swing.ImageIcon(getClass().getResource("/quanlysanbong/images/icons8-waitress-32.png")), staffPanel); // NOI18N
@@ -4111,7 +4150,7 @@ public class AdminGUI extends javax.swing.JFrame {
                         .addComponent(dateTimeWrong, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(checkDateTimeBtn)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
                 .addGroup(stadiumTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(addStaBtn)
                     .addComponent(updateStaBtn)
@@ -4374,7 +4413,7 @@ public class AdminGUI extends javax.swing.JFrame {
                 .addComponent(rateTimeWrong)
                 .addGap(26, 26, 26)
                 .addComponent(updateRateBtn)
-                .addContainerGap(108, Short.MAX_VALUE))
+                .addContainerGap(138, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Rate  ", new javax.swing.ImageIcon(getClass().getResource("/quanlysanbong/images/icons8-dividends-32.png")), rateStadiumTab); // NOI18N
@@ -4583,6 +4622,30 @@ public class AdminGUI extends javax.swing.JFrame {
         billMngPanel.setVisible(true);
         
         showBillList(billList);
+        
+        String[] months = {"", "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"};
+        
+        
+        DefaultCategoryDataset dcd = new DefaultCategoryDataset();
+        
+        for(int i = 1; i <= 12; i++) {
+            dcd.setValue(billDao.getTotalBillValueOfMonth(i), "Amount", months[i]);
+        }
+        
+        JFreeChart jchart = ChartFactory.createBarChart("Total bill monthly", "Months", "Total",
+                dcd, PlotOrientation.VERTICAL, true, true, false);
+        
+        CategoryPlot plot = jchart.getCategoryPlot();
+        plot.setRangeGridlinePaint(Color.black);
+        plot.setBackgroundPaint(Color.white);
+        
+        ChartPanel chartPanel = new ChartPanel(jchart);
+        barChartPanel.removeAll();
+        barChartPanel.add(chartPanel, BorderLayout.CENTER);
+        barChartPanel.validate();
+        
+        
     }//GEN-LAST:event_billbtnActionPerformed
 
     public int getStaffIndex(String manv) {
@@ -5231,7 +5294,7 @@ public class AdminGUI extends javax.swing.JFrame {
 
     private void sortCusCbBoxItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_sortCusCbBoxItemStateChanged
         // TODO add your handling code here:
-
+ 
         String sortChoose = sortCusCbBox.getSelectedItem().toString();
         ArrayList<KhachHang> tempKhList = khList;
         switch (sortChoose) {
@@ -5917,6 +5980,18 @@ public class AdminGUI extends javax.swing.JFrame {
         }
         //======================================================================
         
+        if(!checkOrderFlag && !ctptList.isEmpty()) {
+            int ans = JOptionPane.showConfirmDialog(this, "This will clear Order detail list below!",
+                    "Caution", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if(ans == JOptionPane.YES_OPTION) {
+                orderDetailTableModel.setRowCount(0);
+                ctptList.clear();
+                
+            } else {
+                return;
+            }
+        }
+        
         int sYear = startYearChooser2.getYear();
         int sMonth = startMonthCbBox2.getSelectedIndex() + 1;
         int sDay = startDayCbBox2.getSelectedIndex() + 1;
@@ -5935,6 +6010,9 @@ public class AdminGUI extends javax.swing.JFrame {
             .filter(sta -> sta.getTenTrangThai().equals("Trống")).collect(Collectors.toList());
             dateTimeWrong2.setText(" ");
             showOrderAvaiStadiums(avaiStaList);
+            
+            // set flag de lan check time tiep theo se clear order staidum list
+            checkOrderFlag = false;
         } else {
             dateTimeWrong2.setText("End date-time must be greater than Start date-time");
         }
@@ -6057,6 +6135,13 @@ public class AdminGUI extends javax.swing.JFrame {
     
     private void checkPreOrderIdBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_checkPreOrderIdBtnActionPerformed
         // TODO add your handling code here:
+        
+        String currTime = clock.getCurrentTime();
+        if( !isInWorkTime(currTime, rateList)) {
+            showWorkTimeMessage(currTime, rateList);
+            return;
+        }
+        
         String preOrderID = preOrderIdTxt.getText();
         
         if(hasOrder(preOrderID)) { // neu pd da duoc lap phieu thue roi thi bao loi
@@ -6175,7 +6260,6 @@ public class AdminGUI extends javax.swing.JFrame {
     private void orderServicesTable2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_orderServicesTable2MouseClicked
         // TODO add your handling code here:
         removeOrderServiceBtn2.setEnabled(true);
-        
     }//GEN-LAST:event_orderServicesTable2MouseClicked
 
     private void viewServicesBtn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_viewServicesBtn2ActionPerformed
@@ -6532,6 +6616,11 @@ public class AdminGUI extends javax.swing.JFrame {
             billTotalLabel.setText(String.format("%.3f", total));
         }
     }//GEN-LAST:event_billListTableMouseClicked
+
+    private void changepwdBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changepwdBtnActionPerformed
+        // TODO add your handling code here:
+        new ChangePasswordGUI(this, rootPaneCheckingEnabled, admin.getTaikhoan()).setVisible(true);
+    }//GEN-LAST:event_changepwdBtnActionPerformed
     
     
     public float getRate(String makhunggio) {
@@ -7112,6 +7201,7 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JButton addStaBtn;
     private javax.swing.JButton addStaffBtn;
     private javax.swing.JTable avaiStaTable;
+    private javax.swing.JPanel barChartPanel;
     private javax.swing.JLabel billCusIDLabel;
     private javax.swing.JLabel billDateCreateLabel;
     private javax.swing.JLabel billDepositLabel;
@@ -7311,6 +7401,7 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel20;
     private javax.swing.JPanel jPanel21;
+    private javax.swing.JPanel jPanel22;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;

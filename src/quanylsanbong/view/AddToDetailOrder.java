@@ -16,7 +16,8 @@ import quanlysanbong.model.TrangThaiSan;
  */
 public class AddToDetailOrder extends javax.swing.JDialog {
 
-    private AdminGUI adminGUI;
+    private AdminGUI adminGui;
+    private StaffGUI staffGui;
     private CalendarHelper cal;
     private MyClock clock;
     private String mapt;
@@ -33,7 +34,14 @@ public class AddToDetailOrder extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-        this.adminGUI = (AdminGUI) parent;
+        
+        
+        if(parent.getClass().getName().equals("quanylsanbong.view.AdminGUI"))
+            this.adminGui = (AdminGUI) parent;
+        else if(parent.getClass().getName().equals("quanylsanbong.view.StaffGUI"))
+            this.staffGui = (StaffGUI) parent;
+        
+        
         this.mapt = mapt;
         this.orderItem = orderItem;
         this.makhunggio = makhunggio;
@@ -297,7 +305,12 @@ public class AddToDetailOrder extends javax.swing.JDialog {
             
             CT_PhieuThue ctptItem = new CT_PhieuThue(this.mapt, orderItem.getMaSan(),
                     sDate, eDate, "", totalTime * orderItem.getPricePerHour(), this.makhunggio);
-            adminGUI.addDetailOrder(ctptItem, index);
+            
+            if(adminGui != null)
+                adminGui.addDetailOrder(ctptItem, index);
+            else if (staffGui != null)
+                staffGui.addDetailOrder(ctptItem, index);
+            
             this.dispose();
         }
     }//GEN-LAST:event_addDetailOrderBtnActionPerformed

@@ -37,21 +37,18 @@ public class UserDAO {
         return acc;
     }
 
-    public String getRoleOfAccount(String username, String password) {
-        String role = "";
+    public String getRoleOfAccount(String username) {
         try {
-            String sql = "SELECT vaitro FROM TAIKHOAN WHERE taikhoan=? AND matkhau=?";
+            String sql = "SELECT vaitro FROM TAIKHOAN WHERE taikhoan=?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, username);
-            ps.setString(2, password);
             ResultSet rs = ps.executeQuery();
-            while (rs.next()) {
-                role = rs.getString(1);
-            }
+            rs.next();
+            return rs.getString(1);
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return role;
+        return "";
     }
 
     public boolean changPassword(String user, String newpass) {

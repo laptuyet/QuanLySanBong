@@ -78,6 +78,21 @@ public class BillDAO {
         }
         return false;
     }
+    
+    public double getTotalBillValueOfMonth(int i) {
+        String sql = "SELECT SUM(tongtien)\n" +
+                     "FROM HOADON WHERE MONTH(ngaylap) = ?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, i);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            return rs.getDouble(1);
+        } catch(SQLException ex) {
+            ex.printStackTrace();
+        }
+        return 0;
+    }
 
 //    public static void main(String[] args) {
 //        boolean billList = new BillDAO().isOrderHasBill("pt02");

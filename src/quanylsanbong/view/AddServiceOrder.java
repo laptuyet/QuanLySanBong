@@ -18,7 +18,9 @@ import quanlysanbong.model.DichVu;
  */
 public class AddServiceOrder extends javax.swing.JDialog {
 
-    private AdminGUI adminGUI;
+    private AdminGUI adminGui;
+    private StaffGUI staffGui;
+    private CustomerGUI customerGui;
     private ArrayList<DichVu> dvList;
     private DefaultTableModel foodTableModel;
     private int flag; // 1: them vao ctpt luc dat phieu, 2: them vao khi xem ctpt trong order list
@@ -30,7 +32,14 @@ public class AddServiceOrder extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
-        this.adminGUI = (AdminGUI) parent;
+        
+        if(parent.getClass().getName().equals("quanylsanbong.view.AdminGUI"))
+            this.adminGui = (AdminGUI) parent;
+        else if(parent.getClass().getName().equals("quanylsanbong.view.StaffGUI"))
+            this.staffGui = (StaffGUI) parent;
+        else this.customerGui = (CustomerGUI) parent;
+        
+        
         this.dvList = dvList;
 
         // loc ra cac item chua het hang de hien thi
@@ -216,10 +225,19 @@ public class AddServiceOrder extends javax.swing.JDialog {
             }
 
             if (hopLe) {
-                adminGUI.addServiceOrder(mapt, dvItem, qty, flag);
-                qtyWrong.setForeground(new Color(5, 151, 32));
-                qtySpn.setValue(0);
-                qtyWrong.setText("Add service successfully! :D");
+                if(adminGui != null) {
+                    adminGui.addServiceOrder(mapt, dvItem, qty, flag);
+                    qtyWrong.setForeground(new Color(5, 151, 32));
+                    qtySpn.setValue(0);
+                    qtyWrong.setText("Add service successfully! :D");
+                } else if (staffGui != null) {
+                    staffGui.addServiceOrder(mapt, dvItem, qty, flag);
+                    qtyWrong.setForeground(new Color(5, 151, 32));
+                    qtySpn.setValue(0);
+                    qtyWrong.setText("Add service successfully! :D");
+                }
+                // nho them truong hop cho cus
+                
                 //this.dispose();
             }
         }

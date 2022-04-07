@@ -193,9 +193,6 @@ public class CalendarHelper {
     
 //    public static void main(String[] args) {
 //        
-//        CalendarHelper c = new CalendarHelper();
-//        long ms = c.getMiliSecondTime("20:00:00");
-//        System.out.println(ms);
-//        System.out.println(c.formatDateTime(ms));
+//        System.out.println(new CalendarHelper().getMonthOfDateTimeString("2022/04/01 08:00:00"));
 //    }
 }

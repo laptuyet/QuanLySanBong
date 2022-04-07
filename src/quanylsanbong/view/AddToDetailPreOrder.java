@@ -20,7 +20,9 @@ public class AddToDetailPreOrder extends javax.swing.JDialog {
     private TrangThaiSan preOrderItem;
     private CalendarHelper cal;
     private FoodHelper fh;
-    private AdminGUI adminGUI;
+    private AdminGUI adminGui;
+    private StaffGUI staffGui;
+    private CustomerGUI customerGui;
     private String mapd;
     private int index;
     private MyClock clock;
@@ -43,8 +45,12 @@ public class AddToDetailPreOrder extends javax.swing.JDialog {
         staPrice.setText(String.valueOf(preOrderItem.getPricePerHour()));
 
         preOrderDateLabel.setText(date);
-
-        this.adminGUI = (AdminGUI) parent;
+        if(parent.getClass().getName().equals("quanylsanbong.view.AdminGUI"))
+            this.adminGui = (AdminGUI) parent;
+        else if(parent.getClass().getName().equals("quanylsanbong.view.StaffGUI"))
+            this.staffGui = (StaffGUI) parent;
+        else this.customerGui = (CustomerGUI) parent;
+        
         this.preOrderItem = preOrderItem;
         this.mapd = mapd;
         this.index = index;
@@ -317,7 +323,7 @@ public class AddToDetailPreOrder extends javax.swing.JDialog {
             hopLe = false;
         }
         
-        if( !(cal.isEndTimeGtStartTime(this.sTime, sTime) && cal.isEndTimeGtStartTime(eTime, this.eTime)) ) {
+        if( !(cal.isEndTimeGtStartTime2(this.sTime, sTime) && cal.isEndTimeGtStartTime2(eTime, this.eTime)) ) {
             
             String msg = "Pre-order time must be between "
                     + this.sTime + " and " + this.eTime + "\n\n"
@@ -329,7 +335,12 @@ public class AddToDetailPreOrder extends javax.swing.JDialog {
 
         if (hopLe) {
             CT_PhieuDat ctpdItem = new CT_PhieuDat(mapd, preOrderItem.getMaSan(), sDate, eDate, deposit);
-            adminGUI.addDetailPreOrder(ctpdItem, index);
+            
+            if(adminGui != null)
+                adminGui.addDetailPreOrder(ctpdItem, index);
+            else if (staffGui != null)
+                staffGui.addDetailPreOrder(ctpdItem, index);
+            // nho them customerGui vao
             this.dispose();
 
         }
