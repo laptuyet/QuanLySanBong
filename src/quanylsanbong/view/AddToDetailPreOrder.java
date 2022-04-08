@@ -224,20 +224,22 @@ public class AddToDetailPreOrder extends javax.swing.JDialog {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(addDetailPreOrderBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(50, 50, 50)
-                                .addComponent(cancelPreOrderBtn)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(staDepositWrong, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE))
+                                .addComponent(cancelPreOrderBtn))
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(layout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                     .addComponent(preOrderDateLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addGap(33, 33, 33)
-                                    .addComponent(staDeposit, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(staDeposit, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(staDepositWrong, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(0, 0, Short.MAX_VALUE)))))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addComponent(preOrderTimeWrong, javax.swing.GroupLayout.PREFERRED_SIZE, 414, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(35, 35, 35))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -278,12 +280,12 @@ public class AddToDetailPreOrder extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(staDeposit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(staDepositWrong)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(addDetailPreOrderBtn)
-                        .addComponent(cancelPreOrderBtn)))
+                .addGap(4, 4, 4)
+                .addComponent(staDepositWrong)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(addDetailPreOrderBtn)
+                    .addComponent(cancelPreOrderBtn))
                 .addGap(74, 74, 74))
         );
 
@@ -321,6 +323,9 @@ public class AddToDetailPreOrder extends javax.swing.JDialog {
         if (deposit == -9999) {
             staDepositWrong.setText("Deposit must be numbers");
             hopLe = false;
+        } else if (deposit < 0) {
+            staDepositWrong.setText("Deposit must be >= 0");
+            hopLe = false;
         }
         
         if( !(cal.isEndTimeGtStartTime2(this.sTime, sTime) && cal.isEndTimeGtStartTime2(eTime, this.eTime)) ) {
@@ -340,7 +345,7 @@ public class AddToDetailPreOrder extends javax.swing.JDialog {
                 adminGui.addDetailPreOrder(ctpdItem, index);
             else if (staffGui != null)
                 staffGui.addDetailPreOrder(ctpdItem, index);
-            // nho them customerGui vao
+            else customerGui.addDetailPreOrder(ctpdItem, index);
             this.dispose();
 
         }

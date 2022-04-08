@@ -28,9 +28,9 @@ public class AutoID {
 
             int stt = Integer.valueOf(lastId.substring(2)) + 1;
 
-            newId = "pd" + ((stt <= 9) ? "0" + stt : stt);
+            newId = "PD" + ((stt <= 9) ? "0" + stt : stt);
         } else {
-            newId = "pd01";
+            newId = "PD01";
         }
 
         return newId;
@@ -45,9 +45,9 @@ public class AutoID {
 
             int stt = Integer.valueOf(lastId.substring(2)) + 1;
 
-            newId = "pt" + ((stt <= 9) ? "0" + stt : stt);
+            newId = "PT" + ((stt <= 9) ? "0" + stt : stt);
         } else {
-            newId = "pt01";
+            newId = "PT01";
         }
 
         return newId;
