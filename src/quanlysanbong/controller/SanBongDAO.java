@@ -116,10 +116,29 @@ public class SanBongDAO {
             ResultSet rs = ps.executeQuery();
             rs.next();
             return rs.getDouble(1);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return -1;
+    }
+
+    public int isInUse(String masan) {
+        String sql = "DECLARE @ANS int\n"
+                + "IF EXISTS (SELECT * FROM CHITIET_TRANGTHAISAN CT WHERE CT.masan = ?)\n"
+                + "	SET @ANS = 1\n"
+                + "ELSE SET @ANS = 0\n"
+                + "SELECT @ANS";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, masan);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            return rs.getInt(1);
+            
         } catch(SQLException ex) {
             ex.printStackTrace();
         }
-        
-        return -1;
+        return 0;
     }
 }

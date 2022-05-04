@@ -22,7 +22,7 @@ public class AutoID {
     public String getAutoPhieuDatID(ArrayList<PhieuDat> preOrderList) {
         String newId;
         if (!preOrderList.isEmpty()) {
-            preOrderList.sort((a, b) -> a.getMapd().compareTo(b.getMapd()));
+            preOrderList.sort((a, b) -> a.getMapd().compareToIgnoreCase(b.getMapd()));
 
             String lastId = preOrderList.get(preOrderList.size() - 1).getMapd();
 
@@ -39,7 +39,7 @@ public class AutoID {
     public String getAutoPhieuThueID(ArrayList<PhieuThue> orderList) {
         String newId;
         if (!orderList.isEmpty()) {
-            orderList.sort((a, b) -> a.getMapt().compareTo(b.getMapt()));
+            orderList.sort((a, b) -> a.getMapt().compareToIgnoreCase(b.getMapt()));
 
             String lastId = orderList.get(orderList.size() - 1).getMapt();
 

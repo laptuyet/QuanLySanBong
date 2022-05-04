@@ -132,4 +132,18 @@ public class StaffDAO {
         return true;
     }
     
+    public boolean isQuit(String username) {
+
+        String sql = "SELECT trangthainghi FROM NHANVIEN WHERE taikhoan=?";
+        try {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, username);
+            ResultSet rs = ps.executeQuery();
+            rs.next();
+            return rs.getBoolean(1);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return true;
+    }
 }

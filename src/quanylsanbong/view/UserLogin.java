@@ -5,7 +5,9 @@
 package quanylsanbong.view;
 
 import java.awt.Color;
+import javax.swing.JOptionPane;
 import quanlysanbong.controller.UserDAO;
+import quanlysanbong.controller.StaffDAO;
 import quanlysanbong.model.Account;
 
 /**
@@ -160,7 +162,7 @@ public class UserLogin extends javax.swing.JFrame {
                             .addComponent(jLabel4))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(pwdWrong)
-                        .addGap(27, 127, Short.MAX_VALUE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -170,7 +172,7 @@ public class UserLogin extends javax.swing.JFrame {
                         .addGap(59, 59, 59))))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1)
-                .addGap(0, 1, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -200,24 +202,39 @@ public class UserLogin extends javax.swing.JFrame {
                 tonTai = true;
             }
         }
+        
+        
+        
+        
         if (tonTai) {
             String role = new UserDAO().getRoleOfAccount(user);
-            if (role.equals("admin")) {
-                adminGUI = new AdminGUI(user, role);
-                adminGUI.setVisible(true);
-                this.dispose();
+            
+            if(new StaffDAO().isQuit(user) && (role.equals("admin") || role.equals("nhanvien")) ) {
+                JOptionPane.showMessageDialog(rootPane, "This user is quit, cannot login!");
+                return;
             }
-
-            if (role.equals("nhanvien")) {
-                staffGUI = new StaffGUI(user, role);
-                staffGUI.setVisible(true);
-                this.dispose();
-            }
-
-            if (role.equals("khach")) {
-                cusGUI = new CustomerGUI(user, role);
-                cusGUI.setVisible(true);
-                this.dispose();
+            
+            switch (role) {
+                case "admin" : {
+                    adminGUI = new AdminGUI(user, role);
+                    adminGUI.setVisible(true);
+                    this.dispose();
+                    break;
+                }
+                
+                case "nhanvien" : {
+                    staffGUI = new StaffGUI(user, role);
+                    staffGUI.setVisible(true);
+                    this.dispose();
+                    break;
+                }
+                
+                case "khach" : {
+                    cusGUI = new CustomerGUI(user, role);
+                    cusGUI.setVisible(true);
+                    this.dispose();
+                    break;
+                }
             }
         }
 

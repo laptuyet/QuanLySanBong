@@ -125,24 +125,24 @@ public class KhachHangDAO {
         }
         return true;
     }
-    
+
     public float getMemRateDiscount(String makh) {
-        String sql = "SELECT tile_giamgia\n" +
-                    "FROM KHACHHANG KH INNER JOIN LOAIKHACH LK ON KH.maloaikhach = LK.maloaikhach\n" +
-                    "	AND KH.makh=?";
+        String sql = "SELECT tile_giamgia\n"
+                + "FROM KHACHHANG KH INNER JOIN LOAIKHACH LK ON KH.maloaikhach = LK.maloaikhach\n"
+                + "	AND KH.makh=?";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, makh);
             ResultSet rs = ps.executeQuery();
             rs.next();
             return rs.getFloat(1);
-            
-        } catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return -1;
     }
-    
+
     public String getMembership(String makh) {
         String sql = "SELECT maloaikhach FROM KHACHHANG WHERE makh=?";
         try {
@@ -151,10 +151,35 @@ public class KhachHangDAO {
             ResultSet rs = ps.executeQuery();
             rs.next();
             return rs.getString(1);
-            
-        } catch(SQLException ex) {
+
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return "";
+    }
+
+    public void updateRentTimes(String cusId) {
+        String sql = "DECLARE @cusID varchar(10) = ? \n"
+                + "UPDATE KHACHHANG set solan_thuesan += 1 WHERE makh = @cusID\n"
+                + "\n"
+                + "DECLARE @renttimes int;\n"
+                + "SELECT @renttimes = solan_thuesan\n"
+                + "FROM KHACHHANG WHERE makh = @cusID\n"
+                + "IF (@cusID <> 'khvanglai')\n"
+                + "	BEGIN\n"
+                + "		IF (@renttimes > 40)\n"
+                + "			UPDATE KHACHHANG set maloaikhach = 'diamond' WHERE makh = @cusID\n"
+                + "		ELSE IF (@renttimes BETWEEN 16 AND 40)\n"
+                + "			UPDATE KHACHHANG set maloaikhach = 'gold' WHERE makh = @cusID\n"
+                + "		ELSE IF (@renttimes BETWEEN 5 AND 15)\n"
+                + "			UPDATE KHACHHANG set maloaikhach = 'silver' WHERE makh = @cusID\n"
+                + "	END";
+        try  {
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, cusId);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 }

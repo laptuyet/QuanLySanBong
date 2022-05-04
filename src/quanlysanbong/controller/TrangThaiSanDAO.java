@@ -29,12 +29,17 @@ public class TrangThaiSanDAO {
     public ArrayList<TrangThaiSan> getTrangThaiSanList(String sDateTime, String eDateTime) {
         ArrayList<TrangThaiSan> stateList = new ArrayList<>();
 
-        String sql = "SELECT SAN.*, tentt "
-                + "FROM (SELECT masan, tensan, tenloaisan, giatien_motgio "
-                + "      FROM SANBONG, LOAISAN "
-                + "      WHERE SANBONG.maloaisan = LOAISAN.maloaisan) SAN "
-                + "      LEFT JOIN CHITIET_TRANGTHAISAN CT ON CT.masan = SAN.masan AND (ngaygio_bd BETWEEN ? AND ?) "
-                + "      LEFT JOIN TRANGTHAISAN TT ON TT.matt = CT.matt";
+        String sql = "DECLARE @START smalldatetime = ?,\n"
+                + "		@END smalldatetime = ?\n"
+                + "SELECT SAN.*, tentt\n"
+                + "FROM (SELECT masan, tensan, tenloaisan, giatien_motgio\n"
+                + "      FROM SANBONG, LOAISAN\n"
+                + "      WHERE SANBONG.maloaisan = LOAISAN.maloaisan) SAN\n"
+                + "             LEFT JOIN CHITIET_TRANGTHAISAN CT ON CT.masan = SAN.masan \n"
+                + "			 AND ( (ngaygio_bd BETWEEN @START AND @END)\n"
+                + "				OR ( ngaygio_bd <= @START AND @END <= ngaygio_kt) \n"
+                + "				OR (ngaygio_kt BETWEEN @START AND @END) )\n"
+                + "             LEFT JOIN TRANGTHAISAN TT ON TT.matt = CT.matt";
         try {
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, sDateTime);

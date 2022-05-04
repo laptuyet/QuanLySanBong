@@ -441,6 +441,9 @@ public class AdminGUI extends javax.swing.JFrame {
         billDepositLabel = new javax.swing.JLabel();
         jPanel22 = new javax.swing.JPanel();
         barChartPanel = new javax.swing.JPanel();
+        statisticCbx = new javax.swing.JComboBox<>();
+        btnStatistic = new javax.swing.JButton();
+        jLabel96 = new javax.swing.JLabel();
         infoPanel = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -560,9 +563,6 @@ public class AdminGUI extends javax.swing.JFrame {
         jLabel40 = new javax.swing.JLabel();
         checkDateTimeBtn = new javax.swing.JButton();
         dateTimeWrong = new javax.swing.JLabel();
-        jLabel96 = new javax.swing.JLabel();
-        maintainYes = new javax.swing.JRadioButton();
-        maintainNo = new javax.swing.JRadioButton();
         rateStadiumTab = new javax.swing.JPanel();
         jLabel41 = new javax.swing.JLabel();
         jLabel42 = new javax.swing.JLabel();
@@ -3004,6 +3004,21 @@ public class AdminGUI extends javax.swing.JFrame {
 
         barChartPanel.setLayout(new java.awt.BorderLayout());
 
+        statisticCbx.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
+        statisticCbx.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Doanh thu hàng tháng" }));
+
+        btnStatistic.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
+        btnStatistic.setIcon(new javax.swing.ImageIcon(getClass().getResource("/quanlysanbong/images/icons8-check-32.png"))); // NOI18N
+        btnStatistic.setText("CHECK");
+        btnStatistic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnStatisticActionPerformed(evt);
+            }
+        });
+
+        jLabel96.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
+        jLabel96.setText("Option:");
+
         javax.swing.GroupLayout jPanel22Layout = new javax.swing.GroupLayout(jPanel22);
         jPanel22.setLayout(jPanel22Layout);
         jPanel22Layout.setHorizontalGroup(
@@ -3012,13 +3027,27 @@ public class AdminGUI extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(barChartPanel, javax.swing.GroupLayout.DEFAULT_SIZE, 1081, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(jPanel22Layout.createSequentialGroup()
+                .addGap(302, 302, 302)
+                .addComponent(jLabel96)
+                .addGap(18, 18, 18)
+                .addComponent(statisticCbx, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(btnStatistic)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel22Layout.setVerticalGroup(
             jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel22Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(barChartPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(253, Short.MAX_VALUE))
+                .addGap(63, 63, 63)
+                .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnStatistic)
+                    .addGroup(jPanel22Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(statisticCbx, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel96)))
+                .addContainerGap(152, Short.MAX_VALUE))
         );
 
         jTabbedPane3.addTab("STATISTICS", new javax.swing.ImageIcon(getClass().getResource("/quanlysanbong/images/icons8-list-32.png")), jPanel22); // NOI18N
@@ -3974,28 +4003,6 @@ public class AdminGUI extends javax.swing.JFrame {
         dateTimeWrong.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         dateTimeWrong.setText(" ");
 
-        jLabel96.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
-        jLabel96.setText("Maintain");
-
-        maintainYes.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
-        maintainYes.setText("Yes");
-        maintainYes.setEnabled(false);
-        maintainYes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                maintainYesActionPerformed(evt);
-            }
-        });
-
-        maintainNo.setFont(new java.awt.Font("Unispace", 0, 12)); // NOI18N
-        maintainNo.setSelected(true);
-        maintainNo.setText("No");
-        maintainNo.setEnabled(false);
-        maintainNo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                maintainNoActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout stadiumTabLayout = new javax.swing.GroupLayout(stadiumTab);
         stadiumTab.setLayout(stadiumTabLayout);
         stadiumTabLayout.setHorizontalGroup(
@@ -4003,12 +4010,6 @@ public class AdminGUI extends javax.swing.JFrame {
             .addGroup(stadiumTabLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(stadiumTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(stadiumTabLayout.createSequentialGroup()
-                        .addComponent(addStaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(updateStaBtn)
-                        .addGap(18, 18, 18)
-                        .addComponent(deleteStaBtn))
                     .addGroup(stadiumTabLayout.createSequentialGroup()
                         .addGroup(stadiumTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -4018,27 +4019,22 @@ public class AdminGUI extends javax.swing.JFrame {
                             .addComponent(staNameTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(staNameWrong, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(stadiumTabLayout.createSequentialGroup()
-                                .addGroup(stadiumTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(staTypeCbBox, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(stadiumTabLayout.createSequentialGroup()
-                                        .addGap(58, 58, 58)
-                                        .addComponent(maintainYes)))
-                                .addGroup(stadiumTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(stadiumTabLayout.createSequentialGroup()
-                                        .addGap(32, 32, 32)
-                                        .addComponent(staCancelBtn))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, stadiumTabLayout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(maintainNo)
-                                        .addGap(99, 99, 99))))))
+                                .addComponent(staTypeCbBox, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(32, 32, 32)
+                                .addComponent(staCancelBtn))))
+                    .addGroup(stadiumTabLayout.createSequentialGroup()
+                        .addComponent(addStaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(updateStaBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(deleteStaBtn))
                     .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(stadiumTabLayout.createSequentialGroup()
                         .addComponent(jLabel30, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(stadiumTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(staIdWrong, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(staIdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jLabel96))
+                            .addComponent(staIdTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(15, 15, 15)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 9, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(stadiumTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -4114,11 +4110,11 @@ public class AdminGUI extends javax.swing.JFrame {
                             .addComponent(jLabel33)
                             .addComponent(staTypeCbBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(staCancelBtn))
-                        .addGap(18, 18, 18)
+                        .addGap(64, 64, 64)
                         .addGroup(stadiumTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel96)
-                            .addComponent(maintainYes)
-                            .addComponent(maintainNo)))
+                            .addComponent(addStaBtn)
+                            .addComponent(updateStaBtn)
+                            .addComponent(deleteStaBtn)))
                     .addGroup(stadiumTabLayout.createSequentialGroup()
                         .addGroup(stadiumTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(stadiumTabLayout.createSequentialGroup()
@@ -4150,12 +4146,7 @@ public class AdminGUI extends javax.swing.JFrame {
                         .addComponent(dateTimeWrong, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(checkDateTimeBtn)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 76, Short.MAX_VALUE)
-                .addGroup(stadiumTabLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addStaBtn)
-                    .addComponent(updateStaBtn)
-                    .addComponent(deleteStaBtn))
-                .addGap(70, 70, 70))
+                .addGap(70, 157, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Stadium  ", new javax.swing.ImageIcon(getClass().getResource("/quanlysanbong/images/icons8-stadium-32-black.png")), stadiumTab); // NOI18N
@@ -4514,7 +4505,7 @@ public class AdminGUI extends javax.swing.JFrame {
         // tu tao mapd 
         String autoPdID = new AutoID().getAutoPhieuDatID(pdList);
         preOrderIdLabel.setText(autoPdID);
-
+        
         preOrderCusIDCbBox.removeAllItems();
         for (KhachHang kh : khList) {
             preOrderCusIDCbBox.addItem(kh.getMakh());
@@ -4622,32 +4613,8 @@ public class AdminGUI extends javax.swing.JFrame {
         billMngPanel.setVisible(true);
         
         showBillList(billList);
-        
-        String[] months = {"", "January", "February", "March", "April", "May", "June",
-            "July", "August", "September", "October", "November", "December"};
-        
-        
-        DefaultCategoryDataset dcd = new DefaultCategoryDataset();
-        
-        for(int i = 1; i <= 12; i++) {
-            dcd.setValue(billDao.getTotalBillValueOfMonth(i), "Amount", months[i]);
-        }
-        
-        JFreeChart jchart = ChartFactory.createBarChart("Total bill monthly", "Months", "Total",
-                dcd, PlotOrientation.VERTICAL, true, true, false);
-        
-        CategoryPlot plot = jchart.getCategoryPlot();
-        plot.setRangeGridlinePaint(Color.black);
-        plot.setBackgroundPaint(Color.white);
-        
-        ChartPanel chartPanel = new ChartPanel(jchart);
-        barChartPanel.removeAll();
-        barChartPanel.add(chartPanel, BorderLayout.CENTER);
-        barChartPanel.validate();
-        
-        
     }//GEN-LAST:event_billbtnActionPerformed
-
+    
     public int getStaffIndex(String manv) {
         for(int i = 0; i < nvList.size(); i++) {
             if(nvList.get(i).getManv().equals(manv))
@@ -5444,8 +5411,6 @@ public class AdminGUI extends javax.swing.JFrame {
         addStaBtn.setEnabled(false);
         updateStaBtn.setEnabled(true);
         deleteStaBtn.setEnabled(true);
-        maintainYes.setEnabled(true);
-        maintainNo.setEnabled(true);
 
         int index = staTable.getSelectedRow();
 
@@ -5479,8 +5444,6 @@ public class AdminGUI extends javax.swing.JFrame {
         staIdTxt.setEnabled(true);
         updateStaBtn.setEnabled(false);
         deleteStaBtn.setEnabled(false);
-        maintainYes.setEnabled(false);
-        maintainNo.setEnabled(false);
     }//GEN-LAST:event_staCancelBtnActionPerformed
 
     private void updateStaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateStaBtnActionPerformed
@@ -5517,8 +5480,6 @@ public class AdminGUI extends javax.swing.JFrame {
                 addStaBtn.setEnabled(true);
                 updateStaBtn.setEnabled(false);
                 deleteStaBtn.setEnabled(false);
-                maintainYes.setEnabled(false);
-                maintainNo.setEnabled(false);
                 resetStaTexts();
                 resetStaLabels();
             } else {
@@ -5538,6 +5499,12 @@ public class AdminGUI extends javax.swing.JFrame {
             int ans = JOptionPane.showConfirmDialog(this, "Do you really want to delete this stadium?",
                     "Delete caution", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if(ans == JOptionPane.YES_OPTION) {
+                
+                if(staDao.isInUse(staList.get(index).getMaSan()) == 1) {
+                    JOptionPane.showMessageDialog(rootPane, "This stadium is in use, cannot delete!");
+                    return;
+                }
+                
                 if (staDao.deleteStadium(staList.get(index).getMaSan())) {
                 JOptionPane.showMessageDialog(rootPane, "Delete stadium successfully!");
                 staList.remove(index);
@@ -6056,9 +6023,10 @@ public class AdminGUI extends javax.swing.JFrame {
                 if(ptDao.addOrder(pt) && ctptDao.addOrderDetailList(ctptList)
                         && stateDao.addTrangThaiSanOrder(ctptList) 
                         && ctdvDao.addServiceDetailOrder(ctdvList)) {
-                    
-                    resetOrder();
+                    khDao.updateRentTimes(cusId); // tang so lan thue san +1
                     ptList.add(pt);
+                    resetOrder();
+                    
                     showOrderList(ptList);
                     
                     JOptionPane.showMessageDialog(rootPane, "Add Order successfully!");
@@ -6529,22 +6497,6 @@ public class AdminGUI extends javax.swing.JFrame {
             endMinute.setValue(59);
     }//GEN-LAST:event_endMinuteStateChanged
 
-    private void maintainYesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maintainYesActionPerformed
-        // TODO add your handling code here:
-        if(maintainNo.isSelected()) {
-            maintainYes.setSelected(true);
-            maintainNo.setSelected(false);
-        }
-    }//GEN-LAST:event_maintainYesActionPerformed
-
-    private void maintainNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maintainNoActionPerformed
-        // TODO add your handling code here:
-        if(maintainYes.isSelected()) {
-            maintainYes.setSelected(false);
-            maintainNo.setSelected(true);
-        }
-    }//GEN-LAST:event_maintainNoActionPerformed
-
     private void rateSHourStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_rateSHourStateChanged
         // TODO add your handling code here:
         int val = (int)rateSHour.getValue();
@@ -6621,7 +6573,51 @@ public class AdminGUI extends javax.swing.JFrame {
         // TODO add your handling code here:
         new ChangePasswordGUI(this, rootPaneCheckingEnabled, admin.getTaikhoan()).setVisible(true);
     }//GEN-LAST:event_changepwdBtnActionPerformed
+
+    private void btnStatisticActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnStatisticActionPerformed
+        // TODO add your handling code here:
+        
+        int option = statisticCbx.getSelectedIndex();
+        
+        switch (option) {
+            case 0 : {
+                chartByMonthlyRevenue();
+                break;
+            }
+            case 2 : {
+                chartByStadiumTypeRevenue();
+                break;
+            }
+        }     
+        
+    }//GEN-LAST:event_btnStatisticActionPerformed
     
+    public void chartByMonthlyRevenue() {
+        String[] months = {"", "January", "February", "March", "April", "May", "June",
+            "July", "August", "September", "October", "November", "December"};
+        
+        DefaultCategoryDataset dcd = new DefaultCategoryDataset();
+        
+        for(int i = 1; i <= 12; i++) {
+            dcd.setValue(billDao.getTotalBillValueOfMonth(i), "Amount", months[i]);
+        }
+        
+        JFreeChart jchart = ChartFactory.createBarChart("Total bill monthly", "Months", "Total",
+                dcd, PlotOrientation.VERTICAL, true, true, false);
+        
+        CategoryPlot plot = jchart.getCategoryPlot();
+        plot.setRangeGridlinePaint(Color.black);
+        plot.setBackgroundPaint(Color.white);
+        
+        ChartPanel chartPanel = new ChartPanel(jchart);
+        barChartPanel.removeAll();
+        barChartPanel.add(chartPanel, BorderLayout.CENTER);
+        barChartPanel.validate();
+    }
+    
+    public void chartByStadiumTypeRevenue() {
+        
+    }
     
     public float getRate(String makhunggio) {
         for(HeSo hs : rateList) {
@@ -7163,37 +7159,37 @@ public class AdminGUI extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-//    public static void main(String args[]) {
-//        /* Set the Nimbus look and feel */
-//        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-//        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-//         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-//         */
-//        try {
-//            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-//                if ("Windows".equals(info.getName())) {
-//                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-//                    break;
-//                }
-//            }
-//        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(AdminGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(AdminGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(AdminGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(AdminGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-//        }
-//        //</editor-fold>
-//
-//        /* Create and display the form */
-//        java.awt.EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                new AdminGUI("admin", "admin").setVisible(true);
-//            }
-//        });
-//    }
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Windows".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(AdminGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(AdminGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(AdminGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(AdminGUI.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new AdminGUI("admin", "admin").setVisible(true);
+            }
+        });
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -7222,6 +7218,7 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JButton billbtn;
     private javax.swing.JButton bookingBtn;
     private javax.swing.JPanel bookingPanel;
+    private javax.swing.JButton btnStatistic;
     private javax.swing.JButton cancelBtn;
     private javax.swing.JButton cancelCusBtn;
     private javax.swing.JButton cancelStaffBtn;
@@ -7450,8 +7447,6 @@ public class AdminGUI extends javax.swing.JFrame {
     private javax.swing.JLabel lnameWrong;
     private javax.swing.JButton logoutBtn;
     private javax.swing.JLabel mRateLabel;
-    private javax.swing.JRadioButton maintainNo;
-    private javax.swing.JRadioButton maintainYes;
     private javax.swing.JButton matchMngBtn;
     private javax.swing.JPanel matchMngPanel;
     private javax.swing.JLabel memDiscountLabel;
@@ -7565,6 +7560,7 @@ public class AdminGUI extends javax.swing.JFrame {
     private com.toedter.calendar.JYearChooser startYearChooser1;
     private com.toedter.calendar.JYearChooser startYearChooser2;
     private javax.swing.JTable stateStaTable;
+    private javax.swing.JComboBox<String> statisticCbx;
     private javax.swing.JLabel timeLabel;
     private javax.swing.JLabel totalDepositLabel;
     private javax.swing.JButton updateCusBtn;

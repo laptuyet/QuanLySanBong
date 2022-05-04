@@ -57,7 +57,6 @@ public class ManageRentTimeAndBill extends Thread {
         this.dvList = dvList;
         this.rateList = rateList;
         start();
-
     }
 
     @Override
@@ -112,11 +111,14 @@ public class ManageRentTimeAndBill extends Thread {
             }
             // END xu ly tung phieu thue
             
-            if(!msg.equals(""))
+            if(!msg.equals("")) {
                 JOptionPane.showMessageDialog(adminGui, msg);
+                msg = ""; // reset lai khong la no thong bao message cu~ lien tuc
+            }
+                
             
             try {
-                Thread.sleep(10000); // 30s check 1 lan
+                Thread.sleep(30000); // 30s check 1 lan
             } catch (InterruptedException ex) {
                 Logger.getLogger(MyClock.class.getName()).log(Level.SEVERE, null, ex);
             }
